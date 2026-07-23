@@ -14,6 +14,7 @@
 <meta name="twitter:title" content="Skott Reader — Visual / Brand / Presentation / Design-to-Build">
 <meta name="twitter:description" content="Visual / Brand / Presentation / Design-to-Build.">
 <meta name="twitter:image" content="https://skottreader.com/assets/og-card.png">
+<title>Skott Reader</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -684,12 +685,28 @@ class Component extends DCLogic {
     const route = this.routeFromHash();
     this._hashApplying = true;
     this.setState({ route, submitted: false, submitError: null, menuOpen: false });
+    this.setDocTitle(route);
     if (!isInitial) { try { window.scrollTo(0, 0); } catch (e) {} }
     this._hashApplying = false;
   }
 
+  setDocTitle(route) {
+    if (typeof document === 'undefined') return;
+    const base = 'Skott Reader';
+    const names = { home: '', work: 'Work', about: 'About', contact: 'Contact', case: 'Standard Model Bio — Case Study' };
+    let label;
+    if (route.name === 'detail') {
+      const p = this.PROJECTS.find(x => x.id === route.id);
+      label = p ? p.client : '';
+    } else {
+      label = names[route.name] || '';
+    }
+    document.title = label ? (label + ' — ' + base) : base;
+  }
+
   go(name, id) {
     this.setState({ route: { name, id }, submitted: false, submitError: null, menuOpen: false });
+    this.setDocTitle({ name, id });
     try { window.scrollTo(0, 0); } catch (e) {}
     try {
       const h = this.hashFor({ name, id });
