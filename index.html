@@ -461,17 +461,20 @@
             <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:20px;">
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Name</span>
-                <input required type="text" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+                <input name="name" required type="text" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Email</span>
-                <input required type="email" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+                <input name="email" required type="email" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Briefly describe your project</span>
-                <textarea required rows="5" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;resize:vertical;font-family:inherit;" style-focus="border-color:var(--accent);"></textarea>
+                <textarea name="message" required rows="5" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;resize:vertical;font-family:inherit;" style-focus="border-color:var(--accent);"></textarea>
               </label>
-              <button type="submit" style="align-self:flex-start;padding:14px 30px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Submit →</button>
+              <button type="submit" disabled="{{ submitting }}" style="align-self:flex-start;padding:14px 30px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">{{ submitLabel }}</button>
+              <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:0;font-size:14px;color:#f72585;">{{ submitError }}</p>
+              </sc-if>
             </form>
           </sc-if>
         </div>
@@ -680,13 +683,13 @@ class Component extends DCLogic {
   applyRouteFromHash(isInitial) {
     const route = this.routeFromHash();
     this._hashApplying = true;
-    this.setState({ route, submitted: false, menuOpen: false });
+    this.setState({ route, submitted: false, submitError: null, menuOpen: false });
     if (!isInitial) { try { window.scrollTo(0, 0); } catch (e) {} }
     this._hashApplying = false;
   }
 
   go(name, id) {
-    this.setState({ route: { name, id }, submitted: false, menuOpen: false });
+    this.setState({ route: { name, id }, submitted: false, submitError: null, menuOpen: false });
     try { window.scrollTo(0, 0); } catch (e) {}
     try {
       const h = this.hashFor({ name, id });
@@ -849,7 +852,29 @@ class Component extends DCLogic {
         }))
       })),
       showFooterCta: rn !== 'contact',
-      submit: (e) => { e.preventDefault(); this.setState({ submitted: true }); },
+      submit: (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = new FormData(form);
+        this.setState({ submitting: true, submitError: null });
+        fetch('https://formspree.io/f/meeylnay', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then((res) => {
+          if (res.ok) {
+            this.setState({ submitted: true, submitting: false });
+          } else {
+            res.json().then((d) => {
+              const msg = (d && d.errors && d.errors.length) ? d.errors.map(x => x.message).join(', ') : 'Something went wrong. Please try again or email me directly.';
+              this.setState({ submitting: false, submitError: msg });
+            }).catch(() => this.setState({ submitting: false, submitError: 'Something went wrong. Please try again or email me directly.' }));
+          }
+        }).catch(() => this.setState({ submitting: false, submitError: 'Network error. Please check your connection and try again.' }));
+      },
+      submitting: !!s.submitting,
+      submitLabel: s.submitting ? 'Sending…' : 'Submit →',
+      submitError: s.submitError || null,
       submitted: s.submitted, notSubmitted: !s.submitted
     };
   }
