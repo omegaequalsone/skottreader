@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
-<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=3">
+<link rel="apple-touch-icon" href="assets/favicon-180.png?v=3">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skott Reader">
@@ -30,7 +30,20 @@
   *{box-sizing:border-box;}
   doc-page:not(:defined){visibility:hidden;}
   ::selection{background:#7209b7;color:#fff;}
+  #cv-dl{position:fixed;top:20px;right:20px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:none;border-radius:999px;background:#7209b7;color:#fff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:600;font-size:14px;cursor:pointer;box-shadow:0 6px 20px -6px rgba(114,9,183,0.6);transition:filter .2s ease;}
+  #cv-dl:hover{filter:brightness(1.1);}
+  @media print{#cv-dl{display:none !important;}}
 </style>
+<script>
+  window.addEventListener('load', function(){
+    if(document.getElementById('cv-dl')) return;
+    var b=document.createElement('button');
+    b.id='cv-dl';
+    b.innerHTML='Download PDF ↓';
+    b.onclick=function(){ window.print(); };
+    document.body.appendChild(b);
+  });
+</script>
 </helmet>
 <x-import component-from-global-scope="doc-page" from="./doc-page.js" size="letter" margin="0.5in" hint-size="816px,1056px">
   <div style="--fg:#161229;--fg-dim:#3f3b5c;--fg-mute:#7d789c;--accent:#7209b7;--pink:#f72585;--line:rgba(24,18,48,0.12);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--fg);font-size:12.5px;line-height:1.5;">
