@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f72585"></stop>
+      <stop offset="0.35" stop-color="#7209b7"></stop>
+      <stop offset="0.7" stop-color="#4361ee"></stop>
+      <stop offset="1" stop-color="#4cc9f0"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0c0a16"></rect>
+  <rect x="8" y="51" width="48" height="6" rx="3" fill="url(#g)"></rect>
+  <text x="32" y="30" text-anchor="middle" dominant-baseline="central" font-family="system-ui,-apple-system,&#39;Helvetica Neue&#39;,Arial,sans-serif" font-weight="800" font-size="38" letter-spacing="-2" fill="#ffffff">SR</text>
+</svg>
