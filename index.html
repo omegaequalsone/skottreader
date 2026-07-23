@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{overflow-y:scroll;}
+  html,body{margin:0;padding:0;}
+  a{color:inherit;}
+  input,textarea,button{font-family:inherit;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  ::selection{background:var(--accent);color:var(--accent-fg);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  @keyframes lbIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  ::-webkit-scrollbar{width:11px;height:11px;}
+  ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px;}
+</style>
+</helmet>
+<div style="{{ rootStyle }}">
+
+  <div style="position:fixed;top:0;left:0;right:0;z-index:60;" ref="{{ navWrapRef }}">
+  <nav style="{{ navStyle }}">
+    <div style="{{ logoLockupStyle }}">
+      <a onClick="{{ goHome }}" ref="{{ logoRef }}" style="{{ logoStyle }}">SKOTT READER</a>
+      <span ref="{{ subRef }}" style="{{ navSubtitleStyle }}">Visual / Brand / Presentation / Design-to-Build</span>
+    </div>
+    <sc-if value="{{ showNavLinks }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;align-items:center;gap:26px;">
+      <a onClick="{{ goWork }}" style="{{ navWorkStyle }}" style-hover="color:var(--accent) !important;">Work</a>
+      <a onClick="{{ goAbout }}" style="{{ navAboutStyle }}" style-hover="color:var(--accent) !important;">About</a>
+      <a onClick="{{ goContact }}" style="{{ navContactStyle }}" style-hover="color:var(--accent) !important;">Contact</a>
+      <button onClick="{{ toggleTheme }}" aria-label="Toggle light or dark mode" style="width:42px;height:42px;border-radius:999px;border:1px solid var(--line2);background:var(--surface2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:color .2s ease, border-color .2s ease;" style-hover="color:var(--accent);border-color:var(--accent);">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><line x1="12" y1="2.5" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="21.5"></line><line x1="2.5" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="21.5" y2="12"></line><line x1="4.9" y1="4.9" x2="6.6" y2="6.6"></line><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"></line><line x1="4.9" y1="19.1" x2="6.6" y2="17.4"></line><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"></line></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg></sc-if>
+      </button>
+    </div>
+    </sc-if>
+    <sc-if value="{{ showHamburger }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button onClick="{{ toggleTheme }}" aria-label="Toggle light or dark mode" style="width:38px;height:38px;border-radius:999px;border:1px solid var(--line2);background:var(--surface2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:color .2s ease, border-color .2s ease;" style-hover="color:var(--accent);border-color:var(--accent);">
+        <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><line x1="12" y1="2.5" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="21.5"></line><line x1="2.5" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="21.5" y2="12"></line><line x1="4.9" y1="4.9" x2="6.6" y2="6.6"></line><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"></line><line x1="4.9" y1="19.1" x2="6.6" y2="17.4"></line><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"></line></svg></sc-if>
+        <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg></sc-if>
+      </button>
+      <button onClick="{{ toggleMenu }}" aria-label="Open menu" style="width:38px;height:38px;border-radius:999px;border:1px solid var(--line2);background:var(--surface2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg></sc-if>
+        <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg></sc-if>
+      </button>
+    </div>
+    </sc-if>
+  </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:2px;padding:8px 24px 20px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,0.22);">
+      <a onClick="{{ goWork }}" style="{{ mWorkStyle }}" style-hover="color:var(--accent) !important;">Work</a>
+      <a onClick="{{ goAbout }}" style="{{ mAboutStyle }}" style-hover="color:var(--accent) !important;">About</a>
+      <a onClick="{{ goContact }}" style="{{ mContactStyle }}" style-hover="color:var(--accent) !important;">Contact</a>
+    </div>
+  </sc-if>
+  </div>
+
+  <main style="{{ mainStyle }}">
+
+    <!-- ===================== HOME ===================== -->
+    <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
+    <div key="{{ routeKey }}" style="">
+
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
+        <div style="display:flex;align-items:stretch;gap:28px;flex-wrap:wrap;">
+          <div style="width:174px;border-radius:26px;overflow:hidden;flex-shrink:0;border:1px solid var(--line);background:var(--surface2);">
+            <img src="assets/portrait.png" style="width:100%;height:100%;object-fit:cover;object-position:50% 8%;display:block;" alt="Skott Reader">
+          </div>
+          <div style="flex:1;min-width:280px;">
+            <h1 style="margin:0;max-width:26ch;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:pretty;">I’m a visual thinker whose design solutions address business, brand, and user needs.</h1>
+            <p style="margin:16px 0 0;max-width:64ch;font-size:clamp(16px,1.6vw,18px);line-height:1.5;letter-spacing:-0.005em;color:var(--fg-dim);text-wrap:pretty;">I'm seeking work that feeds my passion for bridging the gap between products and services and the ways humans utilize them, and to help brands and individuals connect in more meaningful ways.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
+              <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">View my work →</a>
+              <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">Get in touch</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
+        <div style="position:relative;overflow:hidden;border-radius:22px;background:var(--feature-grad);border:1px solid var(--feature-border);padding:clamp(28px,4vw,52px);box-shadow:0 30px 70px -30px rgba(10,28,52,0.7);display:flex;gap:clamp(28px,4vw,52px);align-items:center;flex-wrap:wrap;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);"></div>
+          <div style="flex:1.1;min-width:300px;">
+            <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#c9b8ff;margin-bottom:18px;">Featured Case Study</div>
+            <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.06;letter-spacing:-0.025em;color:#ffffff;text-wrap:pretty;">Standard Model Bio: from one pitch deck to an <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">entire brand.</span></h2>
+            <p style="margin:16px 0 0;max-width:52ch;font-size:16px;line-height:1.55;color:rgba(238,236,248,0.82);text-wrap:pretty;">Hired to design a single deck. Two years later: a complete identity, a living design system, and a fully custom website — designed by hand, scaled with AI.</p>
+            <a onClick="{{ goCase }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:filter .2s ease;" style-hover="filter:brightness(0.9);">Read the case study →</a>
+          </div>
+          <div style="flex:1;min-width:280px;">
+            <div style="border-radius:13px;padding:1px;background:var(--grad);">
+              <div style="aspect-ratio:16/10;position:relative;overflow:hidden;border-radius:12px;background:#203059;">
+                <img src="assets/galleries/standardmodel/web-01.jpg" alt="Standard Model Bio website" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;border-top:1px solid var(--line);">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:34px;">
+          <div>
+            <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">How I Work</div>
+            <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);">Essence → System → Scale</h2>
+          </div>
+          <p style="margin:0;max-width:44ch;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">AI doesn't design for me. I design first — AI helps me ship faster and keep systems alive.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;">
+          <div style="border:1px solid var(--line2);border-radius:16px;background:var(--surface);padding:26px 24px;">
+            <div style="font-family:var(--f-mono);font-size:13px;color:var(--accent-text, var(--accent));margin-bottom:12px;">01</div>
+            <h3 style="margin:0 0 10px;font-family:var(--f-head);font-weight:600;font-size:21px;letter-spacing:-0.02em;color:var(--fg);">Essence</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:var(--fg-dim);text-wrap:pretty;">Understand what a company actually is — stakeholders, story, the language founders use — before deciding what it should look like.</p>
+          </div>
+          <div style="border:1px solid var(--line2);border-radius:16px;background:var(--surface);padding:26px 24px;">
+            <div style="font-family:var(--f-mono);font-size:13px;color:var(--accent-text, var(--accent));margin-bottom:12px;">02</div>
+            <h3 style="margin:0 0 10px;font-family:var(--f-head);font-weight:600;font-size:21px;letter-spacing:-0.02em;color:var(--fg);">System</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:var(--fg-dim);text-wrap:pretty;">Design the foundation by hand — palette, type, layout principles — presented and approved before anything gets built.</p>
+          </div>
+          <div style="border:1px solid var(--line2);border-radius:16px;background:var(--surface);padding:26px 24px;">
+            <div style="font-family:var(--f-mono);font-size:13px;color:var(--accent-text, var(--accent));margin-bottom:12px;">03</div>
+            <h3 style="margin:0 0 10px;font-family:var(--f-head);font-weight:600;font-size:21px;letter-spacing:-0.02em;color:var(--fg);">Scale</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:var(--fg-dim);text-wrap:pretty;">Extend the system everywhere with AI-assisted build — decks, design systems, shipped websites — without an agency or a handoff.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;border-top:1px solid var(--line);">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px;">
+          <div>
+            <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">Selected Work</div>
+            <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.02;letter-spacing:-0.025em;color:var(--fg);white-space:nowrap;">Visual, brand &amp; graphic design</h2>
+          </div>
+          <p style="margin:0;font-size:16px;line-height:1.55;color:var(--fg-dim);white-space:nowrap;">Fintech and blockchain, retail and AI — household names and businesses just finding their voice.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 30px;">
+          <sc-for list="{{ visualProjects }}" as="p" hint-placeholder-count="6">
+            <div onClick="{{ p.onOpen }}" onMouseEnter="{{ p.onMouseEnter }}" onMouseLeave="{{ p.onMouseLeave }}" style="cursor:pointer;display:flex;flex-direction:column;gap:15px;">
+              <div style="{{ p.slotStyle }}">
+                <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}"><div style="{{ p.thumbStyle }}"></div></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11px;letter-spacing:0.14em;color:var(--fg-mute);opacity:.55;text-transform:uppercase;">{{ p.count }}</div></sc-if>
+                <div style="{{ p.overlayStyle }}">
+                  <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;color:#ffffff;text-transform:uppercase;">View project ↗</span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <h3 style="{{ p.titleStyle }}">{{ p.client }}</h3>
+                <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.05em;color:var(--fg-mute);text-transform:uppercase;">{{ p.tags }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:66px 32px 20px;">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px;">
+          <div>
+            <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">Presentation Design</div>
+            <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.02;letter-spacing:-0.025em;color:var(--fg);white-space:nowrap;">Presentation design</h2>
+            <p style="margin:14px 0 0;max-width:52ch;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Clear hierarchy, honest data, and just enough motion to carry the room — from the back row to the boardroom.</p>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 30px;">
+          <sc-for list="{{ presProjects }}" as="p" hint-placeholder-count="3">
+            <div onClick="{{ p.onOpen }}" onMouseEnter="{{ p.onMouseEnter }}" onMouseLeave="{{ p.onMouseLeave }}" style="cursor:pointer;display:flex;flex-direction:column;gap:15px;">
+              <div style="{{ p.slotStyle }}">
+                <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}"><div style="{{ p.thumbStyle }}"></div></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11px;letter-spacing:0.14em;color:var(--fg-mute);opacity:.55;text-transform:uppercase;">{{ p.count }}</div></sc-if>
+                <div style="{{ p.overlayStyle }}">
+                  <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;color:#ffffff;text-transform:uppercase;">View project ↗</span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <h3 style="{{ p.titleStyle }}">{{ p.client }}</h3>
+                <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.05em;color:var(--fg-mute);text-transform:uppercase;">{{ p.tags }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+    </div>
+    </sc-if>
+
+    <!-- ===================== WORK INDEX ===================== -->
+    <sc-if value="{{ showWork }}" hint-placeholder-val="{{ true }}">
+    <div key="{{ routeKey }}" style="max-width:1240px;margin:0 auto;padding:52px 32px 40px;">
+      <h1 style="margin:8px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(36px,6vw,72px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;text-wrap:pretty;">Brand, visual &amp; presentation projects.</h1>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:38px 0 44px;">
+        <sc-for list="{{ filterChips }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button></sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 30px;">
+        <sc-for list="{{ indexList }}" as="p" hint-placeholder-count="9">
+          <div onClick="{{ p.onOpen }}" onMouseEnter="{{ p.onMouseEnter }}" onMouseLeave="{{ p.onMouseLeave }}" style="cursor:pointer;display:flex;flex-direction:column;gap:15px;">
+            <div style="{{ p.slotStyle }}">
+              <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ false }}"><div style="{{ p.thumbStyle }}"></div></sc-if><sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11px;letter-spacing:0.14em;color:var(--fg-mute);opacity:.55;text-transform:uppercase;">{{ p.count }}</div></sc-if>
+              <div style="{{ p.overlayStyle }}">
+                <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;color:#ffffff;text-transform:uppercase;">View project ↗</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;">
+                <h3 style="{{ p.titleStyle }}">{{ p.client }}</h3>
+                <span style="font-family:var(--f-mono);font-size:11px;color:var(--fg-mute);">{{ p.year }}</span>
+              </div>
+              <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.05em;color:var(--fg-mute);text-transform:uppercase;">{{ p.tags }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ===================== WORK DETAIL ===================== -->
+    <sc-if value="{{ showDetail }}" hint-placeholder-val="{{ true }}">
+    <div key="{{ routeKey }}" style="">
+      <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
+        <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;" style-hover="color:#f72585;">← All work</a>
+        <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-top:34px;">{{ detail.category }}</div>
+        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(44px,8vw,104px);line-height:0.94;letter-spacing:-0.035em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h1>
+        <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:36px;border-bottom:1px solid var(--line);">
+          <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">{{ detail.year }}</div></div>
+          <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Role</div><div style="font-size:15px;color:var(--fg);">{{ detail.role }}</div></div>
+          <div style="min-width:180px;"><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:9px;">Discipline</div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;">
+              <sc-for list="{{ detail.tags }}" as="tg" hint-placeholder-count="3"><span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.03em;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);color:var(--fg-dim);">{{ tg }}</span></sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:840px;margin:0 auto;padding:48px 32px 8px;">
+        <sc-for list="{{ detail.narrative }}" as="para" hint-placeholder-count="2"><p style="margin:0 0 24px;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">{{ para }}</p></sc-for>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:36px 32px 20px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;align-items:start;">
+          <sc-for list="{{ detail.gallery }}" as="g" hint-placeholder-count="6">
+            <div onClick="{{ g.onOpen }}" style="{{ g.slotStyle }}" style-hover="border-color:var(--accent);filter:brightness(0.82);">
+              <sc-if value="{{ g.hasImg }}" hint-placeholder-val="{{ false }}"><div style="{{ g.imgStyle }}"></div></sc-if><sc-if value="{{ g.noImg }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:11px;letter-spacing:0.12em;color:var(--fg-mute);opacity:.55;text-transform:uppercase;cursor:pointer;">{{ g.label }}</div></sc-if>
+              <div style="position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--bg) 70%, transparent);color:var(--fg);opacity:0;transition:opacity .28s ease;cursor:pointer;" style-hover="opacity:1;">⤢</div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:34px 32px 40px;">
+        <div style="border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;gap:20px;">
+          <a onClick="{{ detail.prev.onOpen }}" style="cursor:pointer;text-decoration:none;text-align:left;" style-hover="color:#f72585;">
+            <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">← Prev</div>
+            <div style="font-family:var(--f-head);font-weight:600;font-size:22px;letter-spacing:-0.015em;color:inherit;">{{ detail.prev.client }}</div>
+          </a>
+          <a onClick="{{ detail.next.onOpen }}" style="cursor:pointer;text-decoration:none;text-align:right;" style-hover="color:#f72585;">
+            <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Next →</div>
+            <div style="font-family:var(--f-head);font-weight:600;font-size:22px;letter-spacing:-0.015em;color:inherit;">{{ detail.next.client }}</div>
+          </a>
+        </div>
+      </section>
+    </div>
+    </sc-if>
+
+    <!-- ===================== CASE STUDY ===================== -->
+    <sc-if value="{{ showCase }}" hint-placeholder-val="{{ false }}">
+    <div key="{{ routeKey }}" style="">
+      <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
+        <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);">Case Study / Brand to Build</div>
+        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(44px,8vw,104px);line-height:0.94;letter-spacing:-0.035em;color:var(--fg);text-wrap:pretty;">Standard Model Bio</h1>
+        <p style="margin:20px 0 0;max-width:34ch;font-family:var(--f-head);font-weight:500;font-size:clamp(20px,2.6vw,30px);line-height:1.25;letter-spacing:-0.02em;color:var(--fg-dim);text-wrap:pretty;">From one pitch deck to an entire brand — designed by hand, scaled with AI.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:36px;border-bottom:1px solid var(--line);">
+          <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">2024–2026</div></div>
+          <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Role</div><div style="font-size:15px;color:var(--fg);">Brand, Design System &amp; Web</div></div>
+          <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Live Site</div><a href="https://standardmodel.bio" target="_blank" rel="noopener" style="font-size:15px;color:var(--accent);text-decoration:none;" style-hover="text-decoration:underline;">standardmodel.bio ↗</a></div>
+          <div style="min-width:180px;"><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:9px;">Discipline</div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px;">
+              <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.03em;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);color:var(--fg-dim);">Brand Identity</span>
+              <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.03em;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);color:var(--fg-dim);">Design Systems</span>
+              <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.03em;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);color:var(--fg-dim);">Presentation Design</span>
+              <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.03em;padding:5px 11px;border-radius:999px;border:1px solid var(--line2);color:var(--fg-dim);">Web Design &amp; Build</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:48px 32px 8px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,4vw,56px);align-items:center;">
+          <div style="aspect-ratio:1/1.06;position:relative;background:#f8f4ec;border-radius:16px;border:1px solid var(--line);overflow:hidden;">
+            <img src="assets/galleries/standardmodel/hero-figure.png" alt="Standard Model Bio — watercolor human figure" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6%;box-sizing:border-box;">
+          </div>
+          <p style="margin:0;font-size:clamp(21px,2.4vw,27px);line-height:1.48;letter-spacing:-0.015em;font-weight:500;color:var(--fg);text-wrap:pretty;">Standard Model Bio hired me to design the look and feel for a single pitch deck. The foundations I established there — palette, typography, layout principles — have since grown into a complete identity: a living design system, a library of investor and partner presentations, and a fully custom website — all built on the same foundation, all maintained by one designer.</p>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 8px;">
+        <div style="display:flex;flex-direction:column;">
+          <div style="padding:28px 0;border-bottom:1px solid var(--line);">
+            <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;"><span style="color:var(--accent);">01</span>&nbsp;&nbsp;Situation</div>
+            <h3 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.02em;color:var(--fg);">A compelling story, no identity to tell it.</h3>
+            <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Early-stage biotech is a credibility game. Standard Model had a compelling story — a foundation model for human biology, trained on genomic, imaging, and longitudinal patient data — but nothing to make it look real: no palette, no logo, no landing page. They needed a brand from scratch, one that could start as a mini-brand to help the founders meet early investors and mature into a real system: one that could carry a website, docs, and pitch after pitch without losing coherence.</p>
+          </div>
+          <div style="padding:28px 0;border-bottom:1px solid var(--line);">
+            <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;"><span style="color:var(--accent);">02</span>&nbsp;&nbsp;Action</div>
+            <h3 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.02em;color:var(--fg);">Essence, then system — by hand. Then scale, with AI.</h3>
+            <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Every engagement starts with essence: understanding what a company actually is before deciding what it should look like. From that came a core identity built around a single idea — behind every data point is a human story. A palette that refuses biomedicine's antiseptic white-and-blue, holding cool scientific authority and warm human presence at equal weight. Organic, Matisse-inspired forms that flow into one another the way the company's model connects fragmented biomedical data. A brand mark that encodes the actual thesis. This is the part no tool does for you — presented to stakeholders and approved before a single line of code existed. The CEO's response: extend it to everything.</p>
+            <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Then, scale. Using Claude Code, I translated the brand into a coded design system and built the company's website from the ground up — no template, no dev team, no handoff loss between “the design” and “the build,” because the designer was the builder. <strong style="color:var(--fg);">AI didn't design any of it. It let one designer ship what used to take an agency.</strong></p>
+          </div>
+          <div style="padding:28px 0;">
+            <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;"><span style="color:var(--accent);">03</span>&nbsp;&nbsp;Output &amp; Results</div>
+            <h3 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.02em;color:var(--fg);">One system, carrying the whole company.</h3>
+            <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Every new pitch starts on-brand, the site evolves at the pace of the science, and the visual language scales as the company grows. I stay on as Standard Model's ongoing design partner — decks, website, social, and each new surface — holding the fidelity of the system so it speaks with one voice wherever it's seen. In practice, that's meant:</p>
+            <div style="display:flex;flex-direction:column;margin-top:22px;">
+              <div style="display:flex;gap:16px;align-items:baseline;border-bottom:1px solid var(--line);padding:15px 0;"><span style="flex-shrink:0;font-size:15px;color:var(--fg);font-weight:600;min-width:150px;">Brand identity</span><span style="font-size:16px;color:var(--fg-dim);text-wrap:pretty;">a complete visual system, built from a standing start</span></div>
+              <div style="display:flex;gap:16px;align-items:baseline;border-bottom:1px solid var(--line);padding:15px 0;"><span style="flex-shrink:0;font-size:15px;color:var(--fg);font-weight:600;min-width:150px;">Design system</span><span style="font-size:16px;color:var(--fg-dim);text-wrap:pretty;">living and coded, evolving alongside the company</span></div>
+              <div style="display:flex;gap:16px;align-items:baseline;border-bottom:1px solid var(--line);padding:15px 0;"><span style="flex-shrink:0;font-size:15px;color:var(--fg);font-weight:600;min-width:150px;">Presentations</span><span style="font-size:16px;color:var(--fg-dim);text-wrap:pretty;">a deep library of decks and templates the team runs itself</span></div>
+              <div style="display:flex;gap:16px;align-items:baseline;border-bottom:1px solid var(--line);padding:15px 0;"><span style="flex-shrink:0;font-size:15px;color:var(--fg);font-weight:600;min-width:150px;">Website</span><span style="font-size:16px;color:var(--fg-dim);text-wrap:pretty;">fully custom — designed, built, and deployed by one designer</span></div>
+              <div style="display:flex;gap:16px;align-items:baseline;padding:15px 0;"><span style="flex-shrink:0;font-size:15px;color:var(--fg);font-weight:600;min-width:150px;">Continuity</span><span style="font-size:16px;color:var(--fg-dim);text-wrap:pretty;">two years of one visual voice across every touchpoint</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:44px 32px 8px;">
+        <div style="border-radius:18px;padding:clamp(28px,4vw,44px);background:color-mix(in srgb, var(--accent) 7%, var(--surface));border:1px solid color-mix(in srgb, var(--accent) 24%, var(--line2));">
+          <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">Why This Work</div>
+          <h3 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3vw,34px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:pretty;">A mission worth building for.</h3>
+          <p style="margin:18px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Some engagements matter beyond the craft. Standard Model exists to predict the course of a patient's disease — turning genomic, imaging, and clinical data into a model of the whole human — so clinicians and drug developers can move faster from question or diagnosis to treatment, compressing the years between a trial and a therapy that reaches people.</p>
+          <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">That purpose — extending human life and easing suffering — is exactly the kind of thing I want my work attached to. I believe that this one life is all any of us gets, and what gives it meaning is doing work that leaves other people better off. Building the identity and system that let a company like this be understood and trusted is, to me, a genuinely worthwhile way to spend the effort.</p>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:56px auto 0;padding:0 32px;">
+        <div style="height:2px;background:var(--grad);border-radius:2px;"></div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:22px;">
+          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(28px,4vw,52px);line-height:1;letter-spacing:-0.03em;color:var(--fg);">The Deliverables</h2>
+          <span style="font-family:var(--f-mono);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-mute);">Seven surfaces · one system</span>
+        </div>
+      </section>
+
+      <sc-for list="{{ csSections }}" as="cs" hint-placeholder-count="0">
+        <section style="max-width:1240px;margin:0 auto;padding:48px 32px 8px;border-top:1px solid var(--line);">
+          <div style="max-width:780px;margin-bottom:30px;">
+            <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">{{ cs.kicker }}</div>
+            <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3vw,36px);line-height:1.08;letter-spacing:-0.025em;color:var(--fg);text-wrap:pretty;">{{ cs.title }}</h2>
+            <sc-for list="{{ cs.paras }}" as="pp" hint-placeholder-count="1">
+              <p style="margin:14px 0 0;font-size:16px;line-height:1.6;color:var(--fg-dim);text-wrap:pretty;">{{ pp }}</p>
+            </sc-for>
+          </div>
+          <div style="{{ cs.gridStyle }}">
+            <sc-for list="{{ cs.items }}" as="im" hint-placeholder-count="4">
+              <div onClick="{{ im.onOpen }}" style="{{ im.wrapStyle }}" style-hover="box-shadow:0 0 0 1.5px var(--accent);">
+                <img src="{{ im.src }}" alt="{{ cs.title }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box;padding:{{ im.pad }};object-fit:{{ im.fit }};object-position:{{ im.fitPos }};">
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-for>
+
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
+        <div style="position:relative;overflow:hidden;border-radius:22px;background:var(--feature-grad);border:1px solid var(--feature-border);padding:clamp(32px,5vw,64px);box-shadow:0 30px 70px -30px rgba(10,28,52,0.7);">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);"></div>
+          <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#c9b8ff;margin-bottom:22px;">The Payoff</div>
+          <p style="margin:0;max-width:none;white-space:nowrap;font-family:var(--f-head);font-weight:600;font-size:clamp(13px,2.4vw,30px);line-height:1.08;letter-spacing:-0.025em;color:#ffffff;">The brand came from my head. <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">AI is how I made it everywhere.</span></p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,3vw,44px);margin-top:30px;">
+            <p style="margin:0;font-size:16px;line-height:1.62;color:rgba(238,236,248,0.82);text-wrap:pretty;">Every project still begins where it always has — with two decades of design judgment: understanding the company, finding its essence, and building a foundation by hand. That part doesn't get automated.</p>
+            <p style="margin:0;font-size:16px;line-height:1.62;color:rgba(238,236,248,0.82);text-wrap:pretty;">What's changed is reach. With AI tools in the loop, I work faster and carry a single idea further than one designer could alone — extending the same visual system across every surface a company needs: decks, a coded design system, a production website, social, iconography, publication figures.</p>
+            <p style="margin:0;font-size:16px;line-height:1.62;color:rgba(238,236,248,0.82);text-wrap:pretty;">One coherent voice, everywhere it shows up, without a handoff or a translation loss. That's AI-accelerated design: human judgment sets the direction, and AI removes the drag between the idea and the thing itself.</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;">
+            <a href="https://standardmodel.bio" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:filter .2s ease;" style-hover="filter:brightness(0.9);">standardmodel.bio ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1240px;margin:0 auto;padding:22px 32px 8px;">
+        <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">All work →</a>
+      </section>
+    </div>
+    </sc-if>
+
+    <!-- ===================== ABOUT ===================== -->
+    <sc-if value="{{ showAbout }}" hint-placeholder-val="{{ true }}">
+    <div key="{{ routeKey }}" style="max-width:1240px;margin:0 auto;padding:52px 32px 40px;">
+      <div style="{{ aboutGridStyle }}">
+        <div style="{{ aboutSidebarStyle }}">
+          <div style="aspect-ratio:4/5;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--surface2);">
+            <img src="assets/portrait.png" style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;" alt="Skott Reader">
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:20px;">
+            <a href="https://www.skottreader.com/_files/ugd/51767f_2269ca4a4e8744c4ad01bf97faf221fc.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;text-decoration:none;">Download CV ↓</a>
+            <div style="display:flex;align-items:center;gap:18px;color:var(--fg-dim);">
+              <a href="https://www.linkedin.com/in/skottreader/" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg></a>
+              <a href="https://www.instagram.com/omegaequalsone/" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+              <a href="https://flic.kr/s/aHBqjzGLPP" target="_blank" rel="noopener" aria-label="Flickr" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="26" height="14" viewBox="0 0 40 20" fill="currentColor"><circle cx="10" cy="10" r="10"></circle><circle cx="30" cy="10" r="10"></circle></svg></a>
+            </div>
+          </div>
+          <div style="margin-top:36px;padding-top:30px;border-top:1px solid var(--line);">
+            <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:18px;">Tools and Proficiencies</div>
+            <div style="display:grid;grid-template-columns:1fr;gap:11px;">
+              <sc-for list="{{ toolsAndProficiencies }}" as="tp" hint-placeholder-count="13"><div style="font-size:15px;color:var(--fg);border-bottom:1px solid var(--line);padding-bottom:11px;white-space:pre-line;">{{ tp }}</div></sc-for>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,3.6vw,48px);line-height:1.08;letter-spacing:-0.025em;color:var(--fg);max-width:20ch;text-wrap:pretty;">I'm a visual thinker who designs for businesses, brands, and people — usually all three at once.</h1>
+          <div style="margin-top:30px;font-size:17px;line-height:1.62;color:var(--fg-dim);max-width:62ch;">
+            <p style="margin:0 0 20px;text-wrap:pretty;">I believe design should be rooted in simplicity, empathy, and trust, and I try to work those qualities into every pixel. On UX and marketing teams and as an independent designer, I've left a creative mark across education, fintech, blockchain, retail, small business, AI, and social media.</p>
+            <p style="margin:0 0 20px;text-wrap:pretty;">My approach starts with understanding — business objectives, user needs, and what customers actually expect. Clients and colleagues have been generous with their praise, usually for the same handful of things: a patient, ego-free way of working, clear rationale behind every decision, and a knack for grasping a brand or design system quickly and extending it to whatever's needed.</p>
+            <p style="margin:0 0 20px;text-wrap:pretty;">In the last few years my practice has expanded from designing systems to building them. Using AI development tools like Claude Code, I now take brands from foundational identity all the way to shipped, coded products — custom websites, living design systems, template libraries — without a handoff. The design thinking is the same as it's always been — essence first, then system, then scale. What's changed is how far one designer can carry it.</p>
+            <p style="margin:0;text-wrap:pretty;">Most of all, I try to be a good collaborator — bringing stakeholders and executives who aren't designers into the process, so the work we ship is well-informed and something everyone can stand behind.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ===================== CONTACT ===================== -->
+    <sc-if value="{{ showContact }}" hint-placeholder-val="{{ true }}">
+    <div key="{{ routeKey }}" style="max-width:1240px;margin:0 auto;padding:52px 32px 60px;">
+      <div style="{{ contactGridStyle }}">
+        <div>
+          <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(40px,6vw,80px);line-height:0.96;letter-spacing:-0.03em;color:var(--fg);max-width:14ch;">Let's make something.</h1>
+          <p style="margin:26px 0 0;max-width:46ch;font-size:17px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Tell me a little about the project or the reason for your inquiry. I read everything, and I reply to real ones.</p>
+          <div style="margin-top:34px;display:flex;align-items:center;gap:16px;color:var(--fg-dim);">
+            <a href="https://www.linkedin.com/in/skottreader/" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg></a>
+            <a href="https://www.instagram.com/omegaequalsone/" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          </div>
+        </div>
+        <div>
+          <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid var(--line2);border-radius:16px;padding:44px;background:var(--surface);">
+              <div style="width:44px;height:44px;border-radius:999px;background:var(--accent);color:var(--accent-fg);display:flex;align-items:center;justify-content:center;font-size:22px;">✓</div>
+              <h3 style="margin:22px 0 8px;font-family:var(--f-head);font-weight:600;font-size:26px;letter-spacing:-0.02em;color:var(--fg);">Thank you.</h3>
+              <p style="margin:0;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Your note is on its way. I'll reach out to you shortly.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:20px;">
+              <label style="display:flex;flex-direction:column;gap:9px;">
+                <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Name</span>
+                <input required type="text" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+              </label>
+              <label style="display:flex;flex-direction:column;gap:9px;">
+                <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Email</span>
+                <input required type="email" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+              </label>
+              <label style="display:flex;flex-direction:column;gap:9px;">
+                <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Briefly describe your project</span>
+                <textarea required rows="5" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;resize:vertical;font-family:inherit;" style-focus="border-color:var(--accent);"></textarea>
+              </label>
+              <button type="submit" style="align-self:flex-start;padding:14px 30px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Submit →</button>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="border-top:1px solid var(--line);margin-top:40px;">
+    <div style="max-width:1240px;margin:0 auto;padding:64px 32px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;">
+        <sc-if value="{{ showFooterCta }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,5vw,58px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;">Let's make something.</h2>
+          <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:14px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Get in touch →</a>
+        </div>
+        </sc-if>
+        <div style="display:flex;align-items:center;gap:18px;color:var(--fg-dim);">
+          <a href="https://www.linkedin.com/in/skottreader/" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg></a>
+          <a href="https://www.instagram.com/omegaequalsone/" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          <a href="https://flic.kr/s/aHBqjzGLPP" target="_blank" rel="noopener" aria-label="Flickr" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="12" viewBox="0 0 40 20" fill="currentColor"><circle cx="10" cy="10" r="10"></circle><circle cx="30" cy="10" r="10"></circle></svg></a>
+        </div>
+      </div>
+      <div style="margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:12px;color:var(--fg-mute);">
+        <span>© 2026 Skott Reader</span>
+        <span>Visual / Brand / Presentation / Design-to-Build</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ lb.close }}" style="position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:color-mix(in srgb, var(--bg2) 90%, black);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);">
+      <div onClick="{{ lb.stop }}" style="display:flex;align-items:center;justify-content:space-between;padding:20px 26px;">
+        <span style="font-family:var(--f-mono);font-size:12px;letter-spacing:0.1em;color:var(--fg-dim);">{{ lb.counter }}</span>
+        <button onClick="{{ lb.close }}" style="width:40px;height:40px;border-radius:999px;border:1px solid var(--line2);background:transparent;color:var(--fg);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;" style-hover="border-color:var(--accent);">✕</button>
+      </div>
+      <div onClick="{{ lb.stop }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:20px;padding:0 20px;min-height:0;">
+        <button onClick="{{ lb.prev }}" style="flex-shrink:0;width:52px;height:52px;border-radius:999px;border:1px solid var(--line2);background:color-mix(in srgb,var(--surface) 60%, transparent);color:var(--fg);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s ease;" style-hover="background:var(--accent);color:var(--accent-fg);border-color:var(--accent);">‹</button>
+        <sc-if value="{{ lb.hasImg }}" hint-placeholder-val="{{ false }}">{{ lb.imgEl }}</sc-if>
+        <sc-if value="{{ lb.noImg }}" hint-placeholder-val="{{ true }}"><div style="{{ lb.slotStyle }}"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:12px;letter-spacing:0.14em;color:var(--fg-mute);text-transform:uppercase;">{{ lb.label }}</div></div></sc-if>
+        <button onClick="{{ lb.next }}" style="flex-shrink:0;width:52px;height:52px;border-radius:999px;border:1px solid var(--line2);background:color-mix(in srgb,var(--surface) 60%, transparent);color:var(--fg);font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s ease;" style-hover="background:var(--accent);color:var(--accent-fg);border-color:var(--accent);">›</button>
+      </div>
+      <div onClick="{{ lb.stop }}" style="padding:18px 26px 26px;text-align:center;font-family:var(--f-mono);font-size:12px;letter-spacing:0.08em;color:var(--fg-dim);text-transform:uppercase;">{{ lb.label }} &nbsp;·&nbsp; use ← → keys or click arrows</div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;}}">
+class Component extends DCLogic {
+  state = { theme: (function(){ try { var h = new Date().getHours(); return (h >= 19 || h < 6) ? 'dark' : 'light'; } catch(e) { return 'light'; } })(), route: { name: 'home' }, lb: null, filter: 'all', submitted: false, menuOpen: false, vw: (typeof window !== 'undefined' ? window.innerWidth : 1440), hoverId: null, logoFontPx: null };
+  logoRef = React.createRef();
+  subRef = React.createRef();
+  navWrapRef = React.createRef();
+
+  themes = {
+    dark: { '--bg':'#0c0a16','--bg2':'#08060f','--surface':'#151228','--surface2':'#1c1836','--line':'rgba(232,231,255,0.10)','--line2':'rgba(232,231,255,0.18)','--fg':'#eeecf8','--fg-dim':'#a6a2c2','--fg-mute':'#6d6990','--accent':'#4cc9f0','--accent-fg':'#0c0a16','--social-hover':'#f72585','--slot':'#151228','--slot2':'#1c1836','--feature-grad':'linear-gradient(150deg,#0d1524 0%,#111d33 55%,#0e2740 100%)','--feature-border':'rgba(120,180,230,0.16)' },
+    light: { '--bg':'#f4f3fb','--bg2':'#eae8f6','--surface':'#ffffff','--surface2':'#f7f6fd','--line':'rgba(24,18,48,0.12)','--line2':'rgba(24,18,48,0.20)','--fg':'#161229','--fg-dim':'#4c4869','--fg-mute':'#827da0','--accent':'#7209b7','--accent-fg':'#ffffff','--social-hover':'#7209b7','--slot':'#e9e7f5','--slot2':'#f1eff9','--feature-grad':'linear-gradient(150deg,#0d1524 0%,#122038 55%,#0f2b47 100%)','--feature-border':'rgba(255,255,255,0.06)' }
+  };
+
+  PROJECTS = [
+    { id:'standardmodel', client:'Standard Model Bio', category:'brand', year:'2024–2026', role:'Brand, Design System & Web', caseStudy:true, hero:true, heroRatio:'16/9', tags:['Brand Identity','Design Systems','Presentation Design','Web Design & Build'], tagline:'From one pitch deck to an entire brand — designed by hand, scaled with AI.', shots:['16/9','4/3','1/1','16/10','3/4','4/3'], narrative:["Standard Model Bio brought me in to design the look and feel for their pitch decks. I started where I always do: understanding the company's essence, then building a foundational system by hand — a navy/coral/cream palette, a serif-and-sans typographic voice, and layout principles sturdy enough to grow. The CEO extended the engagement on the spot.","Two years on, that foundation has become a complete brand: a living design system, a deep library of presentations, and a fully custom website that I designed and built — using Claude Code to translate the system into working code and ship it on a real deployment pipeline. No template, no dev team, no translation loss.","The brand came from my head. AI is how I made it everywhere."] },
+    { id:'bitgo', client:'BitGo', category:'brand', year:'2018', role:'Design Lead / IC', thumb:'assets/thumbs/bitgo.png', thumbBg:'#ffffff', thumbFit:'cover', tags:['Brand Identity','Iconography','Print & Collateral','Web Templates'], tagline:'A brand & web refresh on an aggressive timeline.', images:['assets/galleries/bitgo/01.jpg','assets/galleries/bitgo/02.jpg','assets/galleries/bitgo/03.jpg','assets/galleries/bitgo/04.jpg','assets/galleries/bitgo/05.jpg','assets/galleries/bitgo/06.jpg'], imageBg:['#ffffff','#ffffff','#95a2aa','#c0ddf1','#d1d2d4','#2278b8'], shots:['4/3','1/1','16/10','3/4','16/9'], narrative:["BitGo brought me on as design lead for a brand and web refresh on an aggressively tight timeline — the kind of sprint where clarity and trust have to be built in from the first pixel.","Alongside a small-but-mighty team of freelance developers, designers, illustrators, and motion designers, I shaped the corporate logo, a new in-product and web iconography system, large-format print and trade-show collateral, business cards, and a set of HTML page layouts for the corporate site."] },
+    { id:'swimlane-brand', client:'Swimlane', category:'brand', year:'2022', role:'Brand & Visual Design', hero:true, heroRatio:'16/10', thumb:'assets/thumbs/swimlane.png', tags:['Brand Identity','Logo Design'], tagline:'A new mark for security automation that looks as smart as it is.', images:['assets/galleries/swimlane-brand/01.jpg','assets/swimlane-logo.svg','assets/galleries/swimlane-brand/03.jpg','assets/galleries/swimlane-brand/04.jpg'], imageBg:['#ffffff','#ffffff','#231f20','#ffffff'], imgSize:[null,'86%',null,null], shots:['4/3','16/6','16/10','1/1'], narrative:["The centerpiece of this work was a new logo for Swimlane. Their old mark (the first image thumbnail below the hero) leaned generic — safe, but forgettable, and it didn't say anything about a company built on speed and precision in security automation.", "I redrew the wordmark with a tighter, more geometric sans that reads as confident and technical without tipping into cold — every counter and terminal considered so it holds up at favicon size and on a trade-show banner alike. The mark pairs it with a faceted, gem-like symbol built from the same angles as the letterforms, giving the whole system a single consistent visual language.", "From there I extended the new identity across marketing collateral and data-rich storytelling — translating dense security-automation workflows into visuals a buyer could actually follow, without dumbing any of it down."] },
+    { id:'citrix', client:'Citrix', category:'brand', year:'2015', role:'Product Marketing Design', thumb:'assets/thumbs/citrix.png', thumbBg:'#660dbc', tags:['Email Design','Web Templates','Iconography'], tagline:'Responsive marketing at production scale.', images:['assets/galleries/citrix/01.jpg','assets/galleries/citrix/02.jpg','assets/galleries/citrix/03.jpg','assets/galleries/citrix/04.jpg','assets/galleries/citrix/05.jpg','assets/galleries/citrix/06.jpg'], imageBg:["#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"], shots:['16/10','1/1','4/3','3/4','16/9','1/1'], narrative:["I worked with a distributed product marketing team to concept, design, and produce visual assets and templates for responsive Product, Support, and Customer Nurture emails, promotions, landing pages, and newsletters — from concept and message development through to the execution and delivery of high-quality assets."] },
+    { id:'movementlabs', client:'Movement Labs', category:'brand', year:'2024', role:'Visual & GenAI Design', thumb:'assets/thumbs/movementlabs.png', thumbFit:'cover', tags:['Brand Identity','Logo Design','Data Visualization','Gen AI Visuals'], tagline:'Brand, data, and AI-made personas.', images:['assets/galleries/movementlabs/01.jpg','assets/galleries/movementlabs/02.jpg','assets/galleries/movementlabs/03.jpg','assets/galleries/movementlabs/04.jpg','assets/galleries/movementlabs/05.jpg','assets/galleries/movementlabs/06.jpg','assets/galleries/movementlabs/07.jpg','assets/galleries/movementlabs/08.jpg'], imageBg:["#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#1c1c1c","#1c1c1c","#ffda34"], shots:['4/3','3/4','16/10','1/1','4/5'], narrative:["I helped Movement Labs refine and extend their existing visual brand — a logo, iconography, social assets, and complex data visualizations and charts. I leaned heavily on advanced Midjourney prompting to produce a consistently styled set of user-persona images."] },
+    { id:'sunrun', client:'Sunrun', category:'brand', year:'2015', role:'Design Generalist', thumb:'assets/thumbs/sunrun.png', thumbBg:'#00b4ea', tags:['UI Design','Web Templates','Iconography','Print & Collateral'], tagline:'A generalist for a fresh rebrand.', images:['assets/galleries/sunrun/01.jpg','assets/galleries/sunrun/02.jpg','assets/galleries/sunrun/03.jpg','assets/galleries/sunrun/04.jpg'], imageBg:["#ffffff","#ffffff","#ffffff","#ffffff"], shots:['16/9','4/3','1/1','3/4','16/10'], narrative:["Sunrun had recently rolled out a major rebrand and lacked in-house design resources. I was brought on as a generalist to create a wide array of assets — responsive web pages, brochures, white papers, and general graphic design, including iconography and some illustration."] },
+    { id:'sui', client:'Sui', category:'brand', year:'2023', role:'Generalist Design IC', thumb:'assets/thumbs/sui.png', thumbFit:'cover', tags:['Presentation Design','Social Graphics','Print & Collateral','Illustration'], tagline:'Fast turnarounds for a fast-moving L1.', images:['assets/galleries/sui/01.jpg','assets/galleries/sui/02.jpg','assets/galleries/sui/03.jpg','assets/galleries/sui/04.jpg','assets/galleries/sui/05.jpg','assets/galleries/sui/06.jpg','assets/galleries/sui/07.jpg','assets/galleries/sui/08.jpg','assets/galleries/sui/09.jpg'], imageBg:["#ededed","#ffffff","#ffffff","#ffffff","#ffffff","#302016","#8390a4","#333f4e","#392e29"], shots:['16/10','1/1','4/3','3/4','16/9','4/5'], narrative:["Sui brought me on as a generalist design IC — their business was moving lightning-fast, and they'd grown frustrated with the sluggish turnarounds from larger agencies. I hit the ground running across aggressive timelines and simultaneous requests from Developer Relations, Education, and Events, delivering presentation design and event collateral that turned highly technical concepts and complex data into clear, concise visuals for the international Web3 community."] },
+    { id:'ssc-advent', client:'SS&C · Advent', category:'brand', year:'2014–2022', role:'Senior & Staff Visual Designer', thumb:'assets/thumbs/ssc-advent.png', thumbBg:'#0f85c7', tags:['Journey Maps','Design Systems','UI Design','Web Templates','Iconography'], tagline:'Eight years as the sole visual designer on a UX team.', images:['assets/galleries/ssc-advent/01.jpg','assets/galleries/ssc-advent/02.jpg','assets/galleries/ssc-advent/03.jpg','assets/galleries/ssc-advent/04.jpg','assets/galleries/ssc-advent/05.jpg','assets/galleries/ssc-advent/06.jpg','assets/galleries/ssc-advent/07.jpg','assets/galleries/ssc-advent/08.jpg','assets/galleries/ssc-advent/09.jpg','assets/galleries/ssc-advent/10.jpg','assets/galleries/ssc-advent/11.jpg'], imageBg:["#ffffff","#ffffff","#1a1a1a","#ffffff","#5b5952","#fde1c6","#d9d2da","#e9e4e9","#eae6ea","#c0c1c1","#ffffff"], shots:['16/9','4/3','16/10','1/1'], narrative:["Over eight years as Senior, then Staff Visual Designer on the UX team at SS&C Advent, I turned tangled customer journeys and buyer processes into clean, legible maps — information design that helps teams see the whole picture and make better calls. I also built out the style guide and designed a steady stream of web banners in support of it.", "Day to day, my focus was UI design — none of which I can show here due to NDA — alongside creating and maintaining Cornerstone, our design system and component library, for a suite of financial applications used across the business.", "As the sole visual designer at Advent, I also picked up the fun stuff: event swag, posters, and anything else that needed a design eye."] },
+    { id:'psilo', client:'Psilo', category:'brand', year:'2024', role:'Brand, Logo & Packaging', thumb:'assets/thumbs/psilo.png', thumbFit:'cover', tags:['Brand Identity','Logo Design','Packaging'], tagline:'A grown-up brand for an emerging category.', images:['assets/galleries/psilo/01.jpg','assets/galleries/psilo/02.jpg','assets/galleries/psilo/03.jpg','assets/galleries/psilo/04.jpg','assets/galleries/psilo/05.jpg'], imageBg:["#ffffff","#ffffff","#ffffff","#ffffff","#646465"], shots:['1/1','4/5','3/4','4/3','1/1'], narrative:["Psilo is a fun, pro-bono side gig.","I designed their logo mark, and I continue to create seasonal packaging for a variety of products."] },
+    { id:'uber', client:'Uber', category:'brand', year:'2017', role:'Logo Design', hero:true, heroRatio:'16/9', thumb:'assets/thumbs/uber.png', thumbBg:'#222233', tags:['Logo Design','Brand Identity'], tagline:'Logo options for an internal Uber dev tool.', images:['assets/galleries/uber/01.jpg'], imageBg:["#ffffff"], shots:['16/10'], narrative:["Working with Uber's dev team, I created a series of logo options for Uber Needle, an internal development tool."] },
+    { id:'werk', client:'Werk Salon', category:'brand', year:'2020', role:'Brand & Logo Design', hero:true, heroRatio:'16/10', thumb:'assets/thumbs/werk.png', thumbFit:'cover', tags:['Brand Identity','Logo Design','Print & Collateral'], tagline:'Big-brand care for an independent salon.', images:['assets/galleries/werk/01.jpg','assets/galleries/werk/02.jpg','assets/galleries/werk/03.jpg','assets/galleries/werk/04.jpg'], imageBg:["#b0b0b0","#686665","#ffffff","#322f2c"], shots:['4/5','3/4','1/1','4/3'], narrative:["I designed an identity for Werk with confidence and warmth — a logo and system the owners could grow into, from the front window to the receipt."] },
+    { id:'dybbuk', client:'Dybbuk Streetwear', category:'brand', year:'2023', role:'Brand & Graphic Design', hero:true, heroRatio:'2/1', heroFit:'cover', heroPos:'center 34%', thumb:'assets/thumbs/dybbuk.png', thumbBg:'#fafafa', tags:['Brand Identity','Typography','Apparel'], tagline:'Edge the culture expects, craft it deserves.', images:['assets/galleries/dybbuk/01.jpg','assets/galleries/dybbuk/02.jpg','assets/galleries/dybbuk/03.jpg','assets/galleries/dybbuk/04.jpg'], imageBg:["#000000","#9c9c9c","#ffffff","#ffffff"], shots:['4/3','4/5','1/1','3/4'], narrative:["During the COVID-19 pandemic, I developed a brand identity for Dybbuk, and designed a variety of products sold in their online store and in select local shops in San Francisco.","For the logo, I created a custom typeface that's an homage to an ancient form of biblical Hebrew."] },
+    { id:'tinytown', client:'Tiny Town Homes', category:'brand', year:'2022', role:'Brand & Logo Design', hero:true, heroRatio:'16/10', thumb:'assets/thumbs/tinytown.png', thumbBg:'#f6d4a7', tags:['Brand Identity','Logo Design','Print & Collateral'], tagline:'Small-footprint living, as an upgrade.', images:['assets/galleries/tinytown/01.jpg','assets/galleries/tinytown/02.jpg','assets/galleries/tinytown/03.jpg'], imageBg:["#ca9474","#ffffff","#644765"], shots:['1/1','4/3','16/10'], narrative:["I created the brand identity, logo, and print collateral for Tiny Town Homes, a hand-crafted micro-housing company — including their logo mark, business cards, and marketing materials."] },
+    { id:'servicenow', client:'ServiceNow', category:'pres', year:'2024', role:'Presentation Design', thumb:'assets/thumbs/servicenow.png', thumbBg:'#ececec', tags:['Presentation Design','Data Visualization'], tagline:'A keynote built to reach the back row.', images:['assets/galleries/servicenow/01.jpg','assets/galleries/servicenow/02.jpg','assets/galleries/servicenow/03.jpg','assets/galleries/servicenow/04.jpg','assets/galleries/servicenow/05.jpg','assets/galleries/servicenow/06.jpg','assets/galleries/servicenow/07.jpg','assets/galleries/servicenow/08.jpg'], imageBg:["#7f9fab","#072343","#012a88","#011a58","#072a56","#021346","#010533","#0c2b2d"], shots:['16/9','16/9','16/10','16/9','16/9'], narrative:["Working as a graphic designer, I partnered with the lead presentation designer working directly with the ServiceNow design team and C-suite executives, to create visually impactful artwork for presentation decks showcased in their 2024 Sales Kickoff in Las Vegas."] },
+    { id:'swimlane-pres', client:'Swimlane', category:'pres', year:'2024', role:'Presentation Design', thumb:'assets/thumbs/swimlane.png', tags:['Presentation Design','Data Visualization','Templates'], tagline:'Selling a complex product, simply.', images:['assets/galleries/swimlane-pres/01.jpg','assets/galleries/swimlane-pres/02.jpg','assets/galleries/swimlane-pres/03.jpg','assets/galleries/swimlane-pres/04.jpg','assets/galleries/swimlane-pres/05.jpg','assets/galleries/swimlane-pres/06.jpg','assets/galleries/swimlane-pres/07.jpg','assets/galleries/swimlane-pres/08.jpg','assets/galleries/swimlane-pres/09.jpg','assets/galleries/swimlane-pres/10.jpg','assets/galleries/swimlane-pres/11.jpg','assets/galleries/swimlane-pres/12.jpg','assets/galleries/swimlane-pres/13.jpg','assets/galleries/swimlane-pres/14.jpg'], imageBg:["#0c0a1d","#130b14","#181224","#050207","#03081c","#00216d","#00216e","#062f75","#00165c","#00216e","#02497d","#00216e","#00216e","#00216e"], shots:['16/9','16/10','16/9','16/9'], narrative:["I created dynamic visuals for Swimlane's pre-show video content, social media graphics, and Google Slides & PowerPoint templates for company-wide use.","Prior to the SKO, I worked with their C-Suite executive team to help hone their content, design custom slides, build out data visualizations and created bespoke, on-brand imagery using Generative AI."] },
+    { id:'openai', client:'OpenAI', category:'pres', year:'2024', role:'Presentation Design', thumb:'assets/thumbs/openai.png', thumbBg:'#141414', tags:['Presentation Design','Data Visualization'], tagline:'Frontier ideas, made clear and grounded.', images:['assets/galleries/openai/01.jpg','assets/galleries/openai/02.jpg','assets/galleries/openai/03.jpg','assets/galleries/openai/04.jpg','assets/galleries/openai/05.jpg','assets/galleries/openai/06.jpg','assets/galleries/openai/07.jpg','assets/galleries/openai/08.jpg','assets/galleries/openai/09.jpg','assets/galleries/openai/10.jpg','assets/galleries/openai/11.jpg','assets/galleries/openai/12.jpg','assets/galleries/openai/13.jpg','assets/galleries/openai/14.jpg'], imageBg:["#0a100c","#0a0a09","#161212","#191314","#1f120f","#161112","#1e120e","#0f0a0a","#0d0908","#291712","#151114","#0a0605","#161213","#1f100d"], shots:['16/9','16/9','16/10','16/9','16/9'], narrative:["Working within their rapidly evolving brand guidelines, I designed a series of presentation decks and templates for OpenAI."] }
+  ];
+
+  aboutProficiencies = ['Presentation Design','Brand Identity & Logo Design','Design Systems','Iconography & Typography','UI & Visual Design','Large-Format Print & Event Collateral','Digital & Analog Photography'];
+  aboutTools = ['Figma / Sketch','Photoshop & Illustrator','Generative AI\n(Midjourney + multiple platforms & models)','AI-Assisted Design & Build','PowerPoint & Google Slides','HTML / CSS'];
+
+  CS_BASE = 'assets/galleries/standardmodel/';
+  CS_SECTIONS = [
+    { kicker:'Design System · Visual Language', title:'The organic language of data.', cols:'repeat(4,1fr)', ratio:'1/1', fit:'contain', paras:[
+      "Standard Model is building one model of the whole human — fragmented biomedical data resolved into a single picture of a patient. I translated that ambition into a living visual language: organic, abstract forms, inspired by late-period Matisse, where simple flowing shapes carry profound meaning. The forms overlap and interact — warm oranges and reds meeting cooler blues, mixing new hues where they cross — the way a multimodal model fuses diverse measurements into a unified whole. They shift in scale too, from small cellular structures to sweeping whole-patient systems, and none stands alone: each flows into the next, an ecosystem where a change at one level ripples through the rest. Watercolor textures and transparent overlays echo the layered complexity of biology, and the negative space around each form is left to breathe — keeping the human body, not the lab, at the center."],
+      files:[['vl-01.png','#f8f4ec'],['vl-02.png','#f8f4ec'],['vl-03.png','#f8f4ec'],['vl-04.png','#f8f4ec'],['vl-05.png','#f8f4ec'],['vl-06.png','#f8f4ec'],['vl-07.png','#f8f4ec'],['vl-08.png','#f8f4ec']] },
+    { kicker:'Brandmark', title:'The mission, built into the mark.', cols:'repeat(auto-fill,minmax(230px,1fr))', ratio:'4/3', fit:'contain', paras:[
+      "The company's thesis is encoded directly in its symbol: six nodes orbiting a central hub — at once a chemical-bond diagram and a data graph — every biomedical signal, at every scale, unified into one representation of a patient. The name borrows its authority from physics, where the Standard Model unifies every force under one theory; the mark makes the same claim for biology, held by one confident system of lockups on light and dark."],
+      files:[['mark-01.jpg','#ffffff'],['mark-02.jpg','#ffffff'],['mark-03.jpg','#ffffff'],['mark-04.jpg','#ffffff'],['lockup-01.jpg','#f8f5ec'],['lockup-02.jpg','#203059'],['lockup-03.jpg','#f8f5ec'],['lockup-04.jpg','#203059']] },
+    { kicker:'Color System', title:'A palette drawn from the body.', cols:'1fr', ratio:'16/10', fit:'contain', paras:[
+      "Six families that map straight onto human biology. Cool navies and slate carry the scientific authority — the clarity of the lab, the depth of the data — while warm flames and corals carry the human presence, from the blush of living tissue to the heat of physiological intensity, with a brûlée tan standing in for paper and skin. Cool and warm sit at equal weight, refusing biomedicine's usual clichés, because the science is real — and so is the person behind every measurement."],
+      files:[['color-01.jpg','#ffffff']] },
+    { kicker:'Iconography', title:'A custom set, drawn for the science.', cols:'repeat(auto-fit,minmax(360px,1fr))', ratio:'16/10', fit:'contain', pad:true, paras:[
+      "Sixty marks spanning the company's entire world — imaging, molecular biology, data and compute, and the clinical layer. One line weight, one corner radius, one palette, so any combination reads as a single voice across decks, the site, and the product. Unmistakably theirs — built from the science it describes."],
+      files:[['icons-01.jpg','#f8f4ec'],['icons-02.jpg','#f8f4ec']] },
+    { kicker:'The Website', title:'From a Wix placeholder to a living flagship.', cols:'repeat(5,1fr)', ratio:'3/4', fit:'cover', fitPos:'top', paras:[
+      "The first site was an off-the-shelf Wix template — enough to point investors somewhere real, but generic and unmistakably not the brand. I redesigned it screen by screen in Figma, folding in the identity — the molecular visuals, the full palette, the custom icon set — then moved from those designs into build with Claude Code. The site is a living document, not a hand-off: it evolves at the pace of the science while holding brand fidelity on every release."],
+      files:[['web-01.jpg','#8d96a9'],['web-02.jpg','#86848e'],['web-03.jpg','#bbbbb9'],['web-04.jpg','#848994'],['web-05.jpg','#f0efed']] },
+    { kicker:'Social', title:'An always-on social presence.', cols:'repeat(auto-fill,minmax(240px,1fr))', ratio:'16/10', fit:'cover', paras:[
+      "The system extends into social: a templated kit of profile marks, announcement cards, and quote posts with a consistent grid and type hierarchy — campaign-ready assets the team can ship on cadence while the brand reads as one voice on every platform."],
+      files:[['social-01.jpg','#f8f4ec'],['social-02.jpg','#f8f4ec'],['social-03.jpg','#bab9b6'],['social-04.jpg','#596685']] },
+    { kicker:'Presentations', title:'Pitch after pitch, on-brand from slide one.', cols:'repeat(auto-fill,minmax(230px,1fr))', ratio:'16/9', fit:'contain', paras:[
+      "An ongoing program of investor and partner decks — plus the explanatory figures that carry the research into the world. Complex mechanisms, model architectures, and survival data, redrawn in the brand's visual language so a reader grasps the idea at a glance: rigorously accurate, unmistakably on-brand, built to make hard science legible."],
+      files:[['deck1-01.jpg','#f8f4ec'],['deck1-12.jpg','#f8f4ec'],['deck1-13.jpg','#f8f4ec'],['deck2-01.jpg','#f8f4ec'],['deck2-02.jpg','#f8f4ec'],['deck2-03.jpg','#f8f4ec'],['deck2-04.jpg','#f8f4ec'],['deck2-05.jpg','#f8f4ec'],['deck2-06.jpg','#f8f4ec'],['deck1-03.jpg','#f8f4ec'],['deck1-04.jpg','#f8f4ec'],['deck1-05.jpg','#8c92a3'],['deck1-06.jpg','#f8f4eb'],['deck1-07.jpg','#f8f4eb'],['deck1-08.jpg','#f8f4ec'],['deck1-09.jpg','#213769'],['deck1-10.jpg','#f8f4ec'],['deck1-11.jpg','#f8f4ec']] }
+  ];
+
+  componentDidMount() {
+    this._key = (e) => {
+      if (!this.state.lb) return;
+      if (e.key === 'Escape') this.closeLb();
+      else if (e.key === 'ArrowRight') this.lbStep(1);
+      else if (e.key === 'ArrowLeft') this.lbStep(-1);
+    };
+    window.addEventListener('keydown', this._key);
+    this._resize = () => { this.setState({ vw: window.innerWidth }); this.measureLogo(); this.measureNavHeight(); };
+    window.addEventListener('resize', this._resize);
+    this._resize();
+    this.measureLogo();
+    this.measureNavHeight();
+    if (typeof requestAnimationFrame === 'function') requestAnimationFrame(() => { this._resize(); this.measureNavHeight(); });
+    setTimeout(() => { this._resize(); this.measureNavHeight(); }, 150);
+    setTimeout(() => { this._resize(); this.measureNavHeight(); }, 500);
+    if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => this.measureLogo());
+    }
+    this._hashApplying = false;
+    this._onHashChange = () => this.applyRouteFromHash();
+    window.addEventListener('hashchange', this._onHashChange);
+    this.applyRouteFromHash(true);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._key); window.removeEventListener('resize', this._resize); window.removeEventListener('hashchange', this._onHashChange); }
+  componentDidUpdate() { this.measureLogo(); this.measureNavHeight(); }
+
+  measureNavHeight() {
+    const el = this.navWrapRef.current;
+    if (!el) return;
+    const h = el.offsetHeight;
+    if (h && Math.abs(h - (this.state.navHeight || 0)) > 0.5) {
+      this.setState({ navHeight: h });
+    }
+  }
+
+  measureLogo() {
+    if (typeof window === 'undefined' || window.innerWidth < 760) return;
+    const logoEl = this.logoRef.current, subEl = this.subRef.current;
+    if (!logoEl || !subEl) return;
+    const subCs = window.getComputedStyle(subEl);
+    const subProbe = document.createElement('span');
+    subProbe.textContent = subEl.textContent;
+    subProbe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none;top:-9999px;left:-9999px;';
+    subProbe.style.fontFamily = subCs.fontFamily;
+    subProbe.style.fontSize = subCs.fontSize;
+    subProbe.style.fontWeight = subCs.fontWeight;
+    subProbe.style.letterSpacing = subCs.letterSpacing;
+    subProbe.style.textTransform = subCs.textTransform;
+    document.body.appendChild(subProbe);
+    const targetWidth = subProbe.offsetWidth;
+    subProbe.remove();
+    if (!targetWidth) return;
+    const cs = window.getComputedStyle(logoEl);
+    const probe = document.createElement('span');
+    probe.textContent = logoEl.textContent;
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none;top:-9999px;left:-9999px;';
+    probe.style.fontFamily = cs.fontFamily;
+    probe.style.fontWeight = cs.fontWeight;
+    probe.style.letterSpacing = cs.letterSpacing;
+    probe.style.fontStyle = cs.fontStyle;
+    (logoEl.parentElement || document.body).appendChild(probe);
+    let size = parseFloat(cs.fontSize) || 27;
+    for (let i = 0; i < 6; i++) {
+      probe.style.fontSize = size + 'px';
+      const w = probe.offsetWidth;
+      if (!w) break;
+      const next = size * (targetWidth / w);
+      if (Math.abs(next - size) < 0.15) { size = next; break; }
+      size = next;
+    }
+    probe.remove();
+    if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3) {
+      this.setState({ logoFontPx: size });
+    }
+  }
+
+  routeFromHash() {
+    let raw = (typeof window !== 'undefined' ? window.location.hash : '').replace(/^#\/?/, '');
+    raw = raw.replace(/[?&].*$/, '');
+    if (!raw || raw === 'home') return { name: 'home' };
+    if (raw === 'work' || raw === 'about' || raw === 'contact') return { name: raw };
+    if (raw === 'case-study' || raw === 'case-studies' || raw === 'case-study/standardmodel') return { name: 'case' };
+    if (raw.indexOf('project/') === 0) {
+      const id = raw.slice('project/'.length);
+      if (this.PROJECTS.some(p => p.id === id)) return { name: 'detail', id };
+    }
+    return { name: 'home' };
+  }
+  hashFor(route) {
+    if (!route || route.name === 'home') return '#/';
+    if (route.name === 'detail') return '#/project/' + route.id;
+    if (route.name === 'case') return '#/case-study';
+    return '#/' + route.name;
+  }
+  applyRouteFromHash(isInitial) {
+    const route = this.routeFromHash();
+    this._hashApplying = true;
+    this.setState({ route, submitted: false, menuOpen: false });
+    if (!isInitial) { try { window.scrollTo(0, 0); } catch (e) {} }
+    this._hashApplying = false;
+  }
+
+  go(name, id) {
+    this.setState({ route: { name, id }, submitted: false, menuOpen: false });
+    try { window.scrollTo(0, 0); } catch (e) {}
+    try {
+      const h = this.hashFor({ name, id });
+      if (window.location.hash !== h) { this._hashApplying = true; window.location.hash = h; this._hashApplying = false; }
+    } catch (e) {}
+  }
+  setFilter(f) { this.setState({ filter: f }); }
+  toggleMenu() { this.setState(st => ({ menuOpen: !st.menuOpen })); }
+  openLb(projId, i) { this.setState({ lb: { projId, i } }); }
+  closeLb() { this.setState({ lb: null }); }
+  lbStep(d) {
+    const lb = this.state.lb; if (!lb) return;
+    if (lb.cs != null) { const n = this.CS_SECTIONS[lb.cs].files.length; this.setState({ lb: { cs: lb.cs, i: (lb.i + d + n) % n } }); return; }
+    const p = this.PROJECTS.find(x => x.id === lb.projId); const n = (p.images ? p.images.length : p.shots.length);
+    this.setState({ lb: { projId: lb.projId, i: (lb.i + d + n) % n } });
+  }
+
+  pad2(n) { return String(n).padStart(2, '0'); }
+  slot(ratio) {
+    return { aspectRatio: ratio, position: 'relative', overflow: 'hidden', borderRadius: '12px', border: '1px solid var(--line)', background: 'repeating-linear-gradient(135deg, var(--slot), var(--slot) 12px, var(--slot2) 12px, var(--slot2) 24px)', transition: 'border-color .3s ease' };
+  }
+
+  renderVals() {
+    const s = this.state;
+    const t = this.themes[s.theme];
+    const rootStyle = Object.assign({}, t, {
+      '--f-head': "'TWK Everett','Degular','Inter Tight',system-ui,sans-serif",
+      '--f-body': "'Plus Jakarta Sans','Inter Tight',system-ui,sans-serif",
+      '--f-mono': "ui-monospace,'SF Mono',Menlo,monospace",
+      '--grad': 'linear-gradient(90deg,#f72585,#7209b7,#4361ee,#4cc9f0)',
+      '--accent-lt': 'color-mix(in srgb, var(--accent) 52%, #ffffff)',
+      background: 'var(--bg)', color: 'var(--fg)', minHeight: '100vh', width: '100%',
+      fontFamily: 'var(--f-body)', transition: 'background .45s ease, color .45s ease'
+    });
+
+    const navBase = { cursor: 'pointer', fontSize: '18px', fontWeight: 500, letterSpacing: '0.01em', textDecoration: 'none', color: 'var(--fg)', transition: 'color .2s ease' };
+    const navOn = { color: 'var(--accent)' };
+    const rn = s.route.name;
+    const navWorkStyle = Object.assign({}, navBase, (rn === 'work' || rn === 'detail') ? navOn : {});
+    const navAboutStyle = Object.assign({}, navBase, rn === 'about' ? navOn : {});
+    const navContactStyle = Object.assign({}, navBase, rn === 'contact' ? navOn : {});
+    const navCaseStyle = Object.assign({}, navBase, rn === 'case' ? navOn : {});
+
+    const isMobileNav = s.vw < 760;
+    const isNarrowCols = s.vw < 880;
+    const navSubFontPx = Math.max(7, Math.min(12, 7 + (Math.min(1200, Math.max(700, s.vw)) - 700) / 500 * 5));
+    const showNavLinks = !isMobileNav;
+    const showHamburger = isMobileNav;
+    const navStyle = { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: 'clamp(10px,2.4vw,15px) clamp(16px,4vw,30px)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', background: 'color-mix(in srgb, var(--bg) 74%, transparent)', borderBottom: '1px solid var(--line)' };
+    const logoLockupStyle = { display: 'flex', flexDirection: 'column', width: 'max-content', flexShrink: 0 };
+    const logoStyle = { cursor: 'pointer', fontFamily: 'var(--f-head)', fontWeight: 500, letterSpacing: '-0.01em', fontSize: s.logoFontPx ? (s.logoFontPx + 'px') : 'clamp(15px, 4.6vw, 27px)', color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap', display: 'inline-block' };
+    const navSubtitleStyle = { display: isMobileNav ? 'none' : 'block', width: '100%', boxSizing: 'border-box', whiteSpace: 'nowrap', fontFamily: 'var(--f-mono)', fontSize: navSubFontPx.toFixed(2) + 'px', letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center', color: 'var(--accent-fg)', background: 'var(--accent)', padding: '4px 6px', marginTop: '2px' };
+    const mNavBase = { cursor: 'pointer', fontSize: '19px', fontWeight: 500, letterSpacing: '0.01em', textDecoration: 'none', color: 'var(--fg)', padding: '13px 4px', borderTop: '1px solid var(--line)' };
+    const mWorkStyle = Object.assign({}, mNavBase, (rn === 'work' || rn === 'detail') ? navOn : {});
+    const mAboutStyle = Object.assign({}, mNavBase, rn === 'about' ? navOn : {});
+    const mContactStyle = Object.assign({}, mNavBase, rn === 'contact' ? navOn : {});
+    const mCaseStyle = Object.assign({}, mNavBase, rn === 'case' ? navOn : {});
+
+    const segBase = { cursor: 'pointer', fontFamily: 'var(--f-mono)', fontSize: '11px', letterSpacing: '0.08em', padding: '6px 12px', borderRadius: '999px', border: 'none', background: 'transparent', color: 'var(--fg-dim)', transition: 'all .2s ease' };
+    const segOn = { background: 'var(--accent)', color: 'var(--accent-fg)' };
+    const segDark = Object.assign({}, segBase, s.theme === 'dark' ? segOn : {});
+    const segLight = Object.assign({}, segBase, s.theme === 'light' ? segOn : {});
+
+    const cardVM = (p) => { const im = p.images || null; const tUrl = p.thumb || (im ? im[0] : null); const isHov = s.hoverId === p.id; return {
+      id: p.id, client: p.client, year: p.year,
+      tags: p.tags.join('  ·  '),
+      count: this.pad2(im ? im.length : p.shots.length) + ' images',
+      hasImg: !!tUrl, noImg: !tUrl,
+      thumbStyle: tUrl ? { position: 'absolute', inset: 0, backgroundImage: 'url("' + tUrl + '")', backgroundSize: p.thumbFit || 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundColor: p.thumbBg || '#f4f4f5' } : null,
+      slotStyle: this.slot('4/3'),
+      overlayStyle: { position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: '16px', background: 'linear-gradient(to top, rgba(0,0,0,0.62), rgba(0,0,0,0.14))', opacity: isHov ? 1 : 0, transition: 'opacity .2s ease' },
+      titleStyle: { margin: 0, fontFamily: 'var(--f-head)', fontWeight: 600, fontSize: '22px', letterSpacing: '-0.015em', color: isHov ? '#f72585' : 'var(--fg)', transition: 'color .2s ease' },
+      onMouseEnter: () => this.setState({ hoverId: p.id }),
+      onMouseLeave: () => this.setState(st => st.hoverId === p.id ? { hoverId: null } : null),
+      onOpen: () => (p.caseStudy ? this.go('case') : this.go('detail', p.id))
+    }; };
+
+    const visualProjects = this.PROJECTS.filter(p => p.category === 'brand' && !p.caseStudy).map(cardVM);
+    const presProjects = this.PROJECTS.filter(p => p.category === 'pres').map(cardVM);
+    const indexList = this.PROJECTS.filter(p => !p.caseStudy && (s.filter === 'all' ? true : s.filter === p.category)).map(cardVM);
+
+    const chipBase = { cursor: 'pointer', fontFamily: 'var(--f-mono)', fontSize: '12px', letterSpacing: '0.06em', textTransform: 'uppercase', padding: '9px 18px', borderRadius: '999px', border: '1px solid var(--line2)', background: 'transparent', color: 'var(--fg-dim)', transition: 'all .2s ease' };
+    const chipOn = { background: 'var(--accent)', color: 'var(--accent-fg)', borderColor: 'var(--accent)' };
+    const mkChip = (label, val) => ({ label, onClick: () => this.setFilter(val), style: Object.assign({}, chipBase, s.filter === val ? chipOn : {}) });
+    const filterChips = [ mkChip('All', 'all'), mkChip('Visual / Brand', 'brand'), mkChip('Presentation', 'pres') ];
+
+    let detail = null;
+    if (rn === 'detail') {
+      const p = this.PROJECTS.find(x => x.id === s.route.id) || this.PROJECTS[0];
+      const sib = this.PROJECTS.filter(x => x.category === p.category);
+      const idx = sib.findIndex(x => x.id === p.id);
+      const pv = sib[(idx - 1 + sib.length) % sib.length];
+      const nx = sib[(idx + 1) % sib.length];
+      detail = {
+        client: p.client, year: p.year, role: p.role, tags: p.tags, narrative: p.narrative,
+        category: p.category === 'brand' ? 'Visual / Brand Design' : 'Presentation Design',
+        gallery: (p.images || null) ? p.images.map((u, i) => ({ hasImg: true, noImg: false, imgStyle: { position: 'absolute', inset: 0, backgroundImage: 'url("' + u + '")', backgroundSize: ((p.hero && i === 0 && p.heroFit) ? p.heroFit : ((p.imgSize && p.imgSize[i]) ? p.imgSize[i] : 'contain')), backgroundRepeat: 'no-repeat', backgroundPosition: ((p.hero && i === 0 && p.heroPos) ? p.heroPos : 'center'), backgroundColor: (p.imageBg && p.imageBg[i]) || '#f4f4f5', cursor: 'pointer' }, slotStyle: (p.hero && i === 0) ? Object.assign({}, this.slot(p.heroRatio || '16/9'), { gridColumn: '1 / -1' }) : this.slot('4/3'), onOpen: () => this.openLb(p.id, i) })) : p.shots.map((r, i) => ({ hasImg: false, noImg: true, label: p.client + ' · ' + this.pad2(i + 1), slotStyle: (p.hero && i === 0) ? Object.assign({}, this.slot(p.heroRatio || '16/9'), { gridColumn: '1 / -1' }) : this.slot('4/3'), onOpen: () => this.openLb(p.id, i) })),
+        prev: { client: pv.client, onOpen: () => (pv.caseStudy ? this.go('case') : this.go('detail', pv.id)) },
+        next: { client: nx.client, onOpen: () => (nx.caseStudy ? this.go('case') : this.go('detail', nx.id)) }
+      };
+    }
+
+    let lb = null;
+    if (s.lb && s.lb.cs != null) {
+      const sec = this.CS_SECTIONS[s.lb.cs]; const i = s.lb.i; const len = sec.files.length;
+      const url = this.CS_BASE + sec.files[i][0];
+      lb = {
+        hasImg: true, noImg: false, url,
+        imgEl: React.createElement('img', { src: url, style: Object.assign({ maxWidth: '90vw', maxHeight: '80vh', width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: '6px', boxShadow: '0 20px 60px -20px rgba(0,0,0,0.5)' }, sec.pad ? { padding: '3vw', background: sec.files[i][1], boxSizing: 'border-box' } : {}) }),
+        label: sec.kicker,
+        counter: this.pad2(i + 1) + ' / ' + this.pad2(len),
+        slotStyle: {},
+        next: () => this.lbStep(1), prev: () => this.lbStep(-1), close: () => this.closeLb(),
+        stop: (e) => { e.stopPropagation(); }
+      };
+    } else if (s.lb) {
+      const p = this.PROJECTS.find(x => x.id === s.lb.projId);
+      const im = p.images || null;
+      const i = s.lb.i; const len = im ? im.length : p.shots.length;
+      lb = {
+        hasImg: !!im, noImg: !im, url: im ? im[i] : '',
+        imgEl: im ? React.createElement('img', { src: im[i], style: { maxWidth: '92vw', maxHeight: '80vh', width: 'auto', height: 'auto', objectFit: 'contain', borderRadius: '6px', backgroundColor: (p.imageBg && p.imageBg[i]) || '#f4f4f5' } }) : null,
+        label: p.client + ' · ' + this.pad2(i + 1),
+        counter: this.pad2(i + 1) + ' / ' + this.pad2(len),
+        slotStyle: Object.assign({}, this.slot('4/3'), { height: '76vh', maxWidth: '92vw', width: 'auto', borderRadius: '10px', border: '1px solid var(--line2)' }),
+        next: () => this.lbStep(1), prev: () => this.lbStep(-1), close: () => this.closeLb(),
+        stop: (e) => { e.stopPropagation(); }
+      };
+    }
+
+    const marqueeItems = ['Standard Model Bio','BitGo','Uber','Citrix','Sunrun','OpenAI','ServiceNow','Sui','Swimlane','Movement Labs','Psilo','SS&C Advent','Dybbuk'];
+
+    const aboutGridStyle = { display: 'grid', gridTemplateColumns: isNarrowCols ? '1fr' : '1fr 1.25fr', gap: isNarrowCols ? '32px' : '64px', alignItems: 'start' };
+    const aboutSidebarStyle = {};
+    const contactGridStyle = { display: 'grid', gridTemplateColumns: isNarrowCols ? '1fr' : '1fr 1fr', gap: isNarrowCols ? '32px' : '60px', alignItems: 'start' };
+
+    return {
+      rootStyle,
+      navWorkStyle, navAboutStyle, navContactStyle, navCaseStyle, segDark, segLight,
+      navStyle, logoStyle, logoLockupStyle, navSubtitleStyle, logoRef: this.logoRef, subRef: this.subRef, navWrapRef: this.navWrapRef, mainStyle: { paddingTop: s.navHeight ? (s.navHeight + 18) + 'px' : 'clamp(56px,13vw,70px)', minHeight: '70vh' }, showNavLinks, showHamburger, mWorkStyle, mAboutStyle, mContactStyle, mCaseStyle,
+      menuOpen: s.menuOpen, menuClosed: !s.menuOpen, toggleMenu: () => this.toggleMenu(),
+      aboutGridStyle, aboutSidebarStyle, contactGridStyle,
+      goHome: () => this.go('home'), goWork: () => this.go('work'), goAbout: () => this.go('about'), goContact: () => this.go('contact'), goCase: () => this.go('case'),
+      toggleDark: () => this.setState({ theme: 'dark' }), toggleLight: () => this.setState({ theme: 'light' }),
+      toggleTheme: () => this.setState(st => ({ theme: st.theme === 'dark' ? 'light' : 'dark' })), isDark: s.theme === 'dark', isLight: s.theme === 'light',
+      showHome: rn === 'home', showWork: rn === 'work', showDetail: rn === 'detail', showAbout: rn === 'about', showContact: rn === 'contact', showCase: rn === 'case',
+      routeKey: rn + (s.route.id ? ':' + s.route.id : ''),
+      visualProjects, presProjects, indexList, filterChips,
+      detail,
+      marqueeItems, toolsAndProficiencies: [...this.aboutProficiencies, ...this.aboutTools],
+      lb, lbOpen: !!lb,
+      csSections: this.CS_SECTIONS.map((sec, si) => ({
+        kicker: sec.kicker, title: sec.title, paras: sec.paras,
+        gridStyle: { display: 'grid', gridTemplateColumns: sec.cols, gap: '18px' },
+        items: sec.files.map((f, i) => ({
+          src: this.CS_BASE + f[0],
+          fit: sec.fit, fitPos: sec.fitPos || 'center', pad: sec.pad ? '7%' : '0',
+          wrapStyle: { aspectRatio: sec.ratio, position: 'relative', background: f[1], borderRadius: '12px', border: '1px solid var(--line)', overflow: 'hidden', cursor: 'zoom-in', transition: 'box-shadow .15s ease' },
+          onOpen: () => this.setState({ lb: { cs: si, i } })
+        }))
+      })),
+      showFooterCta: rn !== 'contact',
+      submit: (e) => { e.preventDefault(); this.setState({ submitted: true }); },
+      submitted: s.submitted, notSubmitted: !s.submitted
+    };
+  }
+}
+</script>
+</body>
+</html>
