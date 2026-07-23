@@ -3,11 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skott Reader">
+<meta property="og:title" content="Skott Reader — Design that starts by hand and ships everywhere">
+<meta property="og:description" content="Visual / Brand / Presentation / Design-to-Build. Design that starts by hand and ships everywhere.">
+<meta property="og:image" content="https://skottreader.com/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Skott Reader — Design that starts by hand and ships everywhere">
+<meta name="twitter:description" content="Visual / Brand / Presentation / Design-to-Build.">
+<meta name="twitter:image" content="https://skottreader.com/assets/og-card.png">
 <script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,9 +31,10 @@
   html,body{margin:0;padding:0;}
   a{color:inherit;}
   input,textarea,button{font-family:inherit;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Bold.otf') format('opentype');font-weight:600 700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Extrabold.otf') format('opentype');font-weight:800;font-style:normal;font-display:swap;}
   ::selection{background:var(--accent);color:var(--accent-fg);}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   @keyframes lbIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
