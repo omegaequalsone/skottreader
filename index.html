@@ -624,22 +624,10 @@ class Component extends DCLogic {
   }
 
   measureLogo() {
-    if (typeof window === 'undefined' || window.innerWidth < 760) return;
+    if (typeof window === 'undefined') return;
     const logoEl = this.logoRef.current, subEl = this.subRef.current;
     if (!logoEl || !subEl) return;
-    const subCs = window.getComputedStyle(subEl);
-    const subProbe = document.createElement('span');
-    subProbe.textContent = subEl.textContent;
-    subProbe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none;top:-9999px;left:-9999px;';
-    subProbe.style.fontFamily = subCs.fontFamily;
-    subProbe.style.fontSize = subCs.fontSize;
-    subProbe.style.fontWeight = subCs.fontWeight;
-    subProbe.style.letterSpacing = subCs.letterSpacing;
-    subProbe.style.textTransform = subCs.textTransform;
-    document.body.appendChild(subProbe);
-    const targetWidth = subProbe.offsetWidth;
-    subProbe.remove();
-    if (!targetWidth) return;
+    const mobile = window.innerWidth < 760;
     const cs = window.getComputedStyle(logoEl);
     const probe = document.createElement('span');
     probe.textContent = logoEl.textContent;
@@ -649,18 +637,70 @@ class Component extends DCLogic {
     probe.style.letterSpacing = cs.letterSpacing;
     probe.style.fontStyle = cs.fontStyle;
     (logoEl.parentElement || document.body).appendChild(probe);
-    let size = parseFloat(cs.fontSize) || 27;
-    for (let i = 0; i < 6; i++) {
+    const fitFont = (el, targetW, start) => {
+      let size = start;
+      for (let i = 0; i < 7; i++) {
+        el.style.fontSize = size + 'px';
+        const w = el.offsetWidth;
+        if (!w) break;
+        const next = size * (targetW / w);
+        if (Math.abs(next - size) < 0.15) { size = next; break; }
+        size = next;
+      }
+      return size;
+    };
+
+    if (mobile) {
+      const navEl = logoEl.closest('nav');
+      if (!navEl) { probe.remove(); return; }
+      const navCs = window.getComputedStyle(navEl);
+      const padX = (parseFloat(navCs.paddingLeft) || 0) + (parseFloat(navCs.paddingRight) || 0);
+      const lockup = logoEl.parentElement;
+      let rightW = 0;
+      const rc = navEl.lastElementChild;
+      if (rc && rc !== lockup) rightW = rc.offsetWidth;
+      const target = navEl.clientWidth - padX - rightW - 16;
+      if (target < 60) { probe.remove(); return; }
+      let size = fitFont(probe, target, parseFloat(cs.fontSize) || 24);
+      size = Math.max(18, Math.min(size, 32));
       probe.style.fontSize = size + 'px';
-      const w = probe.offsetWidth;
-      if (!w) break;
-      const next = size * (targetWidth / w);
-      if (Math.abs(next - size) < 0.15) { size = next; break; }
-      size = next;
+      const logoW = probe.offsetWidth;
+      probe.remove();
+      const subCs = window.getComputedStyle(subEl);
+      const sp = document.createElement('span');
+      sp.textContent = subEl.textContent;
+      sp.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none;top:-9999px;left:-9999px;';
+      sp.style.fontFamily = subCs.fontFamily;
+      sp.style.fontWeight = subCs.fontWeight;
+      sp.style.letterSpacing = subCs.letterSpacing;
+      sp.style.textTransform = subCs.textTransform;
+      document.body.appendChild(sp);
+      let subSize = fitFont(sp, Math.max(20, logoW - 12), parseFloat(subCs.fontSize) || 7);
+      subSize = Math.max(4.5, Math.min(subSize, 12));
+      sp.remove();
+      if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3 || Math.abs(subSize - (this.state.subFontPx || 0)) > 0.2) {
+        this.setState({ logoFontPx: size, subFontPx: subSize });
+      }
+      return;
     }
+
+    const subCs = window.getComputedStyle(subEl);
+    const sp = document.createElement('span');
+    sp.textContent = subEl.textContent;
+    sp.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none;top:-9999px;left:-9999px;';
+    sp.style.fontFamily = subCs.fontFamily;
+    sp.style.fontSize = subCs.fontSize;
+    sp.style.fontWeight = subCs.fontWeight;
+    sp.style.letterSpacing = subCs.letterSpacing;
+    sp.style.textTransform = subCs.textTransform;
+    document.body.appendChild(sp);
+    const targetWidth = sp.offsetWidth;
+    sp.remove();
+    if (!targetWidth) { probe.remove(); return; }
+    let size = fitFont(probe, targetWidth, parseFloat(cs.fontSize) || 27);
     probe.remove();
-    if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3) {
-      this.setState({ logoFontPx: size });
+    if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3 || this.state.subFontPx != null) {
+      this.setState({ logoFontPx: size, subFontPx: null });
     }
   }
 
@@ -759,7 +799,7 @@ class Component extends DCLogic {
     const navStyle = { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: 'clamp(10px,2.4vw,15px) clamp(16px,4vw,30px)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', background: 'color-mix(in srgb, var(--bg) 74%, transparent)', borderBottom: '1px solid var(--line)' };
     const logoLockupStyle = { display: 'flex', flexDirection: 'column', width: 'max-content', flexShrink: 0 };
     const logoStyle = { cursor: 'pointer', fontFamily: 'var(--f-head)', fontWeight: 500, letterSpacing: '-0.01em', fontSize: s.logoFontPx ? (s.logoFontPx + 'px') : 'clamp(15px, 4.6vw, 27px)', color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap', display: 'inline-block' };
-    const navSubtitleStyle = { display: isMobileNav ? 'none' : 'block', width: '100%', boxSizing: 'border-box', whiteSpace: 'nowrap', fontFamily: 'var(--f-mono)', fontSize: navSubFontPx.toFixed(2) + 'px', letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center', color: 'var(--accent-fg)', background: 'var(--accent)', padding: '4px 6px', marginTop: '2px' };
+    const navSubtitleStyle = { display: 'block', width: '100%', boxSizing: 'border-box', whiteSpace: 'nowrap', fontFamily: 'var(--f-mono)', fontSize: (s.subFontPx != null ? s.subFontPx.toFixed(2) : navSubFontPx.toFixed(2)) + 'px', letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center', color: 'var(--accent-fg)', background: 'var(--accent)', padding: '4px 6px', marginTop: '2px' };
     const mNavBase = { cursor: 'pointer', fontSize: '19px', fontWeight: 500, letterSpacing: '0.01em', textDecoration: 'none', color: 'var(--fg)', padding: '13px 4px', borderTop: '1px solid var(--line)' };
     const mWorkStyle = Object.assign({}, mNavBase, (rn === 'work' || rn === 'detail') ? navOn : {});
     const mAboutStyle = Object.assign({}, mNavBase, rn === 'about' ? navOn : {});
