@@ -108,7 +108,7 @@
     <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
     <div key="{{ routeKey }}" style="">
 
-      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 41px;">
         <div style="display:flex;align-items:stretch;gap:28px;flex-wrap:wrap;">
           <div style="flex:1;min-width:min(280px,100%);max-width:900px;">
             <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">I’m a visual thinker whose design solutions address business, brand, and user needs.</h1>
@@ -151,7 +151,7 @@
         </div>
       </section>
 
-      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 41px;">
         <div style="position:relative;overflow:hidden;border-radius:22px;background:var(--feature-grad);border:1px solid var(--feature-border);padding:clamp(28px,4vw,52px);box-shadow:0 30px 70px -30px rgba(10,28,52,0.7);display:flex;gap:clamp(28px,4vw,52px);align-items:center;flex-wrap:wrap;">
           <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);"></div>
           <div style="flex:1.1;min-width:min(300px,100%);">
@@ -170,13 +170,11 @@
         </div>
       </section>
 
-      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;border-top:1px solid var(--line);">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:34px;">
-          <div>
-            <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">How I Work</div>
-            <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);">Essence → System → Scale</h2>
-          </div>
-          <p style="margin:0;max-width:44ch;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">AI doesn't design for me. I design first — AI helps me ship faster and keep systems alive.</p>
+      <section style="max-width:1240px;margin:0 auto;padding:41px 32px 41px;border-top:1px solid var(--line);">
+        <div style="margin-bottom:34px;">
+          <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">How I Work</div>
+          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);">Essence → System → Scale</h2>
+          <p style="margin:18px 0 0;max-width:68ch;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Every engagement follows the same three moves: understand what a company actually is, build the system that expresses it, then extend that system everywhere it needs to go. AI doesn't design for me — it helps me carry the system further, faster.</p>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:22px;">
           <div style="border:1px solid var(--line2);border-radius:16px;background:var(--surface);padding:26px 24px;">
@@ -197,13 +195,12 @@
         </div>
       </section>
 
-      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;border-top:1px solid var(--line);">
+      <section style="max-width:1240px;margin:0 auto;padding:41px 32px 41px;border-top:1px solid var(--line);">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px;">
           <div>
             <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">Selected Work</div>
             <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.02;letter-spacing:-0.025em;color:var(--fg);">Visual, brand &amp; graphic design</h2>
           </div>
-          <p style="margin:0;font-size:16px;line-height:1.55;color:var(--fg-dim);">Biopharma and fintech, blockchain, retail and AI — household names and businesses just finding their voice.</p>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:40px 30px;">
           <sc-for list="{{ visualProjects }}" as="p" hint-placeholder-count="6">
@@ -228,7 +225,7 @@
           <div>
             <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">Presentation Design</div>
             <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.02;letter-spacing:-0.025em;color:var(--fg);">Presentation design</h2>
-            <p style="margin:14px 0 0;max-width:52ch;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Pitch decks, investor and sales presentations in PowerPoint and Google Slides — clear hierarchy, honest data, and just enough motion to carry the room.</p>
+            <p style="margin:14px 0 0;font-size:16px;line-height:1.55;color:var(--fg-dim);white-space:nowrap;">Pitch decks, investor and sales presentations in PowerPoint and Google Slides.</p>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:40px 30px;">
@@ -288,7 +285,7 @@
         <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;" style-hover="color:#f72585;">← All work</a>
         <div style="display:block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-top:34px;">{{ detail.category }}</div>
         <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h1>
-        <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:36px;border-bottom:1px solid var(--line);">
+        <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:37px;border-bottom:1px solid var(--line);">
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">{{ detail.year }}</div></div>
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Role</div><div style="font-size:15px;color:var(--fg);">{{ detail.role }}</div></div>
           <div style="min-width:180px;"><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:9px;">Discipline</div>
@@ -315,7 +312,7 @@
       </section>
 
       <section style="max-width:1240px;margin:0 auto;padding:34px 32px 40px;">
-        <div style="border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;gap:20px;">
+        <div style="border-top:1px solid var(--line);padding-top:27px;display:flex;justify-content:space-between;gap:20px;">
           <a onClick="{{ detail.prev.onOpen }}" style="cursor:pointer;text-decoration:none;text-align:left;" style-hover="color:#f72585;">
             <div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">← Prev</div>
             <div style="font-family:var(--f-head);font-weight:600;font-size:22px;letter-spacing:-0.015em;color:inherit;">{{ detail.prev.client }}</div>
@@ -336,7 +333,7 @@
         <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);">Case Study / Brand to Build</div>
         <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">Standard Model Bio</h1>
         <p style="margin:20px 0 0;max-width:34ch;font-family:var(--f-head);font-weight:500;font-size:clamp(20px,2.6vw,30px);line-height:1.25;letter-spacing:-0.02em;color:var(--fg-dim);text-wrap:pretty;">From one pitch deck to an entire brand — designed by hand, scaled with AI.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:36px;border-bottom:1px solid var(--line);">
+        <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:37px;border-bottom:1px solid var(--line);">
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">2024–2026</div></div>
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Role</div><div style="font-size:15px;color:var(--fg);">Brand, Design System &amp; Web</div></div>
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Live Site</div><a href="https://standardmodel.bio" target="_blank" rel="noopener" style="font-size:15px;color:var(--accent);text-decoration:none;" style-hover="text-decoration:underline;">standardmodel.bio ↗</a></div>
@@ -362,12 +359,12 @@
 
       <section style="max-width:1240px;margin:0 auto;padding:40px 32px 8px;">
         <div style="display:flex;flex-direction:column;">
-          <div style="padding:28px 0;border-bottom:1px solid var(--line);">
+          <div style="padding:28px 0 29px;border-bottom:1px solid var(--line);">
             <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;"><span style="color:var(--accent);">01</span>&nbsp;&nbsp;Situation</div>
             <h3 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.02em;color:var(--fg);">A compelling story, no identity to tell it.</h3>
             <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Early-stage biotech is a credibility game. Standard Model had a compelling story — a foundation model for human biology, trained on genomic, imaging, and longitudinal patient data — but nothing to make it look real: no palette, no logo, no landing page. They needed a brand from scratch, one that could start as a mini-brand to help the founders meet early investors and mature into a real system: one that could carry a website, docs, and pitch after pitch without losing coherence.</p>
           </div>
-          <div style="padding:28px 0;border-bottom:1px solid var(--line);">
+          <div style="padding:28px 0 29px;border-bottom:1px solid var(--line);">
             <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;"><span style="color:var(--accent);">02</span>&nbsp;&nbsp;Action</div>
             <h3 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.02em;color:var(--fg);">Essence, then system — by hand. Then scale, with AI.</h3>
             <p style="margin:14px 0 0;font-size:17px;line-height:1.62;color:var(--fg-dim);text-wrap:pretty;">Every engagement starts with essence: understanding what a company actually is before deciding what it should look like. From that came a core identity built around a single idea — behind every data point is a human story. A palette that refuses biomedicine's antiseptic white-and-blue, holding cool scientific authority and warm human presence at equal weight. Organic, Matisse-inspired forms that flow into one another the way the company's model connects fragmented biomedical data. A brand mark that encodes the actual thesis. This is the part no tool does for you — presented to stakeholders and approved before a single line of code existed. The CEO's response: extend it to everything.</p>
@@ -406,7 +403,7 @@
       </section>
 
       <sc-for list="{{ csSections }}" as="cs" hint-placeholder-count="0">
-        <section style="max-width:1240px;margin:0 auto;padding:48px 32px 8px;border-top:1px solid var(--line);">
+        <section style="max-width:1240px;margin:0 auto;padding:41px 32px 41px;border-top:1px solid var(--line);">
           <div style="max-width:780px;margin-bottom:30px;">
             <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">{{ cs.kicker }}</div>
             <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3vw,36px);line-height:1.08;letter-spacing:-0.025em;color:var(--fg);text-wrap:pretty;">{{ cs.title }}</h2>
@@ -425,7 +422,7 @@
       </sc-for>
 
 
-      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
+      <section style="max-width:1240px;margin:0 auto;padding:40px 32px 41px;">
         <div style="position:relative;overflow:hidden;border-radius:22px;background:var(--feature-grad);border:1px solid var(--feature-border);padding:clamp(32px,5vw,64px);box-shadow:0 30px 70px -30px rgba(10,28,52,0.7);">
           <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);"></div>
           <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#c9b8ff;margin-bottom:22px;">The Payoff</div>
@@ -513,7 +510,7 @@
               </div>
             </div>
           </div>
-          <a href="https://www.linkedin.com/in/skottreader/details/recommendations/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;">More on LinkedIn →</a>
+          <a href="https://www.linkedin.com/in/skottreader/details/recommendations/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;transition:color .2s ease;" style-hover="color:#f72585 !important;">More on LinkedIn →</a>
         </div>
         <div style="{{ aboutSkillsStyle }}">
           <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:var(--accent);color:var(--accent-fg);padding:4px 9px;margin-bottom:18px;">Tools and Proficiencies</div>
@@ -531,7 +528,7 @@
       <div style="{{ contactGridStyle }}">
         <div>
           <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(40px,6vw,80px);line-height:0.96;letter-spacing:-0.03em;color:var(--fg);max-width:14ch;">Let's make something.</h1>
-          <p style="margin:26px 0 0;max-width:46ch;font-size:17px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Tell me a little about the project or the reason for your inquiry. I read everything, and I reply to real ones.</p>
+          <p style="margin:26px 0 0;max-width:46ch;font-size:17px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Introduce yourself and tell me a little about your project or the reason for your inquiry, and I'll get back in touch within 24 hours.</p>
           <div style="margin-top:34px;display:flex;align-items:center;gap:16px;color:var(--fg-dim);">
             <a href="https://www.linkedin.com/in/skottreader/" target="_blank" rel="noopener" aria-label="LinkedIn" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg></a>
             <a href="https://www.instagram.com/omegaequalsone/" target="_blank" rel="noopener" aria-label="Instagram" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4.2"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
@@ -549,15 +546,15 @@
             <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:20px;">
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Name</span>
-                <input name="name" required type="text" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+                <input name="name" required type="text" style="padding:14px 16px;border-radius:5.5px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Email</span>
-                <input name="email" required type="email" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+                <input name="email" required type="email" style="padding:14px 16px;border-radius:5.5px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Briefly describe your project</span>
-                <textarea name="message" required rows="5" style="padding:14px 16px;border-radius:11px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;resize:vertical;font-family:inherit;" style-focus="border-color:var(--accent);"></textarea>
+                <textarea name="message" required rows="5" style="padding:14px 16px;border-radius:5.5px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;resize:vertical;font-family:inherit;" style-focus="border-color:var(--accent);"></textarea>
               </label>
               <button type="submit" disabled="{{ submitting }}" style="align-self:flex-start;padding:14px 30px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">{{ submitLabel }}</button>
               <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
@@ -573,13 +570,17 @@
   </main>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer style="border-top:1px solid var(--line);margin-top:40px;">
-    <div style="max-width:1240px;margin:0 auto;padding:64px 32px;">
+  <footer style="margin-top:40px;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 32px;">
+      <div style="background-image:var(--grad);background-size:100% 1px;background-repeat:no-repeat;background-origin:content-box;background-position:top left;height:1px;"></div>
+      <div style="padding:64px 0;">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;">
         <sc-if value="{{ showFooterCta }}" hint-placeholder-val="{{ true }}">
         <div>
-          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,5vw,58px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;">Let's make something.</h2>
-          <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:14px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Get in touch →</a>
+          <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
+          <h2 style="margin:0 0 26px;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,5vw,58px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;">Let's make something.</h2>
+          </sc-if>
+          <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Get in touch →</a>
         </div>
         </sc-if>
         <div style="display:flex;align-items:center;gap:18px;color:var(--fg-dim);">
@@ -588,9 +589,10 @@
           <a href="https://www.flickr.com/photos/omegaequalsone/albums/72177720297549845" target="_blank" rel="noopener" aria-label="Flickr" style="display:flex;color:inherit;" style-hover="color:var(--social-hover) !important;"><svg width="22" height="12" viewBox="0 0 40 20" fill="currentColor"><circle cx="10" cy="10" r="10"></circle><circle cx="30" cy="10" r="10"></circle></svg></a>
         </div>
       </div>
-      <div style="margin-top:56px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:12px;color:var(--fg-mute);">
+      <div style="margin-top:56px;padding-top:25px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:12px;color:var(--fg-mute);">
         <span>© 2026 Skott Reader</span>
         <span>Visual / Brand / Presentation / Design-to-Build</span>
+      </div>
       </div>
     </div>
   </footer>
@@ -999,8 +1001,8 @@ class Component extends DCLogic {
     const aboutSidebarStyle = isNarrowCols ? { order: 0 } : { gridColumn: '1', gridRow: '1' };
     const aboutMainStyle = isNarrowCols ? { order: 1 } : { gridColumn: '2', gridRow: '1' };
     const aboutRuleStyle = isNarrowCols
-      ? { order: 2, height: '1px', background: 'var(--grad)', borderRadius: '1px' }
-      : { gridColumn: '1 / -1', gridRow: '2', height: '1px', background: 'var(--grad)', borderRadius: '1px' };
+      ? { order: 2, height: '1px', background: 'var(--line)' }
+      : { gridColumn: '1 / -1', gridRow: '2', height: '1px', background: 'var(--line)' };
     const aboutSkillsStyle = isNarrowCols ? { order: 4 } : { gridColumn: '1', gridRow: '3' };
     const aboutRecsStyle = isNarrowCols ? { order: 3 } : { gridColumn: '2', gridRow: '3' };
     const contactGridStyle = { display: 'grid', gridTemplateColumns: isNarrowCols ? '1fr' : '1fr 1fr', gap: isNarrowCols ? '32px' : '60px', alignItems: 'start' };
