@@ -39,15 +39,16 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=3">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=3">
 <link rel="apple-touch-icon" href="assets/favicon-180.png?v=3">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;}
   html{overflow-y:scroll;}
   html,body{margin:0;padding:0;}
   a{color:inherit;}
   input,textarea,button{font-family:inherit;}
+  @font-face{font-family:'Inter Tight';src:url('fonts/InterTight-Variable.ttf') format('truetype-variations'),url('fonts/InterTight-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Inter Tight';src:url('fonts/InterTight-Italic-Variable.ttf') format('truetype-variations'),url('fonts/InterTight-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('fonts/Inter-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('fonts/Inter-Italic-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
   @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
   @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
   @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Bold.otf') format('opentype');font-weight:600 700;font-style:normal;font-display:swap;}
@@ -109,9 +110,9 @@
 
       <section style="max-width:1240px;margin:0 auto;padding:40px 32px 20px;">
         <div style="display:flex;align-items:stretch;gap:28px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:min(280px,100%);">
+          <div style="flex:1;min-width:min(280px,100%);max-width:900px;">
             <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">I’m a visual thinker whose design solutions address business, brand, and user needs.</h1>
-            <p style="margin:16px 0 0;max-width:64ch;font-size:clamp(16px,1.6vw,18px);line-height:1.5;letter-spacing:-0.005em;color:var(--fg-dim);text-wrap:pretty;">My work is driven by a passion for bridging the gap between products and services and the ways humans utilize them, helping brands and individuals connect in more meaningful ways.</p>
+            <p style="margin:20px 0 0;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">My work is driven by a passion for bridging the gap between products and services and the ways humans utilize them, helping brands and individuals connect in more meaningful ways.</p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
               <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">View my work →</a>
               <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">Get in touch</a>
@@ -125,26 +126,26 @@
         <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 90px,#000 calc(100% - 90px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 90px,#000 calc(100% - 90px),transparent 100%);">
           <div style="display:flex;width:max-content;animation:marquee 38s linear infinite;">
             <div style="display:flex;align-items:center;gap:clamp(48px,6vw,88px);padding-right:clamp(48px,6vw,88px);flex:0 0 auto;">
-              <img src="assets/logos/sscadvent.svg" alt="SS&amp;C Advent" style="height:44px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/servicenow.svg" alt="ServiceNow" style="height:32px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/openai.svg" alt="OpenAI" style="height:38px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/google.svg" alt="Google" style="height:38px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/intuit.svg" alt="Intuit" style="height:35px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/bitgo.svg" alt="BitGo" style="height:34px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/sui.svg" alt="Sui" style="height:44px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/citrix.svg" alt="Citrix" style="height:34px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/movementlabs.svg" alt="Movement Labs" style="height:38px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/sscadvent.svg" alt="SS&amp;C Advent" style="height:44px;width:81px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/servicenow.svg" alt="ServiceNow" style="height:32px;width:219px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/openai.svg" alt="OpenAI" style="height:38px;width:138px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/google.svg" alt="Google" style="height:38px;width:115px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/intuit.svg" alt="Intuit" style="height:35px;width:174px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/bitgo.svg" alt="BitGo" style="height:34px;width:131px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/sui.svg" alt="Sui" style="height:44px;width:84px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/citrix.svg" alt="Citrix" style="height:34px;width:109px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/movementlabs.svg" alt="Movement Labs" style="height:38px;width:296px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
             </div>
             <div style="display:flex;align-items:center;gap:clamp(48px,6vw,88px);padding-right:clamp(48px,6vw,88px);flex:0 0 auto;">
-              <img src="assets/logos/sscadvent.svg" alt="SS&amp;C Advent" style="height:44px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/servicenow.svg" alt="ServiceNow" style="height:32px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/openai.svg" alt="OpenAI" style="height:38px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/google.svg" alt="Google" style="height:38px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/intuit.svg" alt="Intuit" style="height:35px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/bitgo.svg" alt="BitGo" style="height:34px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/sui.svg" alt="Sui" style="height:44px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/citrix.svg" alt="Citrix" style="height:34px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
-              <img src="assets/logos/movementlabs.svg" alt="Movement Labs" style="height:38px;width:auto;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/sscadvent.svg" alt="SS&amp;C Advent" style="height:44px;width:81px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/servicenow.svg" alt="ServiceNow" style="height:32px;width:219px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/openai.svg" alt="OpenAI" style="height:38px;width:138px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/google.svg" alt="Google" style="height:38px;width:115px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/intuit.svg" alt="Intuit" style="height:35px;width:174px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/bitgo.svg" alt="BitGo" style="height:34px;width:131px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/sui.svg" alt="Sui" style="height:44px;width:84px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/citrix.svg" alt="Citrix" style="height:34px;width:109px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
+              <img src="assets/logos/movementlabs.svg" alt="Movement Labs" style="height:38px;width:296px;flex:0 0 auto;display:block;filter:var(--logo-filter);">
             </div>
           </div>
         </div>
@@ -286,7 +287,7 @@
       <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
         <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;" style-hover="color:#f72585;">← All work</a>
         <div style="display:block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-top:34px;">{{ detail.category }}</div>
-        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(44px,8vw,104px);line-height:0.94;letter-spacing:-0.035em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h1>
+        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h1>
         <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:36px;border-bottom:1px solid var(--line);">
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">{{ detail.year }}</div></div>
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Role</div><div style="font-size:15px;color:var(--fg);">{{ detail.role }}</div></div>
@@ -298,8 +299,8 @@
         </div>
       </section>
 
-      <section style="max-width:840px;margin:0 auto;padding:48px 32px 8px;">
-        <sc-for list="{{ detail.narrative }}" as="para" hint-placeholder-count="2"><p style="margin:0 0 24px;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">{{ para }}</p></sc-for>
+      <section style="max-width:1240px;margin:0 auto;padding:48px 32px 8px;">
+        <sc-for list="{{ detail.narrative }}" as="para" hint-placeholder-count="2"><p style="margin:0 0 24px;max-width:68ch;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">{{ para }}</p></sc-for>
       </section>
 
       <section style="max-width:1240px;margin:0 auto;padding:36px 32px 20px;">
@@ -333,7 +334,7 @@
     <div key="{{ routeKey }}" style="">
       <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
         <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);">Case Study / Brand to Build</div>
-        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(44px,8vw,104px);line-height:0.94;letter-spacing:-0.035em;color:var(--fg);text-wrap:pretty;">Standard Model Bio</h1>
+        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">Standard Model Bio</h1>
         <p style="margin:20px 0 0;max-width:34ch;font-family:var(--f-head);font-weight:500;font-size:clamp(20px,2.6vw,30px);line-height:1.25;letter-spacing:-0.02em;color:var(--fg-dim);text-wrap:pretty;">From one pitch deck to an entire brand — designed by hand, scaled with AI.</p>
         <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:36px;border-bottom:1px solid var(--line);">
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">2024–2026</div></div>
@@ -763,8 +764,8 @@ class Component extends DCLogic {
       let subSize = fitFont(sp, Math.max(20, logoW - 12), parseFloat(subCs.fontSize) || 7);
       subSize = Math.max(4.5, Math.min(subSize, 12));
       sp.remove();
-      if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3 || Math.abs(subSize - (this.state.subFontPx || 0)) > 0.2) {
-        this.setState({ logoFontPx: size, subFontPx: subSize });
+      if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3 || Math.abs(subSize - (this.state.subFontPx || 0)) > 0.2 || this.state.logoTrackPx != null) {
+        this.setState({ logoFontPx: size, subFontPx: subSize, logoTrackPx: null, lockupW: null });
       }
       return;
     }
@@ -779,13 +780,28 @@ class Component extends DCLogic {
     sp.style.letterSpacing = subCs.letterSpacing;
     sp.style.textTransform = subCs.textTransform;
     document.body.appendChild(sp);
-    const targetWidth = sp.offsetWidth;
+    const subPadX = (parseFloat(subCs.paddingLeft) || 0) + (parseFloat(subCs.paddingRight) || 0);
+    const targetWidth = sp.offsetWidth + subPadX;
     sp.remove();
     if (!targetWidth) { probe.remove(); return; }
-    let size = fitFont(probe, targetWidth, parseFloat(cs.fontSize) || 27);
+    // desktop: keep the wordmark at full size; fit it to just under the pill
+    // width, then spread the characters very slightly to close the gap exactly
+    probe.style.letterSpacing = 'normal';
+    const size = fitFont(probe, targetWidth * 0.965, parseFloat(cs.fontSize) || 27);
+    probe.style.fontSize = size + 'px';
+    const naturalW = probe.offsetWidth;
     probe.remove();
-    if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3 || this.state.subFontPx != null) {
-      this.setState({ logoFontPx: size, subFontPx: null });
+    if (!naturalW) return;
+    // spread across the gaps BETWEEN glyphs (n-1), so the visible letterforms —
+    // not the text box — span exactly the pill width
+    const chars = (logoEl.textContent || '').length || 1;
+    const gaps = Math.max(1, chars - 1);
+    const ls = (targetWidth - naturalW) / gaps;
+    if (Math.abs(size - (this.state.logoFontPx || 0)) > 0.3
+        || Math.abs(ls - (this.state.logoTrackPx == null ? 999 : this.state.logoTrackPx)) > 0.05
+        || Math.abs(targetWidth - (this.state.lockupW || 0)) > 0.5
+        || this.state.subFontPx != null) {
+      this.setState({ logoFontPx: size, logoTrackPx: ls, lockupW: targetWidth, subFontPx: null });
     }
   }
 
@@ -861,7 +877,7 @@ class Component extends DCLogic {
     const t = this.themes[s.theme];
     const rootStyle = Object.assign({}, t, {
       '--f-head': "'TWK Everett','Degular','Inter Tight',system-ui,sans-serif",
-      '--f-body': "'Plus Jakarta Sans','Inter Tight',system-ui,sans-serif",
+      '--f-body': "'Inter Tight','Inter',system-ui,-apple-system,sans-serif",
       '--f-mono': "ui-monospace,'SF Mono',Menlo,monospace",
       '--grad': 'linear-gradient(90deg,#f72585,#7209b7,#4361ee,#4cc9f0)',
       '--accent-lt': 'color-mix(in srgb, var(--accent) 52%, #ffffff)',
@@ -883,8 +899,8 @@ class Component extends DCLogic {
     const showNavLinks = !isMobileNav;
     const showHamburger = isMobileNav;
     const navStyle = { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: 'clamp(10px,2.4vw,15px) clamp(16px,4vw,30px)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', background: 'color-mix(in srgb, var(--bg) 74%, transparent)', borderBottom: '1px solid var(--line)' };
-    const logoLockupStyle = { display: 'flex', flexDirection: 'column', width: 'max-content', flexShrink: 0 };
-    const logoStyle = { cursor: 'pointer', fontFamily: 'var(--f-head)', fontWeight: 500, letterSpacing: '-0.01em', fontSize: s.logoFontPx ? (s.logoFontPx + 'px') : 'clamp(15px, 4.6vw, 27px)', color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap', display: 'inline-block' };
+    const logoLockupStyle = { display: 'flex', flexDirection: 'column', width: (s.lockupW ? s.lockupW.toFixed(2) + 'px' : 'max-content'), flexShrink: 0 };
+    const logoStyle = { cursor: 'pointer', fontFamily: 'var(--f-head)', fontWeight: 700, letterSpacing: (s.logoTrackPx != null ? s.logoTrackPx.toFixed(3) + 'px' : '-0.01em'), marginRight: (s.logoTrackPx != null ? (-s.logoTrackPx).toFixed(3) + 'px' : '0px'), fontSize: s.logoFontPx ? (s.logoFontPx + 'px') : 'clamp(15px, 4.6vw, 27px)', color: 'var(--fg)', textDecoration: 'none', whiteSpace: 'nowrap', display: 'inline-block' };
     const navSubtitleStyle = { display: 'block', width: '100%', boxSizing: 'border-box', whiteSpace: 'nowrap', fontFamily: 'var(--f-mono)', fontSize: (s.subFontPx != null ? s.subFontPx.toFixed(2) : navSubFontPx.toFixed(2)) + 'px', letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center', color: 'var(--accent-fg)', background: 'var(--accent)', padding: '4px 6px', marginTop: '2px' };
     const mNavBase = { cursor: 'pointer', fontSize: '19px', fontWeight: 500, letterSpacing: '0.01em', textDecoration: 'none', color: 'var(--fg)', padding: '13px 4px', borderTop: '1px solid var(--line)' };
     const mWorkStyle = Object.assign({}, mNavBase, (rn === 'work' || rn === 'detail') ? navOn : {});

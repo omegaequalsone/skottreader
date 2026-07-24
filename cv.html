@@ -27,14 +27,15 @@
 <body>
 <x-dc>
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  @font-face{font-family:'Inter Tight';src:url('fonts/InterTight-Variable.ttf') format('truetype-variations'),url('fonts/InterTight-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Inter Tight';src:url('fonts/InterTight-Italic-Variable.ttf') format('truetype-variations'),url('fonts/InterTight-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('fonts/Inter-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Inter';src:url('fonts/Inter-Italic-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
   *{box-sizing:border-box;}
   doc-page:not(:defined){visibility:hidden;}
   ::selection{background:#7209b7;color:#fff;}
-  #cv-dl{position:fixed;top:20px;right:20px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:none;border-radius:999px;background:#7209b7;color:#fff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:600;font-size:14px;cursor:pointer;box-shadow:0 6px 20px -6px rgba(114,9,183,0.6);transition:filter .2s ease;}
+  #cv-dl{position:fixed;top:20px;right:20px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:none;border-radius:999px;background:#7209b7;color:#fff;font-family:'Inter Tight','Inter',system-ui,sans-serif;font-weight:600;font-size:14px;cursor:pointer;box-shadow:0 6px 20px -6px rgba(114,9,183,0.6);transition:filter .2s ease;}
   #cv-dl:hover{filter:brightness(1.1);}
   @media print{#cv-dl{display:none !important;}}
 </style>
@@ -50,7 +51,7 @@
 </script>
 </helmet>
 <x-import component-from-global-scope="doc-page" from="./doc-page.js" size="letter" margin="0.5in" hint-size="816px,1056px">
-  <div style="--fg:#161229;--fg-dim:#3f3b5c;--fg-mute:#7d789c;--accent:#7209b7;--pink:#f72585;--line:rgba(24,18,48,0.12);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--fg);font-size:12.5px;line-height:1.5;">
+  <div style="--fg:#161229;--fg-dim:#3f3b5c;--fg-mute:#7d789c;--accent:#7209b7;--pink:#f72585;--line:rgba(24,18,48,0.12);font-family:'Inter Tight','Inter',system-ui,sans-serif;color:var(--fg);font-size:12.5px;line-height:1.5;">
 
     <div style="display:grid;grid-template-columns:1fr 1.92fr;gap:36px;align-items:start;">
 
