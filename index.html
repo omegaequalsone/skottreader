@@ -747,10 +747,21 @@ class Component extends DCLogic {
       if (rc && rc !== lockup) rightW = rc.offsetWidth;
       const target = navEl.clientWidth - padX - rightW - 16;
       if (target < 60) { probe.remove(); return; }
+      // measure with the tracking the mobile lockup actually renders with
+      probe.style.letterSpacing = '-0.01em';
       let size = fitFont(probe, target, parseFloat(cs.fontSize) || 24);
-      size = Math.max(18, Math.min(size, 32));
+      size = Math.min(size, 30);
       probe.style.fontSize = size + 'px';
-      const logoW = probe.offsetWidth;
+      // never let the wordmark exceed the space beside the nav buttons
+      let logoW = probe.offsetWidth;
+      if (logoW > target) {
+        size = size * (target / logoW);
+        probe.style.fontSize = size + 'px';
+        logoW = probe.offsetWidth;
+      }
+      size = Math.max(13, size);
+      probe.style.fontSize = size + 'px';
+      logoW = probe.offsetWidth;
       probe.remove();
       const subCs = window.getComputedStyle(subEl);
       const sp = document.createElement('span');
