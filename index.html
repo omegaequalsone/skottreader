@@ -35,10 +35,10 @@
 </noscript>
 <x-dc>
 <helmet>
-<link rel="icon" href="favicon.ico?v=3" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=3">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=3">
-<link rel="apple-touch-icon" href="assets/favicon-180.png?v=3">
+<link rel="icon" href="favicon-v4.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32-v4.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16-v4.png">
+<link rel="apple-touch-icon" href="assets/favicon-180-v4.png">
 <style>
   *{box-sizing:border-box;}
   html{overflow-y:scroll;}
@@ -465,7 +465,7 @@
           <div style="margin-top:30px;font-size:17px;line-height:1.62;color:var(--fg-dim);max-width:62ch;">
             <p style="margin:0 0 20px;text-wrap:pretty;">I believe design should be rooted in simplicity, empathy, and trust, and I work those qualities into every pixel. On UX and marketing teams and as an independent designer, I've left a creative mark across education, fintech, blockchain, biopharma, retail, small business, AI, and social media.</p>
             <p style="margin:0 0 20px;text-wrap:pretty;">My approach starts with understanding — business objectives, user needs, and what customers expect. What I'm known for: a patient, ego-free way of working, clear rationale behind every decision, and a knack for grasping a brand or design system quickly and extending it wherever it's needed.</p>
-            <p style="margin:0 0 20px;text-wrap:pretty;">Lately my practice has grown from designing systems to building them. With AI tools like Claude Code, I take brands from identity to shipped products — websites, living design systems, template libraries — with no handoff. The thinking is unchanged: essence, then system, then scale.</p>
+            <p style="margin:0 0 20px;text-wrap:pretty;">Lately my practice has grown from not only designing systems, but also to building them. With AI tools like Claude Code, I take brands from identity to shipped products — websites, living design systems, template libraries — with no handoff. The thinking is unchanged: essence, then system, then scale.</p>
             <p style="margin:0;text-wrap:pretty;">Most of all, I'm a collaborator — I bring stakeholders and executives who aren't designers into the process, so what we ship is something everyone can stand behind.</p>
           </div>
         </div>
@@ -512,9 +512,14 @@
           <a href="https://www.linkedin.com/in/skottreader/details/recommendations/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line);font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;transition:color .2s ease;" style-hover="color:#f72585 !important;">More on LinkedIn →</a>
         </div>
         <div style="{{ aboutSkillsStyle }}">
-          <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:var(--accent);color:var(--accent-fg);padding:4px 9px;margin-bottom:18px;">Tools and Proficiencies</div>
+          <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;background:var(--accent);color:var(--accent-fg);padding:4px 9px;margin-bottom:22px;">Tools and Proficiencies</div>
+          <div style="font-family:var(--f-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:13px;">Proficiencies</div>
           <div style="display:grid;grid-template-columns:1fr;gap:11px;">
-            <sc-for list="{{ toolsAndProficiencies }}" as="tp" hint-placeholder-count="13"><div style="font-size:15px;color:var(--fg);border-bottom:1px solid var(--line);padding-bottom:11px;white-space:pre-line;">{{ tp }}</div></sc-for>
+            <sc-for list="{{ aboutProficiencies }}" as="pr" hint-placeholder-count="8"><div style="font-size:15px;color:var(--fg);border-bottom:1px solid var(--line);padding-bottom:11px;white-space:pre-line;">{{ pr }}</div></sc-for>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg-mute);margin:26px 0 13px;">Tools</div>
+          <div style="display:grid;grid-template-columns:1fr;gap:11px;">
+            <sc-for list="{{ aboutTools }}" as="tl" hint-placeholder-count="4"><div style="border-bottom:1px solid var(--line);padding-bottom:11px;"><div style="font-size:15px;color:var(--fg);">{{ tl.name }}</div><sc-if value="{{ tl.note }}" hint-placeholder-val="{{ true }}"><div style="margin-top:3px;font-size:13px;color:var(--fg-mute);">{{ tl.note }}</div></sc-if></div></sc-for>
           </div>
         </div>
       </div>
@@ -642,8 +647,8 @@ class Component extends DCLogic {
     { id:'openai', client:'OpenAI', category:'pres', year:'2024', role:'Presentation Design', thumb:'assets/thumbs/openai.png', thumbBg:'#141414', tags:['Presentation Design','Data Visualization'], tagline:'Frontier ideas, made clear and grounded.', images:['assets/galleries/openai/01.jpg','assets/galleries/openai/02.jpg','assets/galleries/openai/03.jpg','assets/galleries/openai/04.jpg','assets/galleries/openai/05.jpg','assets/galleries/openai/06.jpg','assets/galleries/openai/07.jpg','assets/galleries/openai/08.jpg','assets/galleries/openai/09.jpg','assets/galleries/openai/10.jpg','assets/galleries/openai/11.jpg','assets/galleries/openai/12.jpg','assets/galleries/openai/13.jpg','assets/galleries/openai/14.jpg'], imageBg:["#0a100c","#0a0a09","#161212","#191314","#1f120f","#161112","#1e120e","#0f0a0a","#0d0908","#291712","#151114","#0a0605","#161213","#1f100d"], shots:['16/9','16/9','16/10','16/9','16/9'], narrative:["Working within their rapidly evolving brand guidelines, I designed a series of presentation decks and templates for OpenAI."] }
   ];
 
-  aboutProficiencies = ['Presentation Design','Pitch & Investor Deck Design','Brand Identity & Logo Design','Biotech & Pharma Brand Design','Design Systems','Iconography & Typography','UI & Visual Design','Large-Format Print & Event Collateral','Digital & Analog Photography'];
-  aboutTools = ['Figma / Sketch','Photoshop & Illustrator','Generative AI\n(Midjourney + multiple platforms & models)','AI-Assisted Design & Build','PowerPoint & Google Slides','HTML / CSS'];
+  aboutProficiencies = ['AI-Accelerated Design & Build','Design Systems & Component Libraries','UI & Visual Design','Brand Identity & Logo Design','Presentation, Pitch & Investor Decks','Iconography & Typography','Large-Format Print & Event Collateral','Digital & Analog Photography'];
+  aboutTools = [{name:'Generative AI',note:'image, video, code'},{name:'HTML / CSS'},{name:'Figma'},{name:'Adobe Creative Suite',note:'Photoshop, Illustrator, InDesign'}];
 
   CS_BASE = 'assets/galleries/standardmodel/';
   CS_SECTIONS = [
@@ -1015,7 +1020,7 @@ class Component extends DCLogic {
       routeKey: rn + (s.route.id ? ':' + s.route.id : ''),
       visualProjects, presProjects, indexList, filterChips,
       detail,
-      marqueeItems, toolsAndProficiencies: [...this.aboutProficiencies, ...this.aboutTools],
+      marqueeItems, aboutProficiencies: this.aboutProficiencies, aboutTools: this.aboutTools,
       lb, lbOpen: !!lb,
       csSections: this.CS_SECTIONS.map((sec, si) => ({
         kicker: sec.kicker, title: sec.title, paras: sec.paras,
