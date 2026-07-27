@@ -48,8 +48,8 @@
       var b=document.createElement('button');
       b.id='cv-dl';
       b.innerHTML='Download PDF ↓';
-      b.onclick=function(){ window.print(); };
-      document.body.appendChild(b);
+      b.onclick=function(){ var t0=document.title; document.title='SkottReader-CV'; window.print(); setTimeout(function(){ document.title=t0; },1500); };
+      document.body.appendChild(b); var t1=null; window.onbeforeprint=function(){ if(t1===null){ t1=document.title; } document.title='SkottReader-CV'; }; window.onafterprint=function(){ if(t1!==null){ document.title=t1; t1=null; } };
     }
     if(document.readyState==='complete'||document.readyState==='interactive'){ addBtn(); }
     else { document.addEventListener('DOMContentLoaded', addBtn); }
