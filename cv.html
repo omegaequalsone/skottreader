@@ -33,27 +33,40 @@
   @font-face{font-family:'Inter';src:url('fonts/Inter-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
   @font-face{font-family:'Inter';src:url('fonts/Inter-Italic-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
   *{box-sizing:border-box;}
-  doc-page:not(:defined){visibility:hidden;}
   ::selection{background:#7209b7;color:#fff;}
+  @media print{
+    html,body,#dc-root,.sc-host,.sc-host-x{height:auto !important;min-height:0 !important;max-height:none !important;overflow:visible !important;}
+  }
   #cv-dl{position:fixed;top:20px;right:20px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border:none;border-radius:999px;background:#7209b7;color:#fff;font-family:'Inter Tight','Inter',system-ui,sans-serif;font-weight:600;font-size:14px;cursor:pointer;box-shadow:0 6px 20px -6px rgba(114,9,183,0.6);transition:filter .2s ease;}
   #cv-dl:hover{filter:brightness(1.1);}
   @media print{#cv-dl{display:none !important;}}
 </style>
 <script>
-  window.addEventListener('load', function(){
-    if(document.getElementById('cv-dl')) return;
-    var b=document.createElement('button');
-    b.id='cv-dl';
-    b.innerHTML='Download PDF ↓';
-    b.onclick=function(){ window.print(); };
-    document.body.appendChild(b);
-  });
+  (function(){
+    function addBtn(){
+      if(document.getElementById('cv-dl')) return;
+      var b=document.createElement('button');
+      b.id='cv-dl';
+      b.innerHTML='Download PDF ↓';
+      b.onclick=function(){ window.print(); };
+      document.body.appendChild(b);
+    }
+    if(document.readyState==='complete'||document.readyState==='interactive'){ addBtn(); }
+    else { document.addEventListener('DOMContentLoaded', addBtn); }
+    window.addEventListener('load', addBtn);
+  })();
 </script>
 </helmet>
 <x-import component-from-global-scope="doc-page" from="./doc-page.js" size="letter" margin="0.5in" hint-size="816px,1056px">
   <div style="--fg:#161229;--fg-dim:#3f3b5c;--fg-mute:#7d789c;--accent:#7209b7;--pink:#f72585;--line:rgba(24,18,48,0.12);font-family:'Inter Tight','Inter',system-ui,sans-serif;color:var(--fg);font-size:12.5px;line-height:1.5;">
 
-    <img src="assets/doc-header.svg" alt="Skott Reader — Visual / Brand / Presentation / Design-to-Build" style="display:block;width:100%;max-width:720px;height:auto;margin:0 0 30px;">
+    <div style="position:relative;width:100%;max-width:720px;margin:0 0 30px;">
+      <img src="assets/doc-header.svg" alt="Skott Reader — Visual / Brand / Presentation / Design-to-Build" style="display:block;width:100%;height:auto;">
+      <a href="https://skottreader.com" aria-label="skottreader.com" title="skottreader.com" style="position:absolute;left:83%;top:6%;width:17%;height:17%;"></a>
+      <a href="mailto:skottreader@gmail.com" aria-label="skottreader@gmail.com" title="skottreader@gmail.com" style="position:absolute;left:76.5%;top:28.5%;width:23.5%;height:17%;"></a>
+      <a href="tel:+14152408262" aria-label="415.240.8262" title="415.240.8262" style="position:absolute;left:86%;top:51%;width:14%;height:17%;"></a>
+      <a href="https://www.linkedin.com/in/skottreader" aria-label="LinkedIn — @skottreader" title="LinkedIn — @skottreader" style="position:absolute;left:83.5%;top:73%;width:16.5%;height:17%;"></a>
+    </div>
 
     <div style="display:grid;grid-template-columns:250px minmax(0,1fr);gap:34px;align-items:start;">
 
@@ -170,14 +183,6 @@
       </main>
     </div>
 
-    <footer style="display:flex;align-items:center;gap:14px;margin-top:34px;padding-top:11px;border-top:1px solid var(--line);font-size:11px;line-height:1;color:var(--fg-mute);">
-      <span style="font-weight:600;color:var(--fg);">Skott Reader</span>
-      <span style="font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:9.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:var(--fg);color:#fff;padding:3px 7px;">Visual / Brand / Presentation / Design-to-Build</span>
-      <span style="margin-left:auto;display:flex;align-items:center;gap:14px;">
-        <a href="mailto:skottreader@gmail.com" style="color:var(--fg-dim);text-decoration:none;">skottreader@gmail.com</a>
-        <a href="https://skottreader.com" style="color:var(--fg-dim);text-decoration:none;">skottreader.com</a>
-      </span>
-    </footer>
   </div>
 </x-import>
 
