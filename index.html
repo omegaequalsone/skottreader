@@ -111,8 +111,8 @@
       <section style="max-width:1240px;margin:0 auto;padding:40px 32px 41px;">
         <div style="display:flex;align-items:stretch;gap:28px;flex-wrap:wrap;">
           <div style="flex:1;min-width:min(280px,100%);max-width:900px;">
-            <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">I’m a visual thinker whose design solutions address business, brand, and user needs.</h1>
-            <p style="margin:20px 0 0;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">My work is driven by a passion for bridging the gap between products and services and the ways humans utilize them, helping brands and individuals connect in more meaningful ways.</p>
+            <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">I’m a visual thinker whose work addresses business, brand, and user needs, and takes place in the seams between products and the people who use them.</h1>
+            <p style="margin:20px 0 0;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">I’m driven by the human end of design, and what I care about most is the moment it all lines up — a business’s goals, a brand’s character, and a real person’s needs all pointing the same way. I work to make sure what a company builds actually lands with the people it’s designed for.</p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
               <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">View my work →</a>
               <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">Get in touch</a>
@@ -553,7 +553,7 @@
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Briefly describe your project</span>
-                <textarea name="message" required rows="5" style="padding:14px 16px;border-radius:5.5px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;resize:vertical;font-family:inherit;" style-focus="border-color:var(--accent);"></textarea>
+                <textarea name="message" required rows="5" style="{{ messageFieldStyle }}" style-focus="border-color:var(--accent);"></textarea>
               </label>
               <button type="submit" disabled="{{ submitting }}" style="align-self:flex-start;padding:14px 30px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">{{ submitLabel }}</button>
               <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}">
@@ -617,7 +617,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;}}">
 class Component extends DCLogic {
-  state = { theme: (function(){ try { var h = new Date().getHours(); return (h >= 19 || h < 6) ? 'dark' : 'light'; } catch(e) { return 'light'; } })(), route: { name: 'home' }, lb: null, filter: 'all', submitted: false, menuOpen: false, vw: (typeof window !== 'undefined' ? window.innerWidth : 1440), hoverId: null, logoFontPx: null };
+  state = { theme: (function(){ try { var h = new Date().getHours(); return (h >= 19 || h < 6) ? 'dark' : 'light'; } catch(e) { return 'light'; } })(), route: { name: 'home' }, lb: null, filter: 'all', submitted: false, nameError: false, emailError: false, messageError: false, menuOpen: false, vw: (typeof window !== 'undefined' ? window.innerWidth : 1440), hoverId: null, logoFontPx: null };
   logoRef = React.createRef();
   subRef = React.createRef();
   navWrapRef = React.createRef();
@@ -838,7 +838,7 @@ class Component extends DCLogic {
   applyRouteFromHash(isInitial) {
     const route = this.routeFromHash();
     this._hashApplying = true;
-    this.setState({ route, submitted: false, submitError: null, nameError: false, emailError: false, menuOpen: false });
+    this.setState({ route, submitted: false, submitError: null, nameError: false, emailError: false, messageError: false, menuOpen: false });
     this.setDocTitle(route);
     if (!isInitial) { try { window.scrollTo(0, 0); } catch (e) {} }
     this._hashApplying = false;
@@ -860,7 +860,7 @@ class Component extends DCLogic {
   }
 
   go(name, id) {
-    this.setState({ route: { name, id }, submitted: false, submitError: null, nameError: false, emailError: false, menuOpen: false });
+    this.setState({ route: { name, id }, submitted: false, submitError: null, nameError: false, emailError: false, messageError: false, menuOpen: false });
     this.setDocTitle({ name, id });
     try { window.scrollTo(0, 0); } catch (e) {}
     try {
@@ -1038,18 +1038,21 @@ class Component extends DCLogic {
         const data = new FormData(form);
         const name = (data.get('name') || '').toString().trim();
         const email = (data.get('email') || '').toString().trim();
+        const message = (data.get('message') || '').toString().trim();
         const nameBad = !name;
         const emailBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        if (nameBad || emailBad) {
+        const messageBad = !message;
+        if (nameBad || emailBad || messageBad) {
           let msg;
           if (nameBad && !email) msg = 'Please enter your name and email address.';
           else if (nameBad) msg = 'Please enter your name.';
           else if (!email) msg = 'Please enter your email address.';
-          else msg = 'Please enter a valid email address.';
-          this.setState({ submitting: false, submitError: msg, nameError: nameBad, emailError: emailBad });
+          else if (emailBad) msg = 'Please enter a valid email address.';
+          else msg = "Just a few words describing why you're getting in touch would go a long way in helping me understand your needs.";
+          this.setState({ submitting: false, submitError: msg, nameError: nameBad, emailError: emailBad, messageError: messageBad });
           return;
         }
-        this.setState({ submitting: true, submitError: null, nameError: false, emailError: false });
+        this.setState({ submitting: true, submitError: null, nameError: false, emailError: false, messageError: false });
         fetch('https://formspree.io/f/meeylnay', {
           method: 'POST',
           body: data,
@@ -1070,7 +1073,8 @@ class Component extends DCLogic {
       submitError: s.submitError || null,
       submitted: s.submitted, notSubmitted: !s.submitted,
       nameFieldStyle: { padding: '14px 16px', borderRadius: '5.5px', border: (s.nameError ? '1px solid #f72585' : '1px solid color-mix(in srgb, var(--fg) 40%, transparent)'), background: 'var(--surface)', color: 'var(--fg)', fontSize: '15px', outline: 'none' },
-      emailFieldStyle: { padding: '14px 16px', borderRadius: '5.5px', border: (s.emailError ? '1px solid #f72585' : '1px solid color-mix(in srgb, var(--fg) 40%, transparent)'), background: 'var(--surface)', color: 'var(--fg)', fontSize: '15px', outline: 'none' }
+      emailFieldStyle: { padding: '14px 16px', borderRadius: '5.5px', border: (s.emailError ? '1px solid #f72585' : '1px solid color-mix(in srgb, var(--fg) 40%, transparent)'), background: 'var(--surface)', color: 'var(--fg)', fontSize: '15px', outline: 'none' },
+      messageFieldStyle: { padding: '14px 16px', borderRadius: '5.5px', border: (s.messageError ? '1px solid #f72585' : '1px solid color-mix(in srgb, var(--fg) 40%, transparent)'), background: 'var(--surface)', color: 'var(--fg)', fontSize: '15px', outline: 'none', resize: 'vertical', fontFamily: 'inherit' }
     };
   }
 }
