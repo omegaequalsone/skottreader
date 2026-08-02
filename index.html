@@ -45,8 +45,8 @@
   html,body{margin:0;padding:0;}
   a{color:inherit;}
   input,textarea,button{font-family:inherit;}
-  @font-face{font-family:'Inter Tight';src:url('fonts/InterTight-Variable.ttf') format('truetype-variations'),url('fonts/InterTight-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
-  @font-face{font-family:'Inter Tight';src:url('fonts/InterTight-Italic-Variable.ttf') format('truetype-variations'),url('fonts/InterTight-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Acid Grotesk';src:url('fonts/AcidGrotesk-Regular.otf') format('opentype');font-weight:100 500;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Acid Grotesk';src:url('fonts/AcidGrotesk-Bold.otf') format('opentype');font-weight:501 900;font-style:normal;font-display:swap;}
   @font-face{font-family:'Inter';src:url('fonts/Inter-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
   @font-face{font-family:'Inter';src:url('fonts/Inter-Italic-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
   @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
@@ -157,7 +157,7 @@
           <div style="flex:1.1;min-width:min(300px,100%);">
             <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#c9b8ff;margin-bottom:18px;">Featured Case Study</div>
             <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.06;letter-spacing:-0.025em;color:#ffffff;text-wrap:pretty;">Standard Model Bio: from one pitch deck to an <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">entire brand.</span></h2>
-            <p style="margin:16px 0 0;max-width:52ch;font-size:16px;line-height:1.55;color:rgba(238,236,248,0.82);text-wrap:pretty;">Hired to design a single deck. Two years later: a complete identity, a living design system, and a fully custom website — designed by hand, scaled with AI.</p>
+            <p style="margin:16px 0 0;max-width:52ch;font-size:18px;line-height:1.55;color:rgba(238,236,248,0.82);text-wrap:pretty;">Hired to design a single deck. Two years later: a complete identity, a living design system, and a fully custom website — designed by hand, scaled with AI.</p>
             <a onClick="{{ goCase }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:filter .2s ease;" style-hover="filter:brightness(0.9);">Read the case study →</a>
           </div>
           <div style="flex:1;min-width:min(280px,100%);">
@@ -172,9 +172,8 @@
 
       <section style="max-width:1240px;margin:0 auto;padding:41px 32px 41px;border-top:1px solid var(--line);">
         <div style="margin-bottom:34px;">
-          <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:14px;">How I Work</div>
-          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);">Essence → System → Scale</h2>
-          <p style="margin:18px 0 0;max-width:68ch;font-size:16px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Every engagement follows the same three moves: understand what a company actually is, build the system that expresses it, then extend that system everywhere it needs to go. AI doesn't design for me — it helps me carry the system further, faster.</p>
+          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);">How I work</h2>
+          <p style="margin:18px 0 0;max-width:76ch;font-size:18px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Every engagement follows the same three moves: understand what a company actually is, build the system that expresses it, then extend that system everywhere it needs to go.</p>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:22px;">
           <div style="border:1px solid var(--line2);border-radius:16px;background:var(--surface);padding:26px 24px;">
@@ -224,7 +223,7 @@
         <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px;">
           <div>
             <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.02;letter-spacing:-0.025em;color:var(--fg);">Presentation design</h2>
-            <p style="margin:14px 0 0;font-size:16px;line-height:1.55;color:var(--fg-dim);white-space:nowrap;">Pitch decks, investor and sales presentations in PowerPoint and Google Slides.</p>
+            <p style="margin:14px 0 0;font-size:18px;line-height:1.55;color:var(--fg-dim);white-space:nowrap;">Pitch decks, investor and sales presentations in PowerPoint and Google Slides.</p>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:40px 30px;">
@@ -889,8 +888,8 @@ class Component extends DCLogic {
     const s = this.state;
     const t = this.themes[s.theme];
     const rootStyle = Object.assign({}, t, {
-      '--f-head': "'TWK Everett','Degular','Inter Tight',system-ui,sans-serif",
-      '--f-body': "'Inter Tight','Inter',system-ui,-apple-system,sans-serif",
+      '--f-head': "'TWK Everett','Degular','Acid Grotesk',system-ui,sans-serif",
+      '--f-body': "'Acid Grotesk','Inter',system-ui,-apple-system,sans-serif",
       '--f-mono': "ui-monospace,'SF Mono',Menlo,monospace",
       '--grad': 'linear-gradient(90deg,#f72585,#7209b7,#4361ee,#4cc9f0)',
       '--accent-lt': 'color-mix(in srgb, var(--accent) 52%, #ffffff)',
