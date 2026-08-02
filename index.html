@@ -542,14 +542,14 @@
             </div>
           </sc-if>
           <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
-            <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:20px;">
+            <form onSubmit="{{ submit }}" novalidate style="display:flex;flex-direction:column;gap:20px;">
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Name</span>
-                <input name="name" required type="text" style="padding:14px 16px;border-radius:5.5px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+                <input name="name" required type="text" style="{{ nameFieldStyle }}" style-focus="border-color:var(--accent);">
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Email</span>
-                <input name="email" required type="email" style="padding:14px 16px;border-radius:5.5px;border:1px solid color-mix(in srgb, var(--fg) 40%, transparent);background:var(--surface);color:var(--fg);font-size:15px;outline:none;" style-focus="border-color:var(--accent);">
+                <input name="email" required type="email" style="{{ emailFieldStyle }}" style-focus="border-color:var(--accent);">
               </label>
               <label style="display:flex;flex-direction:column;gap:9px;">
                 <span style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);">Briefly describe your project</span>
@@ -838,7 +838,7 @@ class Component extends DCLogic {
   applyRouteFromHash(isInitial) {
     const route = this.routeFromHash();
     this._hashApplying = true;
-    this.setState({ route, submitted: false, submitError: null, menuOpen: false });
+    this.setState({ route, submitted: false, submitError: null, nameError: false, emailError: false, menuOpen: false });
     this.setDocTitle(route);
     if (!isInitial) { try { window.scrollTo(0, 0); } catch (e) {} }
     this._hashApplying = false;
@@ -860,7 +860,7 @@ class Component extends DCLogic {
   }
 
   go(name, id) {
-    this.setState({ route: { name, id }, submitted: false, submitError: null, menuOpen: false });
+    this.setState({ route: { name, id }, submitted: false, submitError: null, nameError: false, emailError: false, menuOpen: false });
     this.setDocTitle({ name, id });
     try { window.scrollTo(0, 0); } catch (e) {}
     try {
@@ -1036,7 +1036,20 @@ class Component extends DCLogic {
         e.preventDefault();
         const form = e.target;
         const data = new FormData(form);
-        this.setState({ submitting: true, submitError: null });
+        const name = (data.get('name') || '').toString().trim();
+        const email = (data.get('email') || '').toString().trim();
+        const nameBad = !name;
+        const emailBad = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (nameBad || emailBad) {
+          let msg;
+          if (nameBad && !email) msg = 'Please enter your name and email address.';
+          else if (nameBad) msg = 'Please enter your name.';
+          else if (!email) msg = 'Please enter your email address.';
+          else msg = 'Please enter a valid email address.';
+          this.setState({ submitting: false, submitError: msg, nameError: nameBad, emailError: emailBad });
+          return;
+        }
+        this.setState({ submitting: true, submitError: null, nameError: false, emailError: false });
         fetch('https://formspree.io/f/meeylnay', {
           method: 'POST',
           body: data,
@@ -1055,7 +1068,9 @@ class Component extends DCLogic {
       submitting: !!s.submitting,
       submitLabel: s.submitting ? 'Sending…' : 'Submit →',
       submitError: s.submitError || null,
-      submitted: s.submitted, notSubmitted: !s.submitted
+      submitted: s.submitted, notSubmitted: !s.submitted,
+      nameFieldStyle: { padding: '14px 16px', borderRadius: '5.5px', border: (s.nameError ? '1px solid #f72585' : '1px solid color-mix(in srgb, var(--fg) 40%, transparent)'), background: 'var(--surface)', color: 'var(--fg)', fontSize: '15px', outline: 'none' },
+      emailFieldStyle: { padding: '14px 16px', borderRadius: '5.5px', border: (s.emailError ? '1px solid #f72585' : '1px solid color-mix(in srgb, var(--fg) 40%, transparent)'), background: 'var(--surface)', color: 'var(--fg)', fontSize: '15px', outline: 'none' }
     };
   }
 }
