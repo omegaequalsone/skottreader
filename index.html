@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="fonts/TWKEverett-Bold.otf" as="font" type="font/otf" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skott Reader">
 <meta property="og:url" content="https://skottreader.com/">
@@ -49,10 +50,10 @@
   @font-face{font-family:'Acid Grotesk';src:url('fonts/AcidGrotesk-Bold.otf') format('opentype');font-weight:501 900;font-style:normal;font-display:swap;}
   @font-face{font-family:'Inter';src:url('fonts/Inter-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap;}
   @font-face{font-family:'Inter';src:url('fonts/Inter-Italic-Variable.ttf') format('truetype-variations'),url('fonts/Inter-Italic-Variable.ttf') format('truetype');font-weight:100 900;font-style:italic;font-display:swap;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Bold.otf') format('opentype');font-weight:600 700;font-style:normal;font-display:swap;}
-  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Extrabold.otf') format('opentype');font-weight:800;font-style:normal;font-display:swap;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:block;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:block;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Bold.otf') format('opentype');font-weight:600 700;font-style:normal;font-display:block;}
+  @font-face{font-family:'TWK Everett';src:url('fonts/TWKEverett-Extrabold.otf') format('opentype');font-weight:800;font-style:normal;font-display:block;}
   ::selection{background:var(--accent);color:var(--accent-fg);}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   @keyframes lbIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
@@ -112,7 +113,7 @@
         <div style="display:flex;align-items:stretch;gap:28px;flex-wrap:wrap;">
           <div style="flex:1;min-width:min(280px,100%);max-width:900px;">
             <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">I’m a visual thinker whose work addresses business, brand, and user needs, and takes place in the seams between products and the people who use them.</h1>
-            <p style="margin:20px 0 0;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">I’m driven by the human end of design, and what I care about most is the moment it all lines up — a business’s goals, a brand’s character, and a real person’s needs all pointing the same way. I work to make sure what a company builds actually lands with the people it’s designed for.</p>
+            <p style="margin:20px 0 0;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">I’m driven by the human aspects of design, and what I’m most passionate about is that moment it all lines up — a business’s goals, a brand’s character, and a real person’s needs all pointing the same way. I work to make sure what a company builds actually lands with the people it’s designed for.</p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
               <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">View my work →</a>
               <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">Get in touch</a>
@@ -121,7 +122,7 @@
         </div>
       </section>
 
-      <section style="max-width:1240px;margin:0 auto;padding:56px 32px 0;">
+      <section style="max-width:1240px;margin:0 auto;padding:41px 32px 0;border-top:1px solid var(--line);">
         <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:36px;">Brands &amp; teams I've worked with</div>
         <div style="position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 90px,#000 calc(100% - 90px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 90px,#000 calc(100% - 90px),transparent 100%);">
           <div style="display:flex;width:max-content;animation:marquee 38s linear infinite;">
