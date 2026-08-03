@@ -250,7 +250,7 @@
     <!-- ===================== WORK INDEX ===================== -->
     <sc-if value="{{ showWork }}" hint-placeholder-val="{{ true }}">
     <div key="{{ routeKey }}" style="max-width:1240px;margin:0 auto;padding:52px 32px 40px;">
-      <h1 style="margin:8px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(36px,6vw,72px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;text-wrap:pretty;">Brand, visual &amp; presentation projects.</h1>
+      <h2 style="margin:8px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(36px,6vw,72px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;text-wrap:pretty;">Brand, visual &amp; presentation projects.</h2>
       <div style="display:flex;flex-wrap:wrap;gap:10px;margin:38px 0 44px;">
         <sc-for list="{{ filterChips }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button></sc-for>
       </div>
@@ -282,7 +282,7 @@
       <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
         <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;" style-hover="color:#f72585;">← All work</a>
         <div style="display:block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-top:34px;">{{ detail.category }}</div>
-        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h1>
+        <h2 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h2>
         <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:37px;border-bottom:1px solid var(--line);">
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">{{ detail.year }}</div></div>
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Role</div><div style="font-size:15px;color:var(--fg);">{{ detail.role }}</div></div>
@@ -329,7 +329,7 @@
     <div key="{{ routeKey }}" style="">
       <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
         <div style="display:inline-block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);">Case Study / Brand to Build</div>
-        <h1 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">Standard Model Bio</h1>
+        <h2 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">Standard Model Bio</h2>
         <p style="margin:20px 0 0;max-width:34ch;font-family:var(--f-head);font-weight:500;font-size:clamp(20px,2.6vw,30px);line-height:1.25;letter-spacing:-0.02em;color:var(--fg-dim);text-wrap:pretty;">From one pitch deck to an entire brand — designed by hand, scaled with AI.</p>
         <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:37px;border-bottom:1px solid var(--line);">
           <div><div style="font-family:var(--f-mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:6px;">Year</div><div style="font-size:15px;color:var(--fg);">2024–2026</div></div>
@@ -460,7 +460,7 @@
           </div>
         </div>
         <div style="{{ aboutMainStyle }}">
-          <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,3.6vw,48px);line-height:1.08;letter-spacing:-0.025em;color:var(--fg);max-width:20ch;text-wrap:pretty;">I design for businesses, brands, and people — usually all three at once.</h1>
+          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,3.6vw,48px);line-height:1.08;letter-spacing:-0.025em;color:var(--fg);max-width:20ch;text-wrap:pretty;">I design for businesses, brands, and people — usually all three at once.</h2>
           <div style="margin-top:30px;font-size:17px;line-height:1.62;color:var(--fg-dim);max-width:62ch;">
             <p style="margin:0 0 20px;text-wrap:pretty;">I believe design should be rooted in simplicity, empathy, and trust, and I work those qualities into every pixel. On UX and marketing teams and as an independent designer, I've left a creative mark across education, fintech, blockchain, biopharma, retail, small business, AI, and social media.</p>
             <p style="margin:0 0 20px;text-wrap:pretty;">My approach starts with understanding — business objectives, user needs, and what customers expect. What I'm known for: a patient, ego-free way of working, clear rationale behind every decision, and a knack for grasping a brand or design system quickly and extending it wherever it's needed.</p>
@@ -530,7 +530,7 @@
     <div key="{{ routeKey }}" style="max-width:1240px;margin:0 auto;padding:52px 32px 60px;">
       <div style="{{ contactGridStyle }}">
         <div>
-          <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(40px,6vw,80px);line-height:0.96;letter-spacing:-0.03em;color:var(--fg);max-width:14ch;">Let's make something.</h1>
+          <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(40px,6vw,80px);line-height:0.96;letter-spacing:-0.03em;color:var(--fg);max-width:14ch;">Let's make something.</h2>
           <p style="margin:26px 0 0;max-width:46ch;font-size:17px;line-height:1.55;color:var(--fg-dim);text-wrap:pretty;">Introduce yourself and tell me a little about your project or the reason for your inquiry, and I'll get back in touch within 24 hours.</p>
         </div>
         <div>
@@ -575,7 +575,7 @@
         </div>
         <div style="flex:1 1 340px;min-width:min(340px,100%);max-width:520px;">
           <div style="font-family:var(--f-mono);font-size:14px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--fg-mute);">Error 404</div>
-          <h1 style="margin:14px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(28px,3.6vw,46px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">Off the artboard.</h1>
+          <h2 style="margin:14px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(28px,3.6vw,46px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">Off the artboard.</h2>
           <p style="margin:18px 0 0;font-size:clamp(16px,2vw,19px);line-height:1.55;color:var(--fg-dim);max-width:46ch;text-wrap:pretty;">The page you’re after doesn’t exist — a broken link, or something I’ve since redesigned away. Sorry about that, but everything that’s still here is just a click away.</p>
           <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;">
             <a onClick="{{ goHome }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Back home</a>
