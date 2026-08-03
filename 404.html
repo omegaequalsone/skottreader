@@ -5,116 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>404 — Skott Reader</title>
-<link rel="preload" href="/fonts/TWKEverett-Bold.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="/assets/404-portrait.jpg" as="image">
-<link rel="icon" href="/favicon-v4.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32-v4.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16-v4.png">
-<link rel="apple-touch-icon" href="/assets/favicon-180-v4.png">
-<style>
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  @font-face{font-family:'TWK Everett';src:url('/fonts/TWKEverett-Bold.otf') format('opentype');font-weight:600 700;font-style:normal;font-display:block;}
-  @font-face{font-family:'Acid Grotesk';src:url('/fonts/AcidGrotesk-Regular.otf') format('opentype');font-weight:100 500;font-style:normal;font-display:swap;}
-  @font-face{font-family:'Acid Grotesk';src:url('/fonts/AcidGrotesk-Bold.otf') format('opentype');font-weight:501 900;font-style:normal;font-display:swap;}
-
-  :root{
-    --bg:#f4f3fb; --fg:#161229; --fg-dim:#4c4869; --fg-mute:#827da0;
-    --line:rgba(24,18,48,0.12); --line2:rgba(24,18,48,0.20);
-    --accent:#7209b7; --accent-fg:#ffffff; --surface2:#f7f6fd; --pink:#f72585;
-    --f-head:'TWK Everett',system-ui,-apple-system,sans-serif;
-    --f-body:'Acid Grotesk','Inter',system-ui,-apple-system,sans-serif;
-    --f-mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
-  }
-  :root[data-theme="dark"]{
-    --bg:#0c0a16; --fg:#eeecf8; --fg-dim:#a6a2c2; --fg-mute:#6d6990;
-    --line:rgba(232,231,255,0.10); --line2:rgba(232,231,255,0.18); --accent:#4cc9f0; --accent-fg:#0c0a16; --surface2:#1c1836;
-  }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --bg:#0c0a16; --fg:#eeecf8; --fg-dim:#a6a2c2; --fg-mute:#6d6990;
-      --line:rgba(232,231,255,0.10); --line2:rgba(232,231,255,0.18); --accent:#4cc9f0; --accent-fg:#0c0a16; --surface2:#1c1836;
-    }
-  }
-
-  body{background:var(--bg);color:var(--fg);font-family:var(--f-body);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none;}
-  .wrap{flex:1;width:100%;max-width:1240px;margin:0 auto;padding:32px;display:flex;flex-direction:column;}
-  header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:32px;}
-  .logo-lockup{display:inline-flex;flex-direction:column;width:max-content;text-decoration:none;}
-  .logo{font-family:var(--f-head);font-weight:700;font-size:clamp(15px,4.6vw,27px);letter-spacing:-0.01em;color:var(--fg);white-space:nowrap;line-height:1;}
-  .logo-sub{display:block;width:100%;box-sizing:border-box;white-space:nowrap;font-family:var(--f-mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;text-align:center;color:var(--accent-fg);background:var(--accent);padding:4px 6px;margin-top:4px;}
-  .theme-toggle{width:42px;height:42px;border-radius:999px;border:1px solid var(--line2);background:var(--surface2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:color .2s ease, border-color .2s ease;}
-  .theme-toggle:hover{color:var(--accent);border-color:var(--accent);}
-  .theme-toggle .sun{display:none;}
-  :root[data-theme="dark"] .theme-toggle .sun{display:block;}
-  :root[data-theme="dark"] .theme-toggle .moon{display:none;}
-  main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 0 88px;}
-  .split{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(28px,4vw,56px);width:100%;}
-  .photo{flex:0 0 auto;width:300px;max-width:80vw;}
-  .photo img{width:100%;height:auto;display:block;border-radius:20px;border:1px solid var(--line);box-shadow:0 26px 60px -26px rgba(24,18,48,0.5);}
-  .content{flex:1 1 340px;min-width:0;max-width:520px;}
-
-  .eyebrow{font-family:var(--f-mono);font-size:14px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--fg-mute);}
-  h1{font-family:var(--f-head);font-weight:600;font-size:clamp(28px,3.6vw,46px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);margin:14px 0 0;text-wrap:balance;}
-  p.lead{font-size:clamp(16px,2vw,19px);line-height:1.55;color:var(--fg-dim);max-width:46ch;margin:18px 0 0;text-wrap:pretty;}
-  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
-
-  @media (max-width:760px){
-    .split{flex-direction:column;}
-    .photo{width:260px;}
-    .content{text-align:center;max-width:440px;}
-    .content .actions{justify-content:center;}
-    .content p.lead{margin-left:auto;margin-right:auto;}
-  }
-  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;font-family:var(--f-body);font-weight:600;font-size:15px;cursor:pointer;transition:filter .2s ease, box-shadow .2s ease;}
-  .btn-primary{background:var(--pink);color:#ffffff;border:none;}
-  .btn-primary:hover{filter:brightness(0.92);}
-  .btn-secondary{background:transparent;color:var(--fg);border:1px solid var(--line2);}
-  .btn-secondary:hover{box-shadow:0 0 0 1.5px var(--pink);}
-
-  footer{padding-top:24px;border-top:1px solid var(--line);font-family:var(--f-mono);font-size:12px;color:var(--fg-mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-</style>
 <script>
-  /* Match the main site's time-based default theme (dark 7pm–6am) */
-  try { var h = new Date().getHours(); document.documentElement.setAttribute('data-theme', (h >= 19 || h < 6) ? 'dark' : 'light'); } catch (e) {}
-  function toggleTheme(){ var r = document.documentElement; r.setAttribute('data-theme', r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+  /* GitHub Pages serves this for any unknown path. Hand off to the single-page
+     app's own 404 route so the page renders with the real site nav. */
+  location.replace('/#/404');
 </script>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <a class="logo-lockup" href="/">
-        <span class="logo">SKOTT READER</span>
-        <span class="logo-sub">Visual / Brand / Presentation / Design-to-Build</span>
-      </a>
-      <button class="theme-toggle" type="button" aria-label="Toggle light or dark mode" onclick="toggleTheme()">
-        <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><line x1="12" y1="2.5" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="21.5"></line><line x1="2.5" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="21.5" y2="12"></line><line x1="4.9" y1="4.9" x2="6.6" y2="6.6"></line><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"></line><line x1="4.9" y1="19.1" x2="6.6" y2="17.4"></line><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"></line></svg>
-        <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
-      </button>
-    </header>
-
-    <main>
-      <div class="split">
-        <div class="photo">
-          <img src="/assets/404-portrait.jpg" width="760" height="1133" alt="Skott standing in the desert at sunset, palms up in a shrug" fetchpriority="high">
-        </div>
-        <div class="content">
-          <div class="eyebrow">Error 404</div>
-          <h1>Off the artboard.</h1>
-          <p class="lead">The page you’re after doesn’t exist — a broken link, or something I’ve since redesigned away. Sorry about that, but everything that’s still here is just a click away.</p>
-          <div class="actions">
-            <a class="btn btn-primary" href="/">Back home</a>
-            <a class="btn btn-secondary" href="/#/work">See the work →</a>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <footer>
-      <span>© 2026 Skott Reader</span>
-      <span>Visual / Brand / Presentation / Design-to-Build</span>
-    </footer>
-  </div>
+<noscript><p style="font-family:system-ui,sans-serif;max-width:640px;margin:48px auto;padding:0 24px;">Page not found. <a href="/">Return to skottreader.com</a>.</p></noscript>
 </body>
 </html>
