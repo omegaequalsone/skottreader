@@ -66,14 +66,14 @@
   <div style="position:fixed;top:0;left:0;right:0;z-index:60;" ref="{{ navWrapRef }}">
   <nav style="{{ navStyle }}">
     <div style="{{ logoLockupStyle }}">
-      <a onClick="{{ goHome }}" ref="{{ logoRef }}" style="{{ logoStyle }}">SKOTT READER</a>
+      <a href="/" onClick="{{ goHome }}" ref="{{ logoRef }}" style="{{ logoStyle }}">SKOTT READER</a>
       <span ref="{{ subRef }}" style="{{ navSubtitleStyle }}">Visual / Brand / Presentation / Design-to-Build</span>
     </div>
     <sc-if value="{{ showNavLinks }}" hint-placeholder-val="{{ true }}">
     <div style="display:flex;align-items:center;gap:26px;">
-      <a onClick="{{ goWork }}" style="{{ navWorkStyle }}" style-hover="color:var(--accent) !important;">Work</a>
-      <a onClick="{{ goAbout }}" style="{{ navAboutStyle }}" style-hover="color:var(--accent) !important;">About</a>
-      <a onClick="{{ goContact }}" style="{{ navContactStyle }}" style-hover="color:var(--accent) !important;">Contact</a>
+      <a href="work.html" onClick="{{ goWork }}" style="{{ navWorkStyle }}" style-hover="color:var(--accent) !important;">Work</a>
+      <a href="about.html" onClick="{{ goAbout }}" style="{{ navAboutStyle }}" style-hover="color:var(--accent) !important;">About</a>
+      <a href="contact.html" onClick="{{ goContact }}" style="{{ navContactStyle }}" style-hover="color:var(--accent) !important;">Contact</a>
       <button onClick="{{ toggleTheme }}" aria-label="Toggle light or dark mode" style="width:42px;height:42px;border-radius:999px;border:1px solid var(--line2);background:var(--surface2);color:var(--fg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:color .2s ease, border-color .2s ease;" style-hover="color:var(--accent);border-color:var(--accent);">
         <sc-if value="{{ isDark }}" hint-placeholder-val="{{ true }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><line x1="12" y1="2.5" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="21.5"></line><line x1="2.5" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="21.5" y2="12"></line><line x1="4.9" y1="4.9" x2="6.6" y2="6.6"></line><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"></line><line x1="4.9" y1="19.1" x2="6.6" y2="17.4"></line><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"></line></svg></sc-if>
         <sc-if value="{{ isLight }}" hint-placeholder-val="{{ false }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg></sc-if>
@@ -95,9 +95,9 @@
   </nav>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <div style="display:flex;flex-direction:column;gap:2px;padding:8px 24px 20px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,0.22);">
-      <a onClick="{{ goWork }}" style="{{ mWorkStyle }}" style-hover="color:var(--accent) !important;">Work</a>
-      <a onClick="{{ goAbout }}" style="{{ mAboutStyle }}" style-hover="color:var(--accent) !important;">About</a>
-      <a onClick="{{ goContact }}" style="{{ mContactStyle }}" style-hover="color:var(--accent) !important;">Contact</a>
+      <a href="work.html" onClick="{{ goWork }}" style="{{ mWorkStyle }}" style-hover="color:var(--accent) !important;">Work</a>
+      <a href="about.html" onClick="{{ goAbout }}" style="{{ mAboutStyle }}" style-hover="color:var(--accent) !important;">About</a>
+      <a href="contact.html" onClick="{{ goContact }}" style="{{ mContactStyle }}" style-hover="color:var(--accent) !important;">Contact</a>
     </div>
   </sc-if>
   </div>
@@ -114,8 +114,8 @@
             <h1 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(26px,3.8vw,42px);line-height:1.12;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">I’m a visual thinker whose work addresses business, brand, and user needs, and takes place in the seams between products and the people who use them.</h1>
             <p style="margin:20px 0 0;font-size:clamp(19px,2.1vw,23px);line-height:1.5;letter-spacing:-0.01em;color:var(--fg-dim);text-wrap:pretty;">I’m driven by the human aspect of design, and what I’m most passionate about is the place where it all lines up — a business’s goals, a brand’s character, and a real person’s needs all pointing the same way. I work to make sure what a company builds actually lands with the people it’s designed for.</p>
             <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;">
-              <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">View my work →</a>
-              <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">Get in touch</a>
+              <a href="work.html" onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">View my work →</a>
+              <a href="contact.html" onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">Get in touch</a>
             </div>
           </div>
         </div>
@@ -158,7 +158,7 @@
             <div style="font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#c9b8ff;margin-bottom:18px;">Featured Case Study</div>
             <h2 style="margin:0;font-family:var(--f-head);font-weight:600;font-size:clamp(24px,3.2vw,40px);line-height:1.06;letter-spacing:-0.025em;color:#ffffff;text-wrap:pretty;">Standard Model Bio: from one pitch deck to an <span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">entire brand.</span></h2>
             <p style="margin:16px 0 0;max-width:52ch;font-size:18px;line-height:1.55;color:rgba(238,236,248,0.82);text-wrap:pretty;">Hired to design a single deck. Two years later: a complete identity, a living design system, and a fully custom website — designed by hand, scaled with AI.</p>
-            <a onClick="{{ goCase }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:filter .2s ease;" style-hover="filter:brightness(0.9);">Read the case study →</a>
+            <a href="standardmodel.html" onClick="{{ goCase }}" style="display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:12px 24px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;transition:filter .2s ease;" style-hover="filter:brightness(0.9);">Read the case study →</a>
           </div>
           <div style="flex:1;min-width:min(280px,100%);">
             <div style="border-radius:13px;padding:1px;background:var(--grad);">
@@ -280,7 +280,7 @@
     <sc-if value="{{ showDetail }}" hint-placeholder-val="{{ true }}">
     <div key="{{ routeKey }}" style="">
       <section style="max-width:1240px;margin:0 auto;padding:44px 32px 0;">
-        <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;" style-hover="color:#f72585;">← All work</a>
+        <a href="work.html" onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--f-mono);font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-dim);text-decoration:none;" style-hover="color:#f72585;">← All work</a>
         <div style="display:block;font-family:var(--f-mono);font-size:15px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-mute);margin-top:34px;">{{ detail.category }}</div>
         <h2 style="margin:16px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(34px,5vw,64px);line-height:1.0;letter-spacing:-0.03em;color:var(--fg);text-wrap:pretty;">{{ detail.client }}</h2>
         <div style="display:flex;flex-wrap:wrap;gap:40px;margin-top:34px;padding-bottom:37px;border-bottom:1px solid var(--line);">
@@ -437,7 +437,7 @@
       </section>
 
       <section style="max-width:1240px;margin:0 auto;padding:22px 32px 8px;">
-        <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">All work →</a>
+        <a href="work.html" onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:12px 24px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:14px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">All work →</a>
       </section>
     </div>
     </sc-if>
@@ -578,8 +578,8 @@
           <h2 style="margin:14px 0 0;font-family:var(--f-head);font-weight:600;font-size:clamp(28px,3.6vw,46px);line-height:1.04;letter-spacing:-0.025em;color:var(--fg);text-wrap:balance;">Off the artboard.</h2>
           <p style="margin:18px 0 0;font-size:clamp(16px,2vw,19px);line-height:1.55;color:var(--fg-dim);max-width:46ch;text-wrap:pretty;">The page you’re after doesn’t exist — a broken link, or something I’ve since redesigned away. Sorry about that, but everything that’s still here is just a click away.</p>
           <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;">
-            <a onClick="{{ goHome }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Back home</a>
-            <a onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:15px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">See the work →</a>
+            <a href="/" onClick="{{ goHome }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;border:none;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Back home</a>
+            <a href="work.html" onClick="{{ goWork }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;border-radius:999px;background:transparent;color:var(--fg);font-weight:600;font-size:15px;border:1px solid var(--line2);cursor:pointer;text-decoration:none;transition:box-shadow .2s ease;" style-hover="box-shadow:0 0 0 1.5px #f72585;">See the work →</a>
           </div>
         </div>
       </div>
@@ -599,7 +599,7 @@
           <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
           <h2 style="margin:0 0 26px;font-family:var(--f-head);font-weight:600;font-size:clamp(30px,5vw,58px);line-height:0.98;letter-spacing:-0.03em;color:var(--fg);max-width:16ch;">Let's make something.</h2>
           </sc-if>
-          <a onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Get in touch →</a>
+          <a href="contact.html" onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;background:#f72585;color:#ffffff;font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:transform .2s ease, filter .2s ease;" style-hover="filter:brightness(0.9);">Get in touch →</a>
         </div>
         </sc-if>
         <div style="display:flex;align-items:center;gap:18px;color:var(--fg-dim);">
@@ -889,6 +889,17 @@ class Component extends DCLogic {
       if (window.location.hash !== h) { this._hashApplying = true; window.location.hash = h; this._hashApplying = false; }
     } catch (e) {}
   }
+  /* Nav links now carry a real href so Google (and cmd-click, middle-click,
+   * "copy link address") work. On a plain left-click we preventDefault and let
+   * the SPA route as before — behaviour is unchanged for normal clicking. On a
+   * modified click we do nothing and let the browser open the real page. */
+  navTo(name, id) {
+    return (e) => {
+      if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1)) return;
+      if (e && e.preventDefault) e.preventDefault();
+      this.go(name, id);
+    };
+  }
   setFilter(f) { this.setState({ filter: f }); }
   toggleMenu() { this.setState(st => ({ menuOpen: !st.menuOpen })); }
   openLb(projId, i) { this.setState({ lb: { projId, i } }); }
@@ -1033,7 +1044,7 @@ class Component extends DCLogic {
       navStyle, logoStyle, logoLockupStyle, navSubtitleStyle, logoRef: this.logoRef, subRef: this.subRef, navWrapRef: this.navWrapRef, mainStyle: { paddingTop: s.navHeight ? (s.navHeight + 18) + 'px' : 'clamp(56px,13vw,70px)', minHeight: '70vh' }, showNavLinks, showHamburger, mWorkStyle, mAboutStyle, mContactStyle, mCaseStyle,
       menuOpen: s.menuOpen, menuClosed: !s.menuOpen, toggleMenu: () => this.toggleMenu(),
       aboutGridStyle, aboutSidebarStyle, aboutMainStyle, aboutRuleStyle, aboutSkillsStyle, aboutRecsStyle, contactGridStyle,
-      goHome: () => this.go('home'), goWork: () => this.go('work'), goAbout: () => this.go('about'), goContact: () => this.go('contact'), goCase: () => this.go('case'),
+      goHome: this.navTo('home'), goWork: this.navTo('work'), goAbout: this.navTo('about'), goContact: this.navTo('contact'), goCase: this.navTo('case'),
       toggleDark: () => this.setState({ theme: 'dark' }), toggleLight: () => this.setState({ theme: 'light' }),
       toggleTheme: () => this.setState(st => ({ theme: st.theme === 'dark' ? 'light' : 'dark' })), isDark: s.theme === 'dark', isLight: s.theme === 'light',
       showHome: rn === 'home', showWork: rn === 'work', showDetail: rn === 'detail', showAbout: rn === 'about', showContact: rn === 'contact', showCase: rn === 'case', showNotFound: rn === 'notfound',
