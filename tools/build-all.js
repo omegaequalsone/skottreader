@@ -97,8 +97,16 @@ const SECTIONS = [
   /* ---------------- project pages ---------------- */
   for (let i = 0; i < PROJECTS.length; i++) {
     const p = PROJECTS[i];
-    const prev = PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length];
-    const next = PROJECTS[(i + 1) % PROJECTS.length];
+    // The SPA cycles prev/next within a category, so walking the flat PROJECTS
+    // array puts the wrong href on the last project of each category — the link
+    // then disagrees with the label the SPA rendered right next to it.
+    const sib = PROJECTS.filter(x => x.category === p.category && !x.caseStudy);
+    const si = sib.findIndex(x => x.id === p.id);
+    // At either end of a category the SPA renders an "All work" button instead
+    // of a prev/next link, so there is no anchor to point anywhere; the
+    // work.html fallback also covers case studies, which are not in the chain.
+    const prev = (si > 0 ? sib[si - 1] : null) || { id: 'work' };
+    const next = (si >= 0 ? sib[si + 1] : null) || { id: 'work' };
     const slug = slugOf(p);
     try {
       const { doc, host, runtimeCss, title } = await render(routeOf(p));

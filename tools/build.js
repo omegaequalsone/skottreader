@@ -59,6 +59,19 @@ function render(route) {
     });
     const { window } = dom;
 
+    // jsdom's CSS parser silently discards properties it doesn't implement, so
+    // React writing el.style.backdropFilter is a no-op and the sticky nav loses
+    // its blur in the generated HTML. Re-add a passthrough accessor for each so
+    // the value lands in the style attribute verbatim. Keep this list in sync
+    // with any unsupported property the SPA sets via inline style.
+    for (const [js, css] of [['backdropFilter', 'backdrop-filter'], ['webkitBackdropFilter', '-webkit-backdrop-filter']]) {
+      Object.defineProperty(window.CSSStyleDeclaration.prototype, js, {
+        configurable: true, enumerable: true,
+        get() { return this.getPropertyValue(css); },
+        set(v) { this._setProperty ? this._setProperty(css, v) : this.setProperty(css, v); },
+      });
+    }
+
     window.matchMedia = window.matchMedia || (q => ({
       matches: false, media: q, onchange: null,
       addListener() {}, removeListener() {},
@@ -159,8 +172,12 @@ function transform(host, doc, { prevHref, nextHref, h1Text, tileMap } = {}) {
   host.querySelectorAll('a[data-dc-tpl]').forEach(a => {
     const tpl = Number(a.getAttribute('data-dc-tpl'));
     let href = TPL_HREF[tpl];
-    if (tpl === 216 && prevHref) href = prevHref;   // ← Prev
-    if (tpl === 219 && nextHref) href = nextHref;   // Next →
+    // Match the prev/next anchors on their own label rather than a data-dc-tpl
+    // number: those numbers shift whenever the template gains an element, and a
+    // stale number fails silently, leaving the pager unclickable.
+    const label = (a.firstElementChild && a.firstElementChild.textContent || '').trim();
+    if (label === '← Prev' && prevHref) href = prevHref;
+    if (label === 'Next →' && nextHref) href = nextHref;
     if (href && !a.getAttribute('href')) { a.setAttribute('href', href); report.hrefs++; }
   });
 
