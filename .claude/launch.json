@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "skottreader",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/skottreader/Documents/GitHub/skottreader/.claude/serve.js"],
+      "port": 4321
+    }
+  ]
+}
