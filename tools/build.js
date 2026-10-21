@@ -373,6 +373,71 @@ const LOCKUP_FIT = `
 })();
 </script>`;
 
+/* Same player chrome wiring the SPA runs; generated pages need their own copy. */
+const FILM = `
+<script>
+/* Custom film player chrome (.sr-film). Event delegation on document, so it
+ * works identically in the React SPA (where the node mounts after this runs
+ * and may re-render) and on the prerendered static pages. */
+(function(){
+  if(window.__srFilm)return; window.__srFilm=1;
+  function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  function filmOf(n){return n&&n.closest?n.closest('.sr-film'):null}
+  function vidOf(f){return f.querySelector('.sr-film__video')}
+  function sync(f){
+    var v=vidOf(f); if(!v)return;
+    f.setAttribute('data-state',v.paused?'paused':'playing');
+    f.setAttribute('data-sound',v.muted?'off':'on');
+    var pct=v.duration?(v.currentTime/v.duration*100):0;
+    var fill=f.querySelector('.sr-film__fill'); if(fill)fill.style.width=pct.toFixed(3)+'%';
+    var t=f.querySelector('.sr-film__time'); if(t&&v.duration)t.textContent=fmt(v.currentTime)+' / '+fmt(v.duration);
+    var tr=f.querySelector('.sr-film__track'); if(tr)tr.setAttribute('aria-valuenow',Math.round(pct));
+    var tg=f.querySelector('.sr-film__toggle'); if(tg)tg.setAttribute('aria-label',v.paused?'Play video':'Pause video');
+    var pl=f.querySelector('.sr-film__play'); if(pl)pl.setAttribute('aria-label','Play video');
+    var mu=f.querySelector('.sr-film__mute'); if(mu)mu.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');
+  }
+  function seek(f,x){
+    var v=vidOf(f),tr=f.querySelector('.sr-film__track');
+    if(!v||!tr||!v.duration)return;
+    var r=tr.getBoundingClientRect();
+    v.currentTime=Math.min(1,Math.max(0,(x-r.left)/r.width))*v.duration; sync(f);
+  }
+  document.addEventListener('click',function(e){
+    var n=e.target; if(!n||!n.closest)return;
+    var f=filmOf(n); if(!f)return;
+    var v=vidOf(f); if(!v)return;
+    if(n.closest('.sr-film__track')){seek(f,e.clientX);return}
+    if(n.closest('.sr-film__mute')){v.muted=!v.muted;sync(f);return}
+    if(n.closest('.sr-film__full')){
+      if(document.fullscreenElement){document.exitFullscreen()}
+      else if(f.requestFullscreen){f.requestFullscreen()}
+      else if(v.webkitEnterFullscreen){v.webkitEnterFullscreen()}
+      return;
+    }
+    if(n.closest('.sr-film__play')||n.closest('.sr-film__toggle')||n.closest('.sr-film__video')){
+      if(v.paused){f.setAttribute('data-started','1');var p=v.play();if(p&&p.catch)p.catch(function(){})}
+      else{v.pause()}
+      sync(f);
+    }
+  });
+  document.addEventListener('keydown',function(e){
+    var n=e.target; if(!n||!n.closest)return;
+    var tr=n.closest('.sr-film__track'); if(!tr)return;
+    var f=filmOf(tr),v=f&&vidOf(f); if(!v||!v.duration)return;
+    if(e.key==='ArrowRight'){e.preventDefault();v.currentTime=Math.min(v.duration,v.currentTime+5);sync(f)}
+    else if(e.key==='ArrowLeft'){e.preventDefault();v.currentTime=Math.max(0,v.currentTime-5);sync(f)}
+    else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){f.setAttribute('data-started','1');v.play().catch(function(){})}else{v.pause()}sync(f)}
+  });
+  ['timeupdate','play','pause','loadedmetadata','volumechange','ended'].forEach(function(ev){
+    document.addEventListener(ev,function(e){
+      var f=filmOf(e.target); if(!f)return;
+      if(ev==='ended'){var v=vidOf(f); if(v)v.currentTime=0; f.setAttribute('data-started','0')}
+      sync(f);
+    },true);
+  });
+})();
+</script>`;
+
 const LIGHTBOX = `
 <div id="sr-lb" role="dialog" aria-modal="true" aria-label="Image viewer" style="position:fixed;inset:0;z-index:100;display:none;flex-direction:column;background:color-mix(in srgb, var(--bg2) 90%, black);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);">
   <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 26px;">
@@ -461,6 +526,7 @@ ${THEME_BOOT}
 ${bodyHtml}
 ${LOCKUP_FIT}
 ${LIGHTBOX}
+${FILM}
 </body>
 </html>
 `;

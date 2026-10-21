@@ -42,6 +42,34 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   @keyframes lbIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
   @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .sr-film{position:relative;border-radius:12px;overflow:hidden;background:#161837;box-shadow:0 26px 60px -26px rgba(0,0,0,0.4);aspect-ratio:16/9;max-width:100%;}
+  .sr-film__video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer;}
+  .sr-film__bar{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:999px;background:rgba(21,18,40,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eeecf8;opacity:0;transform:translateY(4px);transition:opacity .18s ease,transform .18s ease;}
+  .sr-film:hover .sr-film__bar,.sr-film:focus-within .sr-film__bar,.sr-film[data-state="paused"] .sr-film__bar{opacity:1;transform:none;}
+  .sr-film[data-started="0"] .sr-film__bar{opacity:0;transform:translateY(4px);}
+  .sr-film[data-started="0"]:hover .sr-film__bar,.sr-film[data-started="0"]:focus-within .sr-film__bar{opacity:1;transform:none;}
+  @media (hover:none){.sr-film__bar{opacity:1;transform:none;}}
+  .sr-film__btn{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:999px;background:transparent;color:inherit;cursor:pointer;transition:color .16s ease;}
+  .sr-film__btn:hover{color:#f72585;}
+  .sr-film__btn:focus-visible,.sr-film__track:focus-visible{outline:2px solid #f72585;outline-offset:2px;}
+  .sr-film__btn svg{width:16px;height:16px;display:block;}
+  .sr-film__track{position:relative;flex:1 1 0;height:4px;border-radius:999px;background:rgba(238,236,248,0.28);cursor:pointer;}
+  .sr-film__track::before{content:"";position:absolute;inset:-8px 0;}
+  .sr-film__fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:#f72585;}
+  .sr-film__time{flex:0 0 auto;font-family:var(--f-mono);font-size:11px;letter-spacing:0.06em;color:rgba(238,236,248,0.76);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .sr-film__play{position:absolute;inset:0;display:grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;transition:opacity .22s ease;}
+  .sr-film__play span{display:grid;place-items:center;width:72px;height:72px;border-radius:999px;background:#f72585;color:#ffffff;box-shadow:0 10px 28px -8px rgba(0,0,0,0.55);transition:filter .16s ease,transform .16s ease;}
+  .sr-film__play:hover span{filter:brightness(0.9);transform:scale(1.04);}
+  .sr-film__play:focus-visible span{outline:2px solid #f72585;outline-offset:3px;}
+  .sr-film__play svg{width:26px;height:26px;margin-left:3px;display:block;}
+  .sr-film[data-started="1"] .sr-film__play{opacity:0;pointer-events:none;}
+  .sr-film .sr-film__i-play{display:none;}
+  .sr-film[data-state="paused"] .sr-film__i-play{display:block;}
+  .sr-film[data-state="paused"] .sr-film__i-pause{display:none;}
+  .sr-film .sr-film__i-muted{display:none;}
+  .sr-film[data-sound="off"] .sr-film__i-muted{display:block;}
+  .sr-film[data-sound="off"] .sr-film__i-sound{display:none;}
+  @media (max-width:520px){.sr-film__time{display:none;}.sr-film__play span{width:58px;height:58px;}.sr-film__play svg{width:21px;height:21px;}}
   ::-webkit-scrollbar{width:11px;height:11px;}
   ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px;}
 
@@ -126,6 +154,34 @@ x-dc{display:none!important}
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
   @keyframes lbIn{from{opacity:0;transform:scale(.97);}to{opacity:1;transform:none;}}
   @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .sr-film{position:relative;border-radius:12px;overflow:hidden;background:#161837;box-shadow:0 26px 60px -26px rgba(0,0,0,0.4);aspect-ratio:16/9;max-width:100%;}
+  .sr-film__video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer;}
+  .sr-film__bar{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:999px;background:rgba(21,18,40,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eeecf8;opacity:0;transform:translateY(4px);transition:opacity .18s ease,transform .18s ease;}
+  .sr-film:hover .sr-film__bar,.sr-film:focus-within .sr-film__bar,.sr-film[data-state="paused"] .sr-film__bar{opacity:1;transform:none;}
+  .sr-film[data-started="0"] .sr-film__bar{opacity:0;transform:translateY(4px);}
+  .sr-film[data-started="0"]:hover .sr-film__bar,.sr-film[data-started="0"]:focus-within .sr-film__bar{opacity:1;transform:none;}
+  @media (hover:none){.sr-film__bar{opacity:1;transform:none;}}
+  .sr-film__btn{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:999px;background:transparent;color:inherit;cursor:pointer;transition:color .16s ease;}
+  .sr-film__btn:hover{color:#f72585;}
+  .sr-film__btn:focus-visible,.sr-film__track:focus-visible{outline:2px solid #f72585;outline-offset:2px;}
+  .sr-film__btn svg{width:16px;height:16px;display:block;}
+  .sr-film__track{position:relative;flex:1 1 0;height:4px;border-radius:999px;background:rgba(238,236,248,0.28);cursor:pointer;}
+  .sr-film__track::before{content:"";position:absolute;inset:-8px 0;}
+  .sr-film__fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:#f72585;}
+  .sr-film__time{flex:0 0 auto;font-family:var(--f-mono);font-size:11px;letter-spacing:0.06em;color:rgba(238,236,248,0.76);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .sr-film__play{position:absolute;inset:0;display:grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;transition:opacity .22s ease;}
+  .sr-film__play span{display:grid;place-items:center;width:72px;height:72px;border-radius:999px;background:#f72585;color:#ffffff;box-shadow:0 10px 28px -8px rgba(0,0,0,0.55);transition:filter .16s ease,transform .16s ease;}
+  .sr-film__play:hover span{filter:brightness(0.9);transform:scale(1.04);}
+  .sr-film__play:focus-visible span{outline:2px solid #f72585;outline-offset:3px;}
+  .sr-film__play svg{width:26px;height:26px;margin-left:3px;display:block;}
+  .sr-film[data-started="1"] .sr-film__play{opacity:0;pointer-events:none;}
+  .sr-film .sr-film__i-play{display:none;}
+  .sr-film[data-state="paused"] .sr-film__i-play{display:block;}
+  .sr-film[data-state="paused"] .sr-film__i-pause{display:none;}
+  .sr-film .sr-film__i-muted{display:none;}
+  .sr-film[data-sound="off"] .sr-film__i-muted{display:block;}
+  .sr-film[data-sound="off"] .sr-film__i-sound{display:none;}
+  @media (max-width:520px){.sr-film__time{display:none;}.sr-film__play span{width:58px;height:58px;}.sr-film__play svg{width:21px;height:21px;}}
   ::-webkit-scrollbar{width:11px;height:11px;}
   ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px;}
 
@@ -240,7 +296,7 @@ x-dc{display:none!important}
         <div data-dc-tpl="298" style="height: 2px; background: var(--grad); border-radius: 2px;"></div>
         <div data-dc-tpl="299" style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 56px; padding-bottom: 30px;">
           <h2 data-dc-tpl="300" style="margin: 0px; font-family: var(--f-head); font-weight: 600; font-size: clamp(28px,4vw,52px); line-height: 1; letter-spacing: -0.03em; color: var(--fg);">The Deliverables</h2>
-          <span data-dc-tpl="301" style="font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-mute);">Seven surfaces · one system</span>
+          <span data-dc-tpl="301" style="font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-mute);">Eight surfaces · one system</span>
         </div>
       </section>
 
@@ -521,25 +577,57 @@ x-dc{display:none!important}
         </section>
       
 
-
-      <section data-dc-tpl="313" style="max-width: 1240px; margin: 0px auto; padding: 40px 32px 41px;">
-        <div data-dc-tpl="314" style="position: relative; overflow: hidden; border-radius: 22px; background: var(--feature-grad); border: 1px solid var(--feature-border); padding: clamp(32px,5vw,64px); box-shadow: 0 30px 70px -30px rgba(10,28,52,0.7);">
-          <div data-dc-tpl="315" style="position: absolute; top: 0px; left: 0px; right: 0px; height: 3px; background: var(--grad);"></div>
-          <div data-dc-tpl="316" style="font-family: var(--f-mono); font-size: 15px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(201, 184, 255); margin-bottom: 22px;">The Payoff</div>
-          <p data-dc-tpl="317" style="margin: 0px; max-width: none; font-family: var(--f-head); font-weight: 600; font-size: clamp(13px,2.4vw,30px); line-height: 1.08; letter-spacing: -0.025em; color: rgb(255, 255, 255);">The brand came from my head. <span data-dc-tpl="318" style="background: var(--grad); background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">AI is how I made it everywhere.</span></p>
-          <div data-dc-tpl="319" style="display: grid; grid-template-columns: repeat(auto-fit,minmax(min(280px,100%),1fr)); gap: clamp(24px,3vw,44px); margin-top: 30px;">
-            <p data-dc-tpl="320" style="margin: 0px; font-size: 16px; line-height: 1.62; color: rgba(238, 236, 248, 0.82); text-wrap: pretty;">Every project still begins where it always has — with two decades of design judgment: understanding the company, finding its essence, and building a foundation by hand. That part doesn't get automated.</p>
-            <p data-dc-tpl="321" style="margin: 0px; font-size: 16px; line-height: 1.62; color: rgba(238, 236, 248, 0.82); text-wrap: pretty;">What's changed is reach. With AI tools in the loop, I work faster and carry a single idea further than one designer could alone — extending the same visual system across every surface a company needs: decks, a coded design system, a production website, social, iconography, publication figures.</p>
-            <p data-dc-tpl="322" style="margin: 0px; font-size: 16px; line-height: 1.62; color: rgba(238, 236, 248, 0.82); text-wrap: pretty;">One coherent voice, everywhere it shows up, without a handoff or a translation loss. That's AI-accelerated design: human judgment sets the direction, and AI removes the drag between the idea and the thing itself.</p>
+      <section data-dc-tpl="313" style="max-width: 1240px; margin: 0px auto; padding: 41px 32px 41px; border-top: 1px solid var(--line);">
+        <div data-dc-tpl="314" style="max-width: 780px; margin-bottom: 30px;">
+          <div data-dc-tpl="315" style="font-family: var(--f-mono); font-size: 15px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 14px;">Motion · Video Production</div>
+          <h2 data-dc-tpl="316" style="margin: 0px; font-family: var(--f-head); font-weight: 600; font-size: clamp(24px,3vw,36px); line-height: 1.08; letter-spacing: -0.025em; color: var(--fg); text-wrap: pretty;">The system, set in motion.</h2>
+          <p data-dc-tpl="317" style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: var(--fg-dim); text-wrap: pretty;">Video is another surface of the system, not a hand-off to someone else. I took this film — an explainer for the company's trial-simulation platform — from a blank page to a finished cut on my own: writing and structuring the narrative, designing every frame, animating the whole thing, directing and timing an AI narration track, then scoring and mixing it. Just under three minutes, produced end to end by one designer, with no studio, no motion house, and nothing lost in translation between the brand and the screen.</p>
+          <p data-dc-tpl="318" style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: var(--fg-dim); text-wrap: pretty;">It holds together because it is built from the same parts as everything else: the navy-and-coral palette, the serif-and-sans pairing, the custom icon set, the chart language from the decks. Type enters on the rhythm the slides already use, and the data animates at publication standard rather than being simplified for motion — so it reads as the brand moving, not as a video made about the brand. Anyone who has seen the site or sat through a deck recognizes it in the first second.</p>
+        </div>
+        <div data-dc-tpl="319" class="sr-film" data-state="paused" data-sound="on" data-started="0">
+          <video data-dc-tpl="320" class="sr-film__video" preload="metadata" playsinline="playsinline" poster="assets/video/standardmodel-trialfront-poster.jpg" aria-label="Standard Model Bio product film, with narration">
+            <source data-dc-tpl="321" src="assets/video/standardmodel-trialfront.mp4" type="video/mp4">
+            <a data-dc-tpl="322" href="assets/video/standardmodel-trialfront.mp4">Download the Standard Model Bio product film (MP4)</a>
+          </video>
+          <button data-dc-tpl="323" type="button" class="sr-film__play" aria-label="Play video"><span data-dc-tpl="324"><svg data-dc-tpl="325" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="326" d="M5 3.2v9.6a.6.6 0 0 0 .92.5l7.3-4.8a.6.6 0 0 0 0-1L5.92 2.7A.6.6 0 0 0 5 3.2z" fill="currentColor"></path></svg></span></button>
+          <div data-dc-tpl="327" class="sr-film__bar">
+            <button data-dc-tpl="328" type="button" class="sr-film__btn sr-film__toggle" aria-label="Play video">
+              <svg data-dc-tpl="329" class="sr-film__i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect data-dc-tpl="330" x="4" y="3" width="2.75" height="10" rx="0.75" fill="currentColor"></rect><rect data-dc-tpl="331" x="9.25" y="3" width="2.75" height="10" rx="0.75" fill="currentColor"></rect></svg>
+              <svg data-dc-tpl="332" class="sr-film__i-play" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="333" d="M5 3.2v9.6a.6.6 0 0 0 .92.5l7.3-4.8a.6.6 0 0 0 0-1L5.92 2.7A.6.6 0 0 0 5 3.2z" fill="currentColor"></path></svg>
+            </button>
+            <div data-dc-tpl="334" class="sr-film__track" role="slider" tabindex="0" aria-label="Video position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div data-dc-tpl="335" class="sr-film__fill"></div></div>
+            <span data-dc-tpl="336" class="sr-film__time">0:00 / 2:46</span>
+            <button data-dc-tpl="337" type="button" class="sr-film__btn sr-film__mute" aria-label="Turn sound off">
+              <svg data-dc-tpl="338" class="sr-film__i-sound" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="339" d="M2.5 6.2h2.2L8 3.4v9.2L4.7 9.8H2.5z" fill="currentColor"></path><path data-dc-tpl="340" d="M10.4 5.6a3.4 3.4 0 0 1 0 4.8M12.2 3.9a5.8 5.8 0 0 1 0 8.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+              <svg data-dc-tpl="341" class="sr-film__i-muted" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="342" d="M2.5 6.2h2.2L8 3.4v9.2L4.7 9.8H2.5z" fill="currentColor"></path><path data-dc-tpl="343" d="M10.8 6.2l3.2 3.6M14 6.2l-3.2 3.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+            </button>
+            <button data-dc-tpl="344" type="button" class="sr-film__btn sr-film__full" aria-label="Watch full screen">
+              <svg data-dc-tpl="345" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="346" d="M3 6V3.6a.6.6 0 0 1 .6-.6H6M10 3h2.4a.6.6 0 0 1 .6.6V6M13 10v2.4a.6.6 0 0 1-.6.6H10M6 13H3.6a.6.6 0 0 1-.6-.6V10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+            </button>
           </div>
-          <div data-dc-tpl="323" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px;">
-            <a data-dc-tpl="324" href="https://standardmodel.bio" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 9px; padding: 12px 24px; border-radius: 999px; background: rgb(247, 37, 133); color: rgb(255, 255, 255); font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: none; transition: filter .2s ease;" class="scp2">standardmodel.bio ↗</a>
+        </div>
+        <div data-dc-tpl="347" style="margin-top: 12px; font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-mute);">2:46 · 1080p · Written, designed, animated, scored</div>
+      </section>
+
+
+      <section data-dc-tpl="348" style="max-width: 1240px; margin: 0px auto; padding: 40px 32px 41px;">
+        <div data-dc-tpl="349" style="position: relative; overflow: hidden; border-radius: 22px; background: var(--feature-grad); border: 1px solid var(--feature-border); padding: clamp(32px,5vw,64px); box-shadow: 0 30px 70px -30px rgba(10,28,52,0.7);">
+          <div data-dc-tpl="350" style="position: absolute; top: 0px; left: 0px; right: 0px; height: 3px; background: var(--grad);"></div>
+          <div data-dc-tpl="351" style="font-family: var(--f-mono); font-size: 15px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(201, 184, 255); margin-bottom: 22px;">The Payoff</div>
+          <p data-dc-tpl="352" style="margin: 0px; max-width: none; font-family: var(--f-head); font-weight: 600; font-size: clamp(13px,2.4vw,30px); line-height: 1.08; letter-spacing: -0.025em; color: rgb(255, 255, 255);">The brand came from my head. <span data-dc-tpl="353" style="background: var(--grad); background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">AI is how I made it everywhere.</span></p>
+          <div data-dc-tpl="354" style="display: grid; grid-template-columns: repeat(auto-fit,minmax(min(280px,100%),1fr)); gap: clamp(24px,3vw,44px); margin-top: 30px;">
+            <p data-dc-tpl="355" style="margin: 0px; font-size: 16px; line-height: 1.62; color: rgba(238, 236, 248, 0.82); text-wrap: pretty;">Every project still begins where it always has — with two decades of design judgment: understanding the company, finding its essence, and building a foundation by hand. That part doesn't get automated.</p>
+            <p data-dc-tpl="356" style="margin: 0px; font-size: 16px; line-height: 1.62; color: rgba(238, 236, 248, 0.82); text-wrap: pretty;">What's changed is reach. With AI tools in the loop, I work faster and carry a single idea further than one designer could alone — extending the same visual system across every surface a company needs: decks, a coded design system, a production website, social, iconography, publication figures.</p>
+            <p data-dc-tpl="357" style="margin: 0px; font-size: 16px; line-height: 1.62; color: rgba(238, 236, 248, 0.82); text-wrap: pretty;">One coherent voice, everywhere it shows up, without a handoff or a translation loss. That's AI-accelerated design: human judgment sets the direction, and AI removes the drag between the idea and the thing itself.</p>
+          </div>
+          <div data-dc-tpl="358" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px;">
+            <a data-dc-tpl="359" href="https://standardmodel.bio" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 9px; padding: 12px 24px; border-radius: 999px; background: rgb(247, 37, 133); color: rgb(255, 255, 255); font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: none; transition: filter .2s ease;" class="scp2">standardmodel.bio ↗</a>
           </div>
         </div>
       </section>
 
-      <section data-dc-tpl="325" style="max-width: 1240px; margin: 0px auto; padding: 22px 32px 8px;">
-        <a data-dc-tpl="326" href="work.html" style="display: inline-flex; align-items: center; gap: 9px; padding: 12px 24px; border-radius: 999px; background: transparent; color: var(--fg); font-weight: 600; font-size: 14px; border: 1px solid var(--line2); cursor: pointer; text-decoration: none; transition: box-shadow .2s ease;" class="scp3">All work ↑</a>
+      <section data-dc-tpl="360" style="max-width: 1240px; margin: 0px auto; padding: 22px 32px 8px;">
+        <a data-dc-tpl="361" href="work.html" style="display: inline-flex; align-items: center; gap: 9px; padding: 12px 24px; border-radius: 999px; background: transparent; color: var(--fg); font-weight: 600; font-size: 14px; border: 1px solid var(--line2); cursor: pointer; text-decoration: none; transition: box-shadow .2s ease;" class="scp3">All work ↑</a>
       </section>
     </div>
     
@@ -556,26 +644,26 @@ x-dc{display:none!important}
   </main>
 
   
-  <footer data-dc-tpl="441" style="margin-top: 40px;">
-    <div data-dc-tpl="442" style="max-width: 1240px; margin: 0px auto; padding: 0px 32px;">
-      <div data-dc-tpl="443" style="background-image: var(--grad); background-size: 100% 1px; background-repeat: no-repeat; background-origin: content-box; height: 1px;"></div>
-      <div data-dc-tpl="444" style="padding: 64px 0px;">
-      <div data-dc-tpl="445" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap;">
+  <footer data-dc-tpl="476" style="margin-top: 40px;">
+    <div data-dc-tpl="477" style="max-width: 1240px; margin: 0px auto; padding: 0px 32px;">
+      <div data-dc-tpl="478" style="background-image: var(--grad); background-size: 100% 1px; background-repeat: no-repeat; background-origin: content-box; height: 1px;"></div>
+      <div data-dc-tpl="479" style="padding: 64px 0px;">
+      <div data-dc-tpl="480" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap;">
         
-        <div data-dc-tpl="447">
+        <div data-dc-tpl="482">
           
-          <a data-dc-tpl="450" href="contact.html" style="display: inline-flex; align-items: center; gap: 9px; padding: 14px 26px; border-radius: 999px; background: rgb(247, 37, 133); color: rgb(255, 255, 255); font-weight: 600; font-size: 15px; cursor: pointer; text-decoration: none; transition: transform .2s ease, filter .2s ease;" class="scp2">Get in touch →</a>
+          <a data-dc-tpl="485" href="contact.html" style="display: inline-flex; align-items: center; gap: 9px; padding: 14px 26px; border-radius: 999px; background: rgb(247, 37, 133); color: rgb(255, 255, 255); font-weight: 600; font-size: 15px; cursor: pointer; text-decoration: none; transition: transform .2s ease, filter .2s ease;" class="scp2">Get in touch →</a>
         </div>
         
-        <div data-dc-tpl="451" style="display: flex; align-items: center; gap: 18px; color: var(--fg-dim);">
-          <a data-dc-tpl="452" href="https://www.linkedin.com/in/skottreader/" target="_blank" rel="noopener" aria-label="LinkedIn" style="display: flex; color: inherit;" class="scp9"><svg data-dc-tpl="453" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path data-dc-tpl="454" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg></a>
-          <a data-dc-tpl="455" href="https://www.instagram.com/omegaequalsone/" target="_blank" rel="noopener" aria-label="Instagram" style="display: flex; color: inherit;" class="scp9"><svg data-dc-tpl="456" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect data-dc-tpl="457" x="3" y="3" width="18" height="18" rx="5"></rect><circle data-dc-tpl="458" cx="12" cy="12" r="4.2"></circle><circle data-dc-tpl="459" cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
-          <a data-dc-tpl="460" href="https://www.flickr.com/photos/omegaequalsone/albums/72177720297549845" target="_blank" rel="noopener" aria-label="Flickr" style="display: flex; color: inherit;" class="scp9"><svg data-dc-tpl="461" width="22" height="12" viewBox="0 0 40 20" fill="currentColor"><circle data-dc-tpl="462" cx="10" cy="10" r="10"></circle><circle data-dc-tpl="463" cx="30" cy="10" r="10"></circle></svg></a>
+        <div data-dc-tpl="486" style="display: flex; align-items: center; gap: 18px; color: var(--fg-dim);">
+          <a data-dc-tpl="487" href="https://www.linkedin.com/in/skottreader/" target="_blank" rel="noopener" aria-label="LinkedIn" style="display: flex; color: inherit;" class="scp9"><svg data-dc-tpl="488" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path data-dc-tpl="489" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"></path></svg></a>
+          <a data-dc-tpl="490" href="https://www.instagram.com/omegaequalsone/" target="_blank" rel="noopener" aria-label="Instagram" style="display: flex; color: inherit;" class="scp9"><svg data-dc-tpl="491" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect data-dc-tpl="492" x="3" y="3" width="18" height="18" rx="5"></rect><circle data-dc-tpl="493" cx="12" cy="12" r="4.2"></circle><circle data-dc-tpl="494" cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg></a>
+          <a data-dc-tpl="495" href="https://www.flickr.com/photos/omegaequalsone/albums/72177720297549845" target="_blank" rel="noopener" aria-label="Flickr" style="display: flex; color: inherit;" class="scp9"><svg data-dc-tpl="496" width="22" height="12" viewBox="0 0 40 20" fill="currentColor"><circle data-dc-tpl="497" cx="10" cy="10" r="10"></circle><circle data-dc-tpl="498" cx="30" cy="10" r="10"></circle></svg></a>
         </div>
       </div>
-      <div data-dc-tpl="464" style="margin-top: 56px; padding-top: 25px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--f-mono); font-size: 12px; color: var(--fg-mute);">
-        <span data-dc-tpl="465">© 2026 Skott Reader</span>
-        <span data-dc-tpl="466">Visual / Brand / Presentation / Design-to-Build</span>
+      <div data-dc-tpl="499" style="margin-top: 56px; padding-top: 25px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--f-mono); font-size: 12px; color: var(--fg-mute);">
+        <span data-dc-tpl="500">© 2026 Skott Reader</span>
+        <span data-dc-tpl="501">Visual / Brand / Presentation / Design-to-Build</span>
       </div>
       </div>
     </div>
@@ -715,6 +803,69 @@ x-dc{display:none!important}
   document.addEventListener('keydown',function(e){
     if(lb.style.display!=='flex')return;
     if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)});
+})();
+</script>
+
+<script>
+/* Custom film player chrome (.sr-film). Event delegation on document, so it
+ * works identically in the React SPA (where the node mounts after this runs
+ * and may re-render) and on the prerendered static pages. */
+(function(){
+  if(window.__srFilm)return; window.__srFilm=1;
+  function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  function filmOf(n){return n&&n.closest?n.closest('.sr-film'):null}
+  function vidOf(f){return f.querySelector('.sr-film__video')}
+  function sync(f){
+    var v=vidOf(f); if(!v)return;
+    f.setAttribute('data-state',v.paused?'paused':'playing');
+    f.setAttribute('data-sound',v.muted?'off':'on');
+    var pct=v.duration?(v.currentTime/v.duration*100):0;
+    var fill=f.querySelector('.sr-film__fill'); if(fill)fill.style.width=pct.toFixed(3)+'%';
+    var t=f.querySelector('.sr-film__time'); if(t&&v.duration)t.textContent=fmt(v.currentTime)+' / '+fmt(v.duration);
+    var tr=f.querySelector('.sr-film__track'); if(tr)tr.setAttribute('aria-valuenow',Math.round(pct));
+    var tg=f.querySelector('.sr-film__toggle'); if(tg)tg.setAttribute('aria-label',v.paused?'Play video':'Pause video');
+    var pl=f.querySelector('.sr-film__play'); if(pl)pl.setAttribute('aria-label','Play video');
+    var mu=f.querySelector('.sr-film__mute'); if(mu)mu.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');
+  }
+  function seek(f,x){
+    var v=vidOf(f),tr=f.querySelector('.sr-film__track');
+    if(!v||!tr||!v.duration)return;
+    var r=tr.getBoundingClientRect();
+    v.currentTime=Math.min(1,Math.max(0,(x-r.left)/r.width))*v.duration; sync(f);
+  }
+  document.addEventListener('click',function(e){
+    var n=e.target; if(!n||!n.closest)return;
+    var f=filmOf(n); if(!f)return;
+    var v=vidOf(f); if(!v)return;
+    if(n.closest('.sr-film__track')){seek(f,e.clientX);return}
+    if(n.closest('.sr-film__mute')){v.muted=!v.muted;sync(f);return}
+    if(n.closest('.sr-film__full')){
+      if(document.fullscreenElement){document.exitFullscreen()}
+      else if(f.requestFullscreen){f.requestFullscreen()}
+      else if(v.webkitEnterFullscreen){v.webkitEnterFullscreen()}
+      return;
+    }
+    if(n.closest('.sr-film__play')||n.closest('.sr-film__toggle')||n.closest('.sr-film__video')){
+      if(v.paused){f.setAttribute('data-started','1');var p=v.play();if(p&&p.catch)p.catch(function(){})}
+      else{v.pause()}
+      sync(f);
+    }
+  });
+  document.addEventListener('keydown',function(e){
+    var n=e.target; if(!n||!n.closest)return;
+    var tr=n.closest('.sr-film__track'); if(!tr)return;
+    var f=filmOf(tr),v=f&&vidOf(f); if(!v||!v.duration)return;
+    if(e.key==='ArrowRight'){e.preventDefault();v.currentTime=Math.min(v.duration,v.currentTime+5);sync(f)}
+    else if(e.key==='ArrowLeft'){e.preventDefault();v.currentTime=Math.max(0,v.currentTime-5);sync(f)}
+    else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){f.setAttribute('data-started','1');v.play().catch(function(){})}else{v.pause()}sync(f)}
+  });
+  ['timeupdate','play','pause','loadedmetadata','volumechange','ended'].forEach(function(ev){
+    document.addEventListener(ev,function(e){
+      var f=filmOf(e.target); if(!f)return;
+      if(ev==='ended'){var v=vidOf(f); if(v)v.currentTime=0; f.setAttribute('data-started','0')}
+      sync(f);
+    },true);
+  });
 })();
 </script>
 </body>
