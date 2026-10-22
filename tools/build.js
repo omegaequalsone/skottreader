@@ -40,6 +40,28 @@ const NM = process.env.NM || '/tmp/pre/node_modules';
 const REACT = fs.readFileSync(`${NM}/react/umd/react.production.min.js`, 'utf8');
 const REACT_DOM = fs.readFileSync(`${NM}/react-dom/umd/react-dom.production.min.js`, 'utf8');
 const BABEL = fs.readFileSync(`${NM}/@babel/standalone/babel.min.js`, 'utf8');
+/* Newer jsdom drops CSS values its parser doesn't implement, and clamp() is one
+ * of them. That would silently strip every responsive font-size and padding from
+ * the generated pages — headlines snap to one fixed size and the pages break on
+ * phones and large screens. The output still looks plausible, so fail loudly
+ * here rather than let a bad build ship. Pinned version: see tools/README.md. */
+(function assertClampSurvives() {
+  const probe = new JSDOM('<div id="p"></div>');
+  const el = probe.window.document.getElementById('p');
+  // React assigns styles as properties, not as a style attribute, and that is
+  // the path newer jsdom drops clamp() on — so probe it the same way React does.
+  el.style.fontSize = 'clamp(10px,2vw,20px)';
+  if (/clamp\(/.test(el.style.fontSize || '')) return;
+  let v = 'installed';
+  try { v = require(`${NM}/jsdom/package.json`).version; } catch (e) {}
+  throw new Error(
+    `jsdom ${v} discards clamp() values.\n` +
+    `Building with it would flatten every responsive font-size and padding in the\n` +
+    `generated pages. Install the pinned version instead:\n\n` +
+    `  npm install jsdom@26.1.0\n`
+  );
+})();
+
 const indexHtml = fs.readFileSync(path.join(SITE, 'index.html'), 'utf8');
 const supportJs = fs.readFileSync(path.join(SITE, 'support.js'), 'utf8');
 
