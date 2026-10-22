@@ -193,8 +193,8 @@ function transform(host, doc, { prevHref, nextHref, h1Text, tileMap } = {}) {
 
   // -- 2b2. React reflects `muted` as a DOM property only, so it never reaches
   // the serialized HTML. Without the attribute the prerendered page parses the
-  // film as unmuted and the browser blocks its autoplay. Put it back.
-  host.querySelectorAll('video[autoplay]').forEach(v => v.setAttribute('muted', ''));
+  // film as unmuted and the browser refuses to start it on scroll. Put it back.
+  host.querySelectorAll('video.sr-film__video').forEach(v => v.setAttribute('muted', ''));
 
   // -- 2c. background-image slots -> real <img>, faithful CSS mapping ----
   host.querySelectorAll('div[style*="background-image"]').forEach(div => {
@@ -434,6 +434,32 @@ const FILM = `
     else if(e.key==='ArrowLeft'){e.preventDefault();v.currentTime=Math.max(0,v.currentTime-5);sync(f)}
     else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){v.play().catch(function(){})}else{v.pause()}sync(f)}
   });
+  /* Nothing is fetched until the film is actually on screen: the markup carries
+   * preload="none" and no autoplay attribute, and the first intersection starts
+   * it muted. Re-scanning on mutation covers the SPA mounting it after we run. */
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting)return;
+      var v=en.target; io.unobserve(v);
+      v.muted=true;
+      var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});
+      var f=filmOf(v); if(f)sync(f);
+    });
+  },{threshold:0.35}):null;
+  var queued=false;
+  function scan(){
+    queued=false; if(!io)return;
+    var list=document.querySelectorAll('.sr-film__video');
+    for(var i=0;i<list.length;i++){
+      if(list[i].__srWatched)continue;
+      list[i].__srWatched=1; io.observe(list[i]);
+    }
+  }
+  function queue(){ if(queued)return; queued=true; (window.requestAnimationFrame||setTimeout)(scan); }
+  queue();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',queue);
+  if(window.MutationObserver)new MutationObserver(queue).observe(document.documentElement,{childList:true,subtree:true});
+
   ['timeupdate','play','pause','loadedmetadata','volumechange','ended'].forEach(function(ev){
     document.addEventListener(ev,function(e){
       var f=filmOf(e.target); if(!f)return;
