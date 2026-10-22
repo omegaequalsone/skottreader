@@ -46,8 +46,6 @@
   .sr-film__video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer;}
   .sr-film__bar{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:999px;background:rgba(21,18,40,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eeecf8;opacity:0;transform:translateY(4px);transition:opacity .18s ease,transform .18s ease;}
   .sr-film:hover .sr-film__bar,.sr-film:focus-within .sr-film__bar,.sr-film[data-state="paused"] .sr-film__bar{opacity:1;transform:none;}
-  .sr-film[data-started="0"] .sr-film__bar{opacity:0;transform:translateY(4px);}
-  .sr-film[data-started="0"]:hover .sr-film__bar,.sr-film[data-started="0"]:focus-within .sr-film__bar{opacity:1;transform:none;}
   @media (hover:none){.sr-film__bar{opacity:1;transform:none;}}
   .sr-film__btn{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:999px;background:transparent;color:inherit;cursor:pointer;transition:color .16s ease;}
   .sr-film__btn:hover{color:#f72585;}
@@ -57,19 +55,19 @@
   .sr-film__track::before{content:"";position:absolute;inset:-8px 0;}
   .sr-film__fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:#f72585;}
   .sr-film__time{flex:0 0 auto;font-family:var(--f-mono);font-size:11px;letter-spacing:0.06em;color:rgba(238,236,248,0.76);font-variant-numeric:tabular-nums;white-space:nowrap;}
-  .sr-film__play{position:absolute;inset:0;display:grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;transition:opacity .22s ease;}
-  .sr-film__play span{display:grid;place-items:center;width:72px;height:72px;border-radius:999px;background:#f72585;color:#ffffff;box-shadow:0 10px 28px -8px rgba(0,0,0,0.55);transition:filter .16s ease,transform .16s ease;}
-  .sr-film__play:hover span{filter:brightness(0.9);transform:scale(1.04);}
-  .sr-film__play:focus-visible span{outline:2px solid #f72585;outline-offset:3px;}
-  .sr-film__play svg{width:26px;height:26px;margin-left:3px;display:block;}
-  .sr-film[data-started="1"] .sr-film__play{opacity:0;pointer-events:none;}
+  .sr-film__sound{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 12px;border:0;border-radius:999px;background:rgba(21,18,40,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eeecf8;font-family:inherit;font-weight:500;font-size:14px;line-height:1;cursor:pointer;transition:opacity .22s ease,background-color .16s ease,color .16s ease;}
+  .sr-film__sound svg{width:16px;height:16px;flex:none;display:block;}
+  .sr-film__sound:hover{background:rgba(21,18,40,0.95);color:#f72585;}
+  .sr-film__sound:focus-visible{outline:2px solid #f72585;outline-offset:2px;}
+  .sr-film[data-sound="on"] .sr-film__sound{opacity:0;pointer-events:none;}
+  @media (min-width:768px){.sr-film__sound{top:16px;left:16px;font-size:15px;}}
   .sr-film .sr-film__i-play{display:none;}
   .sr-film[data-state="paused"] .sr-film__i-play{display:block;}
   .sr-film[data-state="paused"] .sr-film__i-pause{display:none;}
   .sr-film .sr-film__i-muted{display:none;}
   .sr-film[data-sound="off"] .sr-film__i-muted{display:block;}
   .sr-film[data-sound="off"] .sr-film__i-sound{display:none;}
-  @media (max-width:520px){.sr-film__time{display:none;}.sr-film__play span{width:58px;height:58px;}.sr-film__play svg{width:21px;height:21px;}}
+  @media (max-width:520px){.sr-film__time{display:none;}.sr-film__sound{font-size:13px;padding:7px 12px 7px 10px;}}
   ::-webkit-scrollbar{width:11px;height:11px;}
   ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px;}
 
@@ -158,8 +156,6 @@ x-dc{display:none!important}
   .sr-film__video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer;}
   .sr-film__bar{position:absolute;left:12px;right:12px;bottom:12px;display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:999px;background:rgba(21,18,40,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eeecf8;opacity:0;transform:translateY(4px);transition:opacity .18s ease,transform .18s ease;}
   .sr-film:hover .sr-film__bar,.sr-film:focus-within .sr-film__bar,.sr-film[data-state="paused"] .sr-film__bar{opacity:1;transform:none;}
-  .sr-film[data-started="0"] .sr-film__bar{opacity:0;transform:translateY(4px);}
-  .sr-film[data-started="0"]:hover .sr-film__bar,.sr-film[data-started="0"]:focus-within .sr-film__bar{opacity:1;transform:none;}
   @media (hover:none){.sr-film__bar{opacity:1;transform:none;}}
   .sr-film__btn{flex:0 0 auto;display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:999px;background:transparent;color:inherit;cursor:pointer;transition:color .16s ease;}
   .sr-film__btn:hover{color:#f72585;}
@@ -169,19 +165,19 @@ x-dc{display:none!important}
   .sr-film__track::before{content:"";position:absolute;inset:-8px 0;}
   .sr-film__fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:inherit;background:#f72585;}
   .sr-film__time{flex:0 0 auto;font-family:var(--f-mono);font-size:11px;letter-spacing:0.06em;color:rgba(238,236,248,0.76);font-variant-numeric:tabular-nums;white-space:nowrap;}
-  .sr-film__play{position:absolute;inset:0;display:grid;place-items:center;padding:0;border:0;background:transparent;cursor:pointer;transition:opacity .22s ease;}
-  .sr-film__play span{display:grid;place-items:center;width:72px;height:72px;border-radius:999px;background:#f72585;color:#ffffff;box-shadow:0 10px 28px -8px rgba(0,0,0,0.55);transition:filter .16s ease,transform .16s ease;}
-  .sr-film__play:hover span{filter:brightness(0.9);transform:scale(1.04);}
-  .sr-film__play:focus-visible span{outline:2px solid #f72585;outline-offset:3px;}
-  .sr-film__play svg{width:26px;height:26px;margin-left:3px;display:block;}
-  .sr-film[data-started="1"] .sr-film__play{opacity:0;pointer-events:none;}
+  .sr-film__sound{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 12px;border:0;border-radius:999px;background:rgba(21,18,40,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#eeecf8;font-family:inherit;font-weight:500;font-size:14px;line-height:1;cursor:pointer;transition:opacity .22s ease,background-color .16s ease,color .16s ease;}
+  .sr-film__sound svg{width:16px;height:16px;flex:none;display:block;}
+  .sr-film__sound:hover{background:rgba(21,18,40,0.95);color:#f72585;}
+  .sr-film__sound:focus-visible{outline:2px solid #f72585;outline-offset:2px;}
+  .sr-film[data-sound="on"] .sr-film__sound{opacity:0;pointer-events:none;}
+  @media (min-width:768px){.sr-film__sound{top:16px;left:16px;font-size:15px;}}
   .sr-film .sr-film__i-play{display:none;}
   .sr-film[data-state="paused"] .sr-film__i-play{display:block;}
   .sr-film[data-state="paused"] .sr-film__i-pause{display:none;}
   .sr-film .sr-film__i-muted{display:none;}
   .sr-film[data-sound="off"] .sr-film__i-muted{display:block;}
   .sr-film[data-sound="off"] .sr-film__i-sound{display:none;}
-  @media (max-width:520px){.sr-film__time{display:none;}.sr-film__play span{width:58px;height:58px;}.sr-film__play svg{width:21px;height:21px;}}
+  @media (max-width:520px){.sr-film__time{display:none;}.sr-film__sound{font-size:13px;padding:7px 12px 7px 10px;}}
   ::-webkit-scrollbar{width:11px;height:11px;}
   ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px;}
 
@@ -203,8 +199,8 @@ x-dc{display:none!important}
       <a data-dc-tpl="13" href="about.html" style="cursor: pointer; font-size: 18px; font-weight: 500; letter-spacing: 0.01em; text-decoration: none; color: var(--fg); transition: color .2s ease;" class="scp0">About</a>
       <a data-dc-tpl="14" href="contact.html" style="cursor: pointer; font-size: 18px; font-weight: 500; letter-spacing: 0.01em; text-decoration: none; color: var(--fg); transition: color .2s ease;" class="scp0">Contact</a>
       <button data-dc-tpl="15" aria-label="Toggle light or dark mode" style="width: 42px; height: 42px; border-radius: 999px; border: 1px solid var(--line2); background: var(--surface2); color: var(--fg); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: color .2s ease, border-color .2s ease;" class="scp1">
+        <svg data-dc-tpl="17" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle data-dc-tpl="18" cx="12" cy="12" r="4.2"></circle><line data-dc-tpl="19" x1="12" y1="2.5" x2="12" y2="5"></line><line data-dc-tpl="20" x1="12" y1="19" x2="12" y2="21.5"></line><line data-dc-tpl="21" x1="2.5" y1="12" x2="5" y2="12"></line><line data-dc-tpl="22" x1="19" y1="12" x2="21.5" y2="12"></line><line data-dc-tpl="23" x1="4.9" y1="4.9" x2="6.6" y2="6.6"></line><line data-dc-tpl="24" x1="17.4" y1="17.4" x2="19.1" y2="19.1"></line><line data-dc-tpl="25" x1="4.9" y1="19.1" x2="6.6" y2="17.4"></line><line data-dc-tpl="26" x1="17.4" y1="6.6" x2="19.1" y2="4.9"></line></svg>
         
-        <svg data-dc-tpl="28" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path data-dc-tpl="29" d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path></svg>
       </button>
     </div>
     
@@ -588,12 +584,12 @@ x-dc{display:none!important}
           <p data-dc-tpl="317" style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: var(--fg-dim); text-wrap: pretty;">Video is another surface of the system, so it's made the same way everything else is. This one began as a script and a rough video sketch from Standard Model's head of data science — the argument and the evidence were theirs. I took it from there: designing every frame, building the motion, directing and timing an AI narration track, then scoring and mixing the final cut. Just under three minutes, carried from sketch to finished film by one designer.</p>
           <p data-dc-tpl="318" style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: var(--fg-dim); text-wrap: pretty;">It holds together because it's built from the same parts as everything else: the Standard Model brand palette, the serif-and-sans pairing, the mono labels, the chart language from the decks. The data animates at publication standard rather than being simplified for motion, so it reads as the brand moving, not as a video about the brand.</p>
         </div>
-        <div data-dc-tpl="319" class="sr-film" data-state="paused" data-sound="on" data-started="0">
-          <video data-dc-tpl="320" class="sr-film__video" preload="metadata" playsinline="playsinline" poster="assets/video/standardmodel-trialfront-poster.jpg" aria-label="Standard Model Bio product film, with narration">
+        <div data-dc-tpl="319" class="sr-film" data-state="playing" data-sound="off">
+          <video data-dc-tpl="320" class="sr-film__video" autoplay="autoplay" preload="metadata" playsinline="playsinline" poster="assets/video/standardmodel-trialfront-poster.jpg" aria-label="Standard Model Bio product film, with narration" muted="">
             <source data-dc-tpl="321" src="assets/video/standardmodel-trialfront.mp4" type="video/mp4">
             <a data-dc-tpl="322" href="assets/video/standardmodel-trialfront.mp4">Download the Standard Model Bio product film (MP4)</a>
           </video>
-          <button data-dc-tpl="323" type="button" class="sr-film__play" aria-label="Play video"><span data-dc-tpl="324"><svg data-dc-tpl="325" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="326" d="M5 3.2v9.6a.6.6 0 0 0 .92.5l7.3-4.8a.6.6 0 0 0 0-1L5.92 2.7A.6.6 0 0 0 5 3.2z" fill="currentColor"></path></svg></span></button>
+          <button data-dc-tpl="323" type="button" class="sr-film__sound"><svg data-dc-tpl="324" viewBox="0 0 16 16" aria-hidden="true"><path data-dc-tpl="325" d="M2.5 6.2h2.2L8 3.4v9.2L4.7 9.8H2.5z" fill="currentColor"></path><path data-dc-tpl="326" d="M10.4 5.6a3.4 3.4 0 0 1 0 4.8M12.2 3.9a5.8 5.8 0 0 1 0 8.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>Play with sound</button>
           <div data-dc-tpl="327" class="sr-film__bar">
             <button data-dc-tpl="328" type="button" class="sr-film__btn sr-film__toggle" aria-label="Play video">
               <svg data-dc-tpl="329" class="sr-film__i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect data-dc-tpl="330" x="4" y="3" width="2.75" height="10" rx="0.75" fill="currentColor"></rect><rect data-dc-tpl="331" x="9.25" y="3" width="2.75" height="10" rx="0.75" fill="currentColor"></rect></svg>
@@ -828,7 +824,7 @@ x-dc{display:none!important}
     var t=f.querySelector('.sr-film__time'); if(t&&v.duration)t.textContent=fmt(v.currentTime)+' / '+fmt(v.duration);
     var tr=f.querySelector('.sr-film__track'); if(tr)tr.setAttribute('aria-valuenow',Math.round(pct));
     var tg=f.querySelector('.sr-film__toggle'); if(tg)tg.setAttribute('aria-label',v.paused?'Play video':'Pause video');
-    var pl=f.querySelector('.sr-film__play'); if(pl)pl.setAttribute('aria-label','Play video');
+    var sc=f.querySelector('.sr-film__sound'); if(sc)sc.setAttribute('aria-label','Play with sound');
     var mu=f.querySelector('.sr-film__mute'); if(mu)mu.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');
   }
   function seek(f,x){
@@ -842,6 +838,7 @@ x-dc{display:none!important}
     var f=filmOf(n); if(!f)return;
     var v=vidOf(f); if(!v)return;
     if(n.closest('.sr-film__track')){seek(f,e.clientX);return}
+    if(n.closest('.sr-film__sound')){v.muted=false;if(v.paused){var sp=v.play();if(sp&&sp.catch)sp.catch(function(){})}sync(f);return}
     if(n.closest('.sr-film__mute')){v.muted=!v.muted;sync(f);return}
     if(n.closest('.sr-film__full')){
       if(document.fullscreenElement){document.exitFullscreen()}
@@ -849,8 +846,8 @@ x-dc{display:none!important}
       else if(v.webkitEnterFullscreen){v.webkitEnterFullscreen()}
       return;
     }
-    if(n.closest('.sr-film__play')||n.closest('.sr-film__toggle')||n.closest('.sr-film__video')){
-      if(v.paused){f.setAttribute('data-started','1');var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    if(n.closest('.sr-film__toggle')||n.closest('.sr-film__video')){
+      if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}
       else{v.pause()}
       sync(f);
     }
@@ -861,12 +858,12 @@ x-dc{display:none!important}
     var f=filmOf(tr),v=f&&vidOf(f); if(!v||!v.duration)return;
     if(e.key==='ArrowRight'){e.preventDefault();v.currentTime=Math.min(v.duration,v.currentTime+5);sync(f)}
     else if(e.key==='ArrowLeft'){e.preventDefault();v.currentTime=Math.max(0,v.currentTime-5);sync(f)}
-    else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){f.setAttribute('data-started','1');v.play().catch(function(){})}else{v.pause()}sync(f)}
+    else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){v.play().catch(function(){})}else{v.pause()}sync(f)}
   });
   ['timeupdate','play','pause','loadedmetadata','volumechange','ended'].forEach(function(ev){
     document.addEventListener(ev,function(e){
       var f=filmOf(e.target); if(!f)return;
-      if(ev==='ended'){var v=vidOf(f); if(v)v.currentTime=0; f.setAttribute('data-started','0')}
+      if(ev==='ended'){var v=vidOf(f); if(v)v.currentTime=0}
       sync(f);
     },true);
   });

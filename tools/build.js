@@ -191,6 +191,11 @@ function transform(host, doc, { prevHref, nextHref, h1Text, tileMap } = {}) {
     report.h1 = true;
   }
 
+  // -- 2b2. React reflects `muted` as a DOM property only, so it never reaches
+  // the serialized HTML. Without the attribute the prerendered page parses the
+  // film as unmuted and the browser blocks its autoplay. Put it back.
+  host.querySelectorAll('video[autoplay]').forEach(v => v.setAttribute('muted', ''));
+
   // -- 2c. background-image slots -> real <img>, faithful CSS mapping ----
   host.querySelectorAll('div[style*="background-image"]').forEach(div => {
     const st = div.style;
@@ -393,7 +398,7 @@ const FILM = `
     var t=f.querySelector('.sr-film__time'); if(t&&v.duration)t.textContent=fmt(v.currentTime)+' / '+fmt(v.duration);
     var tr=f.querySelector('.sr-film__track'); if(tr)tr.setAttribute('aria-valuenow',Math.round(pct));
     var tg=f.querySelector('.sr-film__toggle'); if(tg)tg.setAttribute('aria-label',v.paused?'Play video':'Pause video');
-    var pl=f.querySelector('.sr-film__play'); if(pl)pl.setAttribute('aria-label','Play video');
+    var sc=f.querySelector('.sr-film__sound'); if(sc)sc.setAttribute('aria-label','Play with sound');
     var mu=f.querySelector('.sr-film__mute'); if(mu)mu.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');
   }
   function seek(f,x){
@@ -407,6 +412,7 @@ const FILM = `
     var f=filmOf(n); if(!f)return;
     var v=vidOf(f); if(!v)return;
     if(n.closest('.sr-film__track')){seek(f,e.clientX);return}
+    if(n.closest('.sr-film__sound')){v.muted=false;if(v.paused){var sp=v.play();if(sp&&sp.catch)sp.catch(function(){})}sync(f);return}
     if(n.closest('.sr-film__mute')){v.muted=!v.muted;sync(f);return}
     if(n.closest('.sr-film__full')){
       if(document.fullscreenElement){document.exitFullscreen()}
@@ -414,8 +420,8 @@ const FILM = `
       else if(v.webkitEnterFullscreen){v.webkitEnterFullscreen()}
       return;
     }
-    if(n.closest('.sr-film__play')||n.closest('.sr-film__toggle')||n.closest('.sr-film__video')){
-      if(v.paused){f.setAttribute('data-started','1');var p=v.play();if(p&&p.catch)p.catch(function(){})}
+    if(n.closest('.sr-film__toggle')||n.closest('.sr-film__video')){
+      if(v.paused){var p=v.play();if(p&&p.catch)p.catch(function(){})}
       else{v.pause()}
       sync(f);
     }
@@ -426,12 +432,12 @@ const FILM = `
     var f=filmOf(tr),v=f&&vidOf(f); if(!v||!v.duration)return;
     if(e.key==='ArrowRight'){e.preventDefault();v.currentTime=Math.min(v.duration,v.currentTime+5);sync(f)}
     else if(e.key==='ArrowLeft'){e.preventDefault();v.currentTime=Math.max(0,v.currentTime-5);sync(f)}
-    else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){f.setAttribute('data-started','1');v.play().catch(function(){})}else{v.pause()}sync(f)}
+    else if(e.key===' '||e.key==='Enter'){e.preventDefault();if(v.paused){v.play().catch(function(){})}else{v.pause()}sync(f)}
   });
   ['timeupdate','play','pause','loadedmetadata','volumechange','ended'].forEach(function(ev){
     document.addEventListener(ev,function(e){
       var f=filmOf(e.target); if(!f)return;
-      if(ev==='ended'){var v=vidOf(f); if(v)v.currentTime=0; f.setAttribute('data-started','0')}
+      if(ev==='ended'){var v=vidOf(f); if(v)v.currentTime=0}
       sync(f);
     },true);
   });
